@@ -1,0 +1,2666 @@
+
+=== Page 1 ===
+ 
+  
+ 
+TRƯỜNG ĐẠI HỌC NGOẠI NGỮ - TIN HỌC THÀNH PHỐ HỒ CHÍ MINH 
+KHOA CÔNG NGHỆ THÔNG TIN 
+ 
+BÁO CÁO KẾT THÚC HỌC PHẦN 
+MÁY HỌC 
+PHÂN CỤM KHÁCH HÀNG BẰNG 
+KMEANS 
+   Giảng viên hướng dẫn: ThS. Huỳnh Thành Lộc 
+Sinh viên thực hiện:  
+1. Trương Gia Nghi 23DH114778 
+2. Đoàn Thanh Sang 23DH113038 
+3. Trần Lâm Hồng Liên 23DH111855 
+  
+Thành phố Hồ Chí Minh, 26 tháng 11 năm 2025 
+
+=== Page 2 ===
+ 
+  
+ 
+ 
+
+=== Page 3 ===
+ 
+  
+ 
+TRƯỜNG ĐẠI HỌC NGOẠI NGỮ - TIN HỌC THÀNH PHỐ HỒ CHÍ MINH 
+KHOA CÔNG NGHỆ THÔNG TIN 
+ 
+BÁO CÁO KẾT THÚC HỌC PHẦN 
+MÁY HỌC 
+PHÂN CỤM KHÁCH HÀNG BẰNG 
+KMEANS 
+   Mã lớp học phần: 251123018401 
+Năm học: 2025 – 2026 
+Học kỳ: 1 
+Sinh viên thực hiện:  
+1. Trương Gia Nghi 23DH114778 
+2. Đoàn Thanh Sang 23DH113038 
+3. Trần Lâm Hồng Liên 23DH111855 
+  
+Thành phố Hồ Chí Minh, 26 tháng 11 năm 2025  
+
+=== Page 4 ===
+ 
+  
+ 
+
+=== Page 5 ===
+ 
+  
+MỤC LỤC 
+DANH MỤC HÌNH ............................................................................................................. i 
+DANH MỤC BẢNG ......................................................................................................... iii 
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI ................................................................................. 1 
+1.1. Giới thiệu bài toán .................................................................................................... 1 
+1.2. Các công trình liên quan ........................................................................................... 2 
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU ................................................................................. 3 
+2.1. Giới thiệu tập dữ liệu ............................................................................................. 3 
+2.2. Tiền xử lý dữ liệu .................................................................................................... 9 
+2.2.1. Giá trị thiếu ........................................................................................................... 9 
+2.2.2. Giá trị trùng lặp .................................................................................................. 11 
+2.2.3. Giá trị ngoại lai ................................................................................................... 14 
+2.2.4. Chuẩn hóa dữ liệu phân loại ............................................................................... 18 
+2.2.5. Chuyển đổi kiểu dữ liệu và mã hóa .................................................................... 21 
+2.2.6. Tổng kết .............................................................................................................. 22 
+2.3. Xây dựng đặc trưng .............................................................................................. 25 
+2.3.1. Feature Engineering ............................................................................................ 26 
+2.3.2. Feature Scaling ................................................................................................... 43 
+CHƯƠNG 3. XÂY DỰNG MÔ HÌNH ........................................................................... 61 
+3.1. Giới thiệu mô hình ................................................................................................ 61 
+3.1.1. Khái niệm ........................................................................................................... 61 
+3.1.2. Nguyên lý hoạt động .......................................................................................... 61 
+3.1.3. Ưu điểm .............................................................................................................. 61 
+3.1.4. Hạn chế ............................................................................................................... 61 
+3.2. Ví dụ minh họa ...................................................................................................... 62 
+3.2.1. Ý tưởng triển khai ............................................................................................... 62 
+3.2.2. Công thức cốt lõi ................................................................................................ 62 
+3.2.3. Quy trình xây dựng mô hình .............................................................................. 63 
+3.3. Cài đặt thuật toán ................................................................................................. 66 
+3.3.1. Khởi tạo tâm cụm ............................................................................................... 66 
+3.3.2. Gán cụm .............................................................................................................. 67 
+3.3.3. Cập nhật tâm cụm ............................................................................................... 67 
+3.3.4. Lặp lại ................................................................................................................. 68 
+3.4. Thước đo đánh giá mô hình ................................................................................. 70 
+3.4.1. Tiêu chí đánh giá nội .......................................................................................... 70 
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM ................................................................... 71 
+
+=== Page 6 ===
+ 
+  
+4.1. Mô hình tự cài đặt ................................................................................................ 71 
+4.1.1. Demographic ...................................................................................................... 71 
+4.1.2. Product Channel ................................................................................................. 78 
+4.1.3. RFM.................................................................................................................... 83 
+4.2. Sử dụng thư viện ................................................................................................... 91 
+4.2.1. Demographic ...................................................................................................... 91 
+4.2.2. Product Channel ................................................................................................. 93 
+4.2.3. RFM.................................................................................................................... 95 
+CHƯƠNG 5. KẾT LUẬN ................................................................................................ 98 
+5.1. Kết quả đạt được .................................................................................................... 98 
+5.2. Những khó khăn, hạn chế ....................................................................................... 98 
+TÀI LIỆU THAM KHẢO ............................................................................................... 99 
+PHỤ LỤC ........................................................................................................................ 100 
+ 
+
+=== Page 7 ===
+ 
+ i 
+DANH MỤC HÌNH 
+Hình 2.1 Phân phối Age ............................................................................................. 26 
+Hình 2.2 Phân phối Income ....................................................................................... 27 
+Hình 2.3 Phân phối của Dependency_Ratio .............................................................. 28 
+Hình 2.4 Phân phối của Dependency_Ratio trước và sau transform ......................... 29 
+Hình 2.5 Tương quan giữa các đặc trưng Demographic ........................................... 30 
+Hình 2.6 Product_HHI ............................................................................................... 31 
+Hình 2.7 Store_Preference ......................................................................................... 32 
+Hình 2.8 Web_Engagement ....................................................................................... 33 
+Hình 2.9 PC1_TotalPurchases ................................................................................... 34 
+Hình 2.10 Các đặc trưng tham chiếu ......................................................................... 35 
+Hình 2.11 Tương quan giữa các đặc trưng Product Channel .................................... 36 
+Hình 2.12 Recency ..................................................................................................... 37 
+Hình 2.13 Income_per_Family_Member_Transformed ............................................ 38 
+Hình 2.14 PC1_TotalPurchases_Total ....................................................................... 39 
+Hình 2.15 PC1_AvgPerPurchase_Income ................................................................. 40 
+Hình 2.16 Income_per_Family_Member trước và sau transform ............................. 41 
+Hình 2.17 Tương quan giữa các đặc trưng RFM ....................................................... 42 
+Hình 2.18 Kết quả scaling Age bằng StandardScaler ................................................ 45 
+Hình 2.19  Kết quả scaling Dependency_Ratio bằng StandardScaler ....................... 45 
+Hình 2.20  Kết quả scaling Income bằng StandardScaler ......................................... 45 
+Hình 2.21 Kết quả scaling Age bằng RobustScaler ................................................... 46 
+Hình 2.22 Kết quả scaling Dependency_Ratio bằng RobustScaler ........................... 46 
+Hình 2.23 Kết quả scaling Income bằng RobustScaler ............................................. 46 
+Hình 2.24 Kết quả scaling PC1_Total_TotalPurchases bằng StandardScaler........... 49 
+Hình 2.25 Kết quả scaling Product_HHI bằng StandardScaler ................................. 49 
+Hình 2.26 Kết quả scaling Store_Preference bằng StandardScaler ........................... 50 
+Hình 2.27 Kết quả scaling Web_Engagement bằng StandardScaler ......................... 50 
+Hình 2.28 Kết quả scaling  PC1_Total_TotalPurchases bằng RobustScaler ............ 51 
+
+=== Page 8 ===
+ 
+ ii 
+Hình 2.29 Kết quả scaling Product_HHI bằng RobustScaler ................................... 51 
+Hình 2.30 Kết quả scaling  Store_Preference bằng RobustScaler ............................ 51 
+Hình 2.31 Kết quả scaling Web_Engagement bằng RobustScaler ........................... 52 
+Hình 2.32 Kết quả scaling Income_per_Family_Member_Transformed bằng StandardScaler
+ ................................................................................................................................................ 55 
+Hình 2.33 Kết quả scaling PC1_AvgPerPurchases_Income bằng StandardScale .... 56 
+Hình 2.34 Kết quả scaling PC1_TotalPurchases_Total bằng StandardScaler .......... 56 
+Hình 2.35 Kết quả scaling Recency bằng StandardScaler ........................................ 56 
+Hình 2.36 Kết quả scaling Income_per_Family_Member_Transformed bằng RobustScaler 57 
+Hình 2.37 Kết quả scaling PC1_AvgPerPurchases_Income bằng RobustScaler ...... 57 
+Hình 2.38 Kết quả scaling PC1_TotalPurchases_Total bằng RobustScaler ............. 58 
+Hình 2.39 Kết quả scaling Recency bằng RobustScaler ........................................... 58 
+ 
+
+=== Page 9 ===
+ 
+ iii 
+DANH MỤC BẢNG 
+Bảng 2.1 Trước xử lý Missing Value ................................................................................. 9 
+Bảng 2.2 Sau xử lý Missing Value ................................................................................... 10 
+Bảng 2.3 Trước xử lý Duplicated Value .......................................................................... 11 
+Bảng 2.4 Sau xử lý Duplicated Value .............................................................................. 13 
+Bảng 2.5 Chi tiết Outliers ................................................................................................. 14 
+Bảng 2.6 Chi tiết nhóm Spending Outlier ........................................................................ 15 
+Bảng 2.7 Chi tiết hướng xử lý cho từng loại Outliers ...................................................... 16 
+Bảng 2.8 Chuẩn hóa dữ liệu cho cột Marital Status ......................................................... 20 
+Bảng 2.9 Ưu điểm và hạn chế của xử lý Outlier .............................................................. 23 
+Bảng 2.10 Demographic trước Scaling ............................................................................ 44 
+Bảng 2.11: So sánh 2 phương pháp scale với Demogaphic ............................................. 47 
+Bảng 2.12 Product + Channel trước Scaling .................................................................... 48 
+Bảng 2.13 So sánh 2 phương pháp scaling với ProductChannel...................................... 52 
+Bảng 2.14 Trước scaling RFM ......................................................................................... 54 
+Bảng 2.15 So sánh 2 phương pháp scaling cho RFM ...................................................... 59 
+ 
+
+=== Page 10 ===
+
+
+=== Page 11 ===
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI 
+ 1 
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI 
+1.1. Giới thiệu bài toán 
+Bài báo cáo này tập trung nghiên cứu và thực nghiệm giải thuật K -Means trong 
+bài toán Phân cụm Khách hàng – một ứng dụng quan trọng của học máy không giám sát 
+trong lĩnh vực kinh doanh và marketing. Phân cụm khách hàng cho phép doanh nghiệp 
+tự động phân nhóm khách hàng dựa trên sự tương đồng về đặc trưng hành vi, nhân khẩu 
+học hoặc giá trị tiêu dùng, từ đó hỗ trợ xây dựng chiến lược chăm sóc, tiếp thị và cá 
+nhân hóa dịch vụ hiệu quả hơn mà không cần nhãn dữ liệu có sẵn. 
+ 
+Tuy nhiên, việc phân cụm khách hàng đặt ra nhiều thách thức như xác định số cụm 
+tối ưu, xử lý dữ liệu có nhiều chiều và đảm bảo tính ổn định của kết quả. Thuật toán K-
+Means được lựa chọn nhờ tính đơn giản, hiệu quả và khả năng mở rộng cho tập dữ liệu 
+lớn, giúp doanh nghiệp nhanh chóng nhận diện các nhóm khách hàng tiềm năng. Thông 
+qua việc áp dụng K -Means, báo cáo này không chỉ minh họa quy trình phân cụm mà 
+còn đánh giá chất lượng phân cụm bằng các chỉ số thực nghiệm, từ đó làm rõ giá trị ứng 
+dụng của học máy không giám sát trong việc hỗ trợ ra quyết định kinh doanh. 
+  
+
+=== Page 12 ===
+CHƯƠNG 1. GIỚI THIỆU ĐỀ TÀI 
+ 2 
+1.2. Các công trình liên quan 
+Bảng 1.1. Bảng giới thiệu các thuật toán 
+Thuật toán Nguyên lý hoạt động Ưu điểm Hạn chế 
+K-Means 
+Chia dữ liệu thành K cụm 
+bằng cách tối ưu khoảng 
+cách giữa điểm và tâm cụm 
+Đơn giản, nhanh, 
+dễ triển khai; 
+phù hợp dữ liệu 
+lớn 
+Nhạy cảm với giá trị khởi 
+tạo; khó xử lý dữ liệu phi 
+tuyến hoặc cụm có hình 
+dạng phức tạp 
+Hierarchical 
+Clustering 
+Xây dựng cây phân cấp 
+(dendrogram) để nhóm dữ 
+liệu theo mức độ tương 
+đồng 
+Không cần xác 
+định số cụm 
+trước; trực quan 
+Tốn thời gian với dữ liệu 
+lớn; khó mở rộng 
+DBSCAN 
+Phân cụm dựa trên mật độ 
+điểm dữ liệu 
+Tìm được cụm 
+có hình dạng bất 
+kỳ; xử lý tốt 
+nhiễu 
+Khó chọn tham số 
+(epsilon, minPts); không 
+tốt với dữ liệu có mật độ 
+thay đổi 
+Gaussian 
+Mixture 
+Models 
+(GMM) 
+Giả định dữ liệu được sinh 
+từ nhiều phân phối 
+Gaussian 
+Linh hoạt hơn K-
+Means; cho phép 
+xác suất thuộc 
+cụm 
+Tốn tài nguyên tính toán; 
+nhạy cảm với giá trị khởi 
+tạo 
+
+=== Page 13 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 3 
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+2.1. Giới thiệu tập dữ liệu 
+Trong nghiên cứu khoa học dữ liệu, có nhiều nguồn cung cấp bộ dữ liệu phục vụ 
+phân tích như UCI Machine Learning Repository, Kaggle hay các kho dữ liệu mở từ tổ 
+chức, doanh nghiệp và chính phủ. Trong đề tài này, chúng ta lựa chọn bộ dữ liệu Customer 
+Behavior, bao gồm thông tin của hơn 2.000 khách hàng. Bộ dữ liệu cung cấp cái nhìn 
+toàn diện về đặc điểm nhân khẩu học, hành vi mua sắm và mức độ tương tác với các chiến 
+dịch marketing. 
+ 
+Phân tích hành vi khách hàng là một phân tích chi tiết về nhóm khách hàng lý 
+tưởng của một công ty. Nó giúp doanh nghiệp hiểu rõ hơn về khách hàng của mình và dễ 
+dàng điều chỉnh sản phẩm theo nhu cầu, hành vi và mối quan tâm cụ thể của các nhóm 
+khách hàng khác nhau. 
+ 
+Đây là nguồn dữ liệu mang tính thực tiễn cao, bởi nó phản ánh rõ nét chân dung 
+tiêu dùng trong bối cảnh thương mại điện tử. Việc khai thác và phân tích bộ dữ liệu này 
+nhằm mục tiêu phân cụm khách hàng, qua đó nhận diện các nhóm tiêu dùng khác nhau. 
+Kết quả phân cụm không chỉ giúp doanh nghiệp tối ưu hóa chiến lược marketing, mà còn 
+góp phần nâng cao trải nghiệm khách hàng và gia tăng hiệu quả kinh doanh. 
+Dataset: Customer_Behavior.xlsx 
+[1] Source:  Kaggle - Customer Personality Analysis Dataset 
+  
+
+=== Page 14 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 4 
+ 
+import pandas as pd 
+# Đọc dữ liệu từ file CSV: 
+dataset = pd.read_csv(r"path_to_file", sep=”\t”) 
+# Thông tin về kiểu dữ liệu và số lượng giá trị không null 
+print(dataset.info()) 
+# Kích thước của DataFrame (số dòng, số cột) 
+print(dataset.shape) 
+# Hiển thị thông tin demo về dữ liệu: 
+print(dataset.head(10)) 
+# Hiển thị thông tin tổng quan về dữ liệu: 
+print(dataset.describe()) 
+ 
+Bảng 2.1 Bảng thông tin các đặc trưng của bộ dữ liệu 
+# Column Non-Null Count Dtype 
+0 ID 2240 int64 
+1 Year_Birth 2240 int64 
+2 Education 2240 object 
+3 Marital_Status 2240 object 
+4 Income 2216 float64 
+
+=== Page 15 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 5 
+5 Kidhome 2240 int64 
+6 Teenhome 2240 int64 
+7 Dt_Customer 2240 object 
+8 Recency 2240 int64 
+9 MntWines 2240 int64 
+10 MntFruits 2240 int64 
+11 MntMeatProducts 2240 int64 
+12 MntFishProducts 2240 int64 
+13 MntSweetProducts 2240 int64 
+14 MntGoldProds 2240 int64 
+15 NumDealsPurchases 2240 int64 
+16 NumWebPurchases 2240 int64 
+
+=== Page 16 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 6 
+17 NumCatalogPurchases 2240 int64 
+18 NumStorePurchases 2240 int64 
+19 NumWebVisitsMonth 2240 int64 
+20 AcceptedCmp3 2240 int64 
+21 AcceptedCmp4 2240 int64 
+22 AcceptedCmp5 2240 int64 
+23 AcceptedCmp1 2240 int64 
+24 AcceptedCmp2 2240 int64 
+25 Complain 2240 int64 
+26 Z_CostContact 2240 int64 
+27 Z_Revenue 2240 int64 
+28 Response 2240 int64 
+ 
+  
+
+=== Page 17 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 7 
+− Cái nhìn tổng quan về các đặc trưng của dataset 
+− Dưới đây là mô tả chi tiết từng đặc trưng gốc trong dataset (29 cột). Với mỗi cột có 
+tên cột, trạng thái null & kiểu dữ liệu, ý nghĩa, cách sử dụng, và ghi chú xử lý dữ 
+liệu cần lưu ý.  
+ID 2240 
+non-null int64 (Mã định danh duy nhất cho mỗi khách hàng) 
+Year_Birth 2240 
+non-null int64 (Năm sinh khách hàng) 
+Education 2240 
+non-null 
+object (Trình độ học vấn (ví dụ Graduation, 
+Master, PhD) 
+Marital_Status 2240 
+non-null 
+object (Tình trạng hôn nhân (Single, Married, 
+Together, Divorced, v.v.). 
+Income 2216 
+non-null float64 (Thu nhập hộ gia đình (số tiền). 
+Kidhome 2240 
+non-null int64 (Số trẻ con sống cùng (kid at home). 
+Teenhome 2240 
+non-null int64 (Số thiếu niên sống cùng) . 
+Dt_Customer 2240 
+non-null 
+object (Ngày khách hàng trở thành khách hàng 
+(ngày đăng ký)) 
+Recency 2240 
+non-null int64 (Số ngày kể từ lần mua hàng gần nhất) 
+MntWines 2240 
+non-null 
+int64 (Tổng chi tiêu cho rượu vang trong khoảng 
+thời gian khảo sát) 
+MntFruits 2240 
+non-null int64(Tổng chi tiêu cho trái cây) 
+MntMeatProducts 2240 
+non-null int64(Tổng chi tiêu cho thịt) 
+MntFishProducts 2240 
+non-null int64(Tổng chi tiêu cho sản phẩm cá) 
+MntSweetProducts 2240 
+non-null int64(Tổng chi tiêu cho đồ ngọt) 
+
+=== Page 18 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 8 
+MntGoldProds 2240 
+non-null 
+int64(Tổng chi tiêu cho sản phẩm cao cấp/kim loại 
+(gold products). 
+NumDealsPurchases 2240 
+non-null 
+int64(Số lần mua hàng có dùng khuyến mãi/giảm 
+giá) 
+NumWebPurchases 2240 
+non-null int64(Số lần mua qua website) 
+NumCatalogPurchases 2240 
+non-null int64(Số lần mua qua catalogue) 
+NumStorePurchases 2240 
+non-null int64(Số lần mua trực tiếp tại cửa hàng) 
+NumWebVisitsMonth 2240 
+non-null int64(Số lần truy cập website trong tháng gần nhất) 
+AcceptedCmp3 2240 
+non-null 
+int64 (0/1)(Khách có chấp nhận chiến dịch 
+marketing số 3 không) 
+AcceptedCmp4 2240 
+non-null int64 (0/1)(Nhận chiến dịch số 4) 
+AcceptedCmp5 2240 
+non-null int64 (0/1)(Nhận chiến dịch số 5) 
+AcceptedCmp1 2240 
+non-null int64 (0/1)(Nhận chiến dịch số 1) 
+AcceptedCmp2 2240 
+non-null int64 (0/1)(Nhận chiến dịch số 2). 
+Complain 2240 
+non-null int64 (0/1)(Khách hàng có từng khiếu nại không.) 
+Z_CostContact 2240 
+non-null 
+int64(Biến nội bộ liên quan chi phí contact 
+campaign (bình thường là mã hóa/biến dụng)) 
+Z_Revenue 2240 
+non-null 
+int64(Biến nội bộ liên quan revenue từ contact; có 
+thể là mã nhóm revenue) 
+Response 2240 
+non-null 
+int64 (0/1)(Khách có phản hồi chiến dịch gần nhất 
+hay không (thông thường 1 = có)) 
+ 
+
+=== Page 19 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 9 
+2.2. Tiền xử lý dữ liệu 
+2.2.1. Giá trị thiếu 
+a) Vấn đề đang tồn tại 
+Phát hiện: 1 cột có giá trị bị thiếu 
+Tổng số missing values: 24 giá trị 
+Tỷ lệ ảnh hưởng: ~1.07% tổng số dòng (24/2,240 dòng) 
+Cột bị ảnh hưởng: Income 
+Bảng 2.2 Trước xử lý Missing Value 
+Thông số Giá trị 
+Dataset gốc 2,240 dòng × 29 cột 
+Cột bị thiếu Income 
+Missing cells 24 cells 
+Tỷ lệ overall 0.04% 
+Cột có missing 1/29 cột (3.45%) 
+ 
+ 
+b) Nhận xét và phương án xử lý 
+Qua phân tích, dữ liệu bị thiếu chỉ xuất hiện ở một cột duy nhất là Income, với 
+tổng cộng 24 giá trị thiếu trên 2.240 dòng, chiếm tỷ lệ rất nhỏ so với toàn bộ tập 
+dữ liệu (khoảng 0.04%).  
+Do đó, nhóm lựa chọn loại bỏ các dòng chứa giá trị thiếu thay vì thực hiện các 
+phương pháp bù (imputation). Quyết định này dựa trên các yếu tố sau: 
+● Tỷ lệ thiếu thấp: đảm bảo việc loại bỏ không làm suy giảm đáng kể 
+kích thước mẫu. 
+● Phân bố missing tập trung: Chỉ ảnh hưởng một cột, không gây mất 
+cân bằng dữ liệu. 
+● Tính chất biến: Income là biến liên tục, việc ước lượng giá trị thay 
+thế có thể làm sai lệch phân tích. 
+
+=== Page 20 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 10 
+● Mục tiêu nghiên cứu: Đảm bảo chất lượng dữ liệu cho mô hình phân 
+cụm, tránh nhiễu từ giá trị giả định. 
+c) Kết quả xử lý 
+Bảng 2.3 Sau xử lý Missing Value 
+Thông tin Giá trị 
+Dataset gốc 2,240 dòng 
+Dòng có missing values 24 dòng 
+Dataset sau loại bỏ 2,216 dòng 
+Tỷ lệ dữ liệu còn lại 98.93% 
+Missing values còn lại 0 
+ 
+d) Tổng kết 
+Đơn giản, minh bạch: Dễ hiểu, dễ tái tạo 
+Bảo toàn chất lượng: Không tạo ra dữ liệu giả (synthetic data) 
+An toàn: Tỷ lệ mất dữ liệu → không ảnh hưởng statistical power 
+Do tỷ lệ giá trị thiếu rất thấp (≈0.04%) và chỉ tập trung ở một biến liên tục, phương 
+pháp loại bỏ các dòng thiếu được lựa chọn nhằm đảm bảo tính toàn vẹn và chất 
+lượng dữ liệu cho mô hình phân cụm, đồng thời tránh sai lệch do ước lượng giá 
+trị giả định. 
+  
+
+=== Page 21 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 11 
+2.2.2. Giá trị trùng lặp 
+a) Vấn đề đang tồn tại 
+Tổng dòng: 2,216  
+Feature duplicates phát hiện: 182 dòng (≈8.21%)  
+Số nhóm duplicate: 176 nhóm  
+Phân bố kích thước nhóm: 
+• Nhóm size 2: 170 nhóm ( 340 dòng ) 
+• Nhóm size 3: 6 nhóm ( 18 dòng ) 
+Bảng 2.4 Trước xử lý Duplicated Value 
+Loại 
+Duplicate 
+Số 
+lượng 
+Tỷ lệ Mô tả 
+Full-row 0 0% Không có dòng trùng lặp hoàn toàn 
+Feature-level 182 8.13% Khách hàng khác nhau nhưng đặc trưng giống hệt 
+ID duplicates 0 0% Không có ID trùng lặp 
+ 
+  
+
+=== Page 22 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 12 
+b) Nhận xét và phương án xử lí 
+Qua phân tích, dữ liệu không xuất hiện dòng trùng lặp hoàn toàn (Full -row) và 
+không có ID trùng lặp, đảm bảo tính duy nhất của khóa định danh. Tuy nhiên, 
+có 182 dòng (≈8.21%) xuất hiện trùng lặp ở mức đặc trưng (Feature-level), tức 
+là các khách hàng khác nhau nhưng có đặc trưng giống hệt. Hiện tượng này có 
+thể gây ảnh hưởng đến quá trình phân cụm, làm giảm độ phân biệt giữa các 
+nhóm và dẫn đến kết quả thiếu chính xác 
+Để đảm bảo chất lượng dữ liệu cho mô hình K -Means, nhóm lựa chọn loại 
+bỏ các bản ghi trùng lặp ở mức đặc trưng. Phương án này dựa trên các yếu tố 
+sau: 
+● Giảm nhiễu và bias: Loại bỏ các dòng trùng lặp giúp mô hình 
+phân cụm phản ánh sự đa dạng thực tế của dữ liệu. 
+● Đảm bảo tính đại diện: Tránh việc một nhóm khách hàng bị lặp 
+lại nhiều lần, gây thiên lệch trong tính toán tâm cụm. 
+● Tối ưu hiệu suất: Giảm kích thước dữ liệu, rút ngắn thời gian 
+huấn luyện mà không làm mất thông tin quan trọng. 
+  
+
+=== Page 23 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 13 
+c) Kết quả xử lý 
+Bảng 2.5 Sau xử lý Duplicated Value 
+Thông tin Giá trị 
+Dataset ban đầu 2,216 dòng 
+Feature duplicates bị loại bỏ 182 dòng  
+Dataset sau xử lý 2,034 dòng 
+Tỷ lệ dữ liệu còn lại 91.79% 
+Số nhóm duplicate loại bỏ 176 nhóm 
+ 
+d) Tổng kết 
+Do tỷ lệ trùng lặp ở mức đặc trưng khá đáng kể (≈8.21%), việc loại bỏ 182 dòng 
+trùng lặp giúp đảm bảo tính đa dạng và đại diện của dữ liệu, giảm thiên lệch 
+trong tính toán tâm cụm và nâng cao độ chính xác của mô hình K -Means. Sau 
+xử lý, tập dữ liệu còn 2,0 34 dòng, đủ lớn để duy trì thống kê và hiệu quả phân 
+cụm. 
+  
+
+=== Page 24 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 14 
+2.2.3. Giá trị ngoại lai 
+a) Vấn đề đang tồn tại 
+Bảng 2.6 Chi tiết Outliers 
+Nhóm thuộc tính Chỉ số Nội dung 
+Income 
+Outliers 
+ 
+Giá trị nghi vấn 1 giá trị 
+Chi tiết 666,666 (≥ ngưỡng 500,000) 
+Khoảng IQR 
+[5,250; 105,000] 
+ 
+Đánh giá 
+Đây có thể là lỗi nhập liệu hoặc 
+trường hợp khách hàng có thu nhập 
+cực kỳ cao, gây sai lệch cho phân 
+tích. 
+Year_Birth 
+Outliers 
+ 
+Giá trị bất thường 2 giá trị 
+Chi tiết [1893, 1899] 
+Độ tuổi tương ứng ~131 và ~125 tuổi (không thực tế) 
+Đánh giá 
+Đây là vấn đề chất lượng dữ liệu, có 
+khả năng do lỗi nhập liệu hoặc dữ liệu 
+không được kiểm soát. 
+Count Outliers 
+NumWebPurchases 4 outliers 
+NumCatalogPurchases 4 outliers 
+NumDealsPurchases 24 outliers 
+NumWebVisitsMonth 3 outliers 
+ 
+
+=== Page 25 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 15 
+− Spending Outliers (chi tiết 6 biến): 
+Bảng 2.7 Chi tiết nhóm Spending Outlier 
+Biến Outliers Tỷ lệ 
+IQR Upper 
+Bound 
+Top Extreme 
+MntFruits 96 4.28% 79.5 [199, 199, 199] 
+MntSweetProducts 105 4.69% 79.5 [263, 263, 262] 
+MntFishProducts 72 3.21% 142.5 [259, 259, 259] 
+MntGoldProds 49 2.19% 118.5 [362, 321, 321] 
+MntMeatProducts 29 1.29% 619.5 [1725, 1725, 1725] 
+MntWines 1 0.04% 1018.5 [1493] 
+ 
+  
+
+=== Page 26 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 16 
+b) Nhận xét và phương án xử lý 
+Nhóm không loại bỏ toàn bộ các giá trị ngoại lai mà sẽ dựa trên ngữ cảnh kinh 
+tế và tính hợp lý của dữ liệu để đánh giá. Chỉ những giá trị thực sự cực đoan, 
+không phản ánh thực tế (ví dụ: lỗi nhập liệu hoặc vượt xa ngưỡng hợp lý) mới 
+bị loại bỏ. Các outliers hợp lý về mặt kinh doanh sẽ được giữ lại nhằm bảo toàn 
+thông tin quan trọng cho phân tích. 
+Bảng 2.8 Chi tiết hướng xử lý cho từng loại Outliers 
+Outliers Xử lý Lý do 
+Income ≥ 500K Loại bỏ Giá trị nghi vấn, có thể là lỗi nhập liệu 
+Year_Birth < 1900 Loại bỏ Không thực tế, khách hàng quá già 
+Spending outliers (352) Giữ lại Hợp lệ – phản ánh khách hàng chi tiêu cao 
+Count outliers (35) Giữ lại Hợp lệ – hành vi mua sắm đặc biệt 
+ 
+− Chi tiết Outliers được giữ lại (387 records): 
+● Spending Outliers (352) 
+○ Business-valid: Khách VIP/high-spender phân khúc quan trọng 
+○ Clustering value: Cần phân biệt giữa low/medium/high spenders 
+○ IQR reasonable: Upper bounds hợp lý, không quá cực đoan 
+● Count Outliers (35) 
+○ Behavioral insight: Phản ánh hành vi mua sắm đa dạng 
+○ Low impact: Chỉ chiếm 1.56%, không ảnh hưởng phân phối chung 
+○ Marketing value: Khách hàng frequent buyer cần nhận diện 
+
+=== Page 27 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 17 
+c) Kết quả xử lý 
+Sau khi phân tích 390 giá trị ngoại lai trên 25 biến, nhóm áp dụng phương 
+pháp loại bỏ có chọn lọc dựa trên ngữ cảnh kinh tế và tính hợp lý của dữ liệu. 
+Các outliers hợp lý về mặt kinh doanh được giữ lại để bảo toàn thông tin quan 
+trọng, chỉ loại bỏ những giá trị cực đoan không phản ánh thực tế (ví dụ: lỗi 
+nhập liệu hoặc vượt xa ngưỡng hợp lý). 
+- Tóm tắt kết quả: 
+● Tổng outliers phát hiện: 390 giá trị 
+● Loại bỏ:  
+○ Income ≥ 500K: 1 dòng 
+○ Year_Birth < 1900: 2 dòng 
+● Tổng số dòng bị loại bỏ: 3 dòng (≈0.15%) 
+Dataset sau xử lý: 2,031 dòng (giữ lại 99.85% dữ liệu) 
+ 
+d) Tổng kết 
+Sau xử lý, dữ liệu giảm từ 2,034 xuống 2,031 dòng, giữ lại 99.85% dữ liệu, 
+đồng thời bảo toàn 387 outliers hợp lệ (≈19.05%) phản ánh hành vi kinh doanh 
+quan trọng như VIP customers và frequent buyers. Việc giữ lại các outliers này 
+giúp mô hình phân cụm nhậ n diện phân khúc giá trị cao, phục vụ chiến lược 
+marketing. 
+● Ưu điểm: 
+○ Đảm bảo chất lượng dữ liệu nhưng vẫn giữ insight kinh doanh. 
+○ Bảo toàn gần như toàn bộ dữ liệu (99.85%). 
+○ Tối ưu cho phân cụm khách hàng. 
+● Hạn chế: 
+○ Vẫn còn 387 outliers hợp lệ, phân phối chi tiêu lệch phải  
+→ cần chuẩn hóa mạnh hơn (RobustScaler, log transform). 
+  
+
+=== Page 28 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 18 
+2.2.4. Chuẩn hóa dữ liệu phân loại  
+a) Vấn đề đang tồn tại 
+− Marital_Status: Phân tích cho thấy biến này có các giá trị chính: 
+Married, Together, Single, Divorced, Widow. Tuy nhiên, xuất hiện một số 
+giá trị không chuẩn: 
+● Alone và YOLO: trùng nghĩa với Single nhưng dùng từ không 
+thống nhất. 
+● Absurd: giá trị vô nghĩa, không có ý nghĩa nghiệp vụ. 
+ Những vấn đề này dẫn đến sự không nhất quán và cần được chuẩn 
+hóa để đảm bảo tính chính xác trong phân cụm. 
+− Education: Các giá trị gồm Graduation, PhD, Master, 2n Cycle, 
+Basic. Tất cả đều hợp lệ và có thứ tự logic, không cần xử lý thêm. 
+− Dt_Customer: Biến này chứa dữ liệu dạng chuỗi ngày (DD -MM-
+YYYY). Cần chuyển đổi sang kiểu datetime để phục vụ phân tích, nhưng 
+không yêu cầu chuẩn hóa giá trị. 
+ 
+b) Phương án xử lý 
+− Chuẩn hóa Marital_Status: gộp các giá trị không chuẩn về nhóm hợp 
+lý ` 
+− Giữ nguyên Education vì đã chuẩn. 
+− Chuyển đổi Dt_Customer sang định dạng ngày để thuận tiện cho tính 
+  
+
+=== Page 29 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 19 
+c) Kết quả xử lý 
+− Trước khi xử lý: 
+● Số lượng giá trị duy nhất: 8 
+● Giá trị không chuẩn/slang: 3 (Alone, YOLO, Absurd) 
+● Số bản ghi bị ảnh hưởng: 7 (≈0.34%) 
+ 
+− Mapping áp dụng: 
+● Alone → Single (3 giá trị) 
+● YOLO → Single (2 giá trị) 
+● Absurd → Other (2 giá trị) 
+ 
+− Sau khi xử lý: 
+● Số lượng giá trị duy nhất: 6 
+● Tất cả giá trị đã được chuẩn hóa 
+● Tính toàn vẹn dữ liệu được bảo đảm 
+ 
+d) Tổng kết 
+− Lợi ích đạt được: 
+● Đảm bảo tính nhất quán về ngữ nghĩa, loại bỏ sự trùng lặp ý 
+nghĩa (Alone, YOLO → Single). 
+● Chuẩn hóa giá trị không chuẩn, giảm nhiễu từ các nhóm hiếm. 
+● Dữ liệu sẵn sàng cho bước mã hóa và mô hình hóa. 
+  
+
+=== Page 30 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 20 
+− Phân tích tác động: 
+ 
+Bảng 2.9 Chuẩn hóa dữ liệu cho cột Marital Status 
+Chỉ số Trước Sau Cải thiện 
+Số lượng category 8 6 Giảm 25% độ phức tạp 
+Giá trị không nhất quán 7 0 Đã xử lý 
+Tần suất nhóm Single 23.2% 23.4% Tăng hợp lý 
+ 
+− Kết luận: 
+Quá trình chuẩn hóa đã hợp nhất các giá trị không chuẩn, giảm từ 8 xuống 6 
+nhóm, xử lý 100% giá trị không nhất quán (0.34% dữ liệu). Kết quả đảm bảo 
+tính nhất quán cho biến phân loại, giúp dữ liệu sẵn sàng cho bước mã hóa và 
+mô hình phân cụm. 
+  
+
+=== Page 31 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 21 
+2.2.5. Chuyển đổi kiểu dữ liệu và mã hóa 
+a) Vấn đề đang tồn tại 
+− Type Conversion Issue: 
+● Biến Dt_Customer hiện ở dạng chuỗi (object) với định dạng 
+DD-MM-YYYY.  
+● Vấn đề: Không thể tính toán các đặc trưng thời gian (tenure, 
+recency), không thể sắp xếp theo timeline, và không thể trích xuất 
+thành phần ngày/tháng/năm. 
+− Encoding Issues: 
+● Education: Là biến ordinal (có thứ tự) nhưng đang ở dạng 
+chuỗi. Nếu dùng One-Hot Encoding sẽ mất thông tin thứ bậc.  
+● Marital_Status: Là biến nominal (không thứ tự), có 6 giá trị, 
+trong đó một số nhóm hiếm (<1%). Cần mã hóa để mô hình hiểu 
+được. 
+b) Nhận xét và phương án xử lý 
+− Datetime Conversion: Chuyển đổi Dt_Customer từ object sang 
+datetime64[ns] với định dạng chuẩn %d-%m-%Y.  
+− Education Encoding (Ordinal): Áp dụng Ordinal Encoding, ánh xạ thứ tự 
+từ thấp đến cao: Basic → 2n Cycle → Graduation → Master → PhD. Tạo 
+cột mới Education_ord với giá trị số từ 0 đến 4.  
+− Marital_Status Encoding (Nominal): Áp dụng One-Hot Encoding kết hợp 
+nhóm các giá trị hiếm (<1%) vào nhóm “Other” để giảm độ phức tạp. Tạo 
+6 cột dummy dạng uint8 để tối ưu bộ nhớ. 
+c) Kết quả xử lý 
+− Dt_Customer: Chuyển đổi thành công sang datetime64[ns], không có lỗi 
+parsing.  
+− Education: Tạo cột Education_ord (Int64), giữ nguyên thứ tự logic, không 
+mất dữ liệu.  
+− Marital_Status: Tạo 6 cột dummy (Marital_*), nhóm giá trị hiếm về 
+“Other”, sử dụng kiểu uint8 để tiết kiệm bộ nhớ.  
+
+=== Page 32 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 22 
+d) Tổng kết 
+− Đảm bảo tính toàn vẹn dữ liệu: Đã  chuyển đổi thành công, không mất thông tin. 
+− Tối ưu cho mô hình học máy: Biến ordinal được mã hóa giữ thứ tự, biến nominal được 
+mã hóa one-hot và giảm độ phức tạp nhờ nhóm giá trị hiếm. 
+− Hỗ trợ phân tích nâng cao: Dt_Customer ở dạng datetime cho phép tính toán đặc trưng 
+thời gian. 
+− Hiệu quả bộ nhớ: Dummy variables sử dụng uint8, tiết kiệm ~87.5% so với kiểu mặc 
+định. 
+2.2.6. Tổng kết 
+a) Tình trạng trước tiền xử lý 
+− Kích thước: 2,240 dòng × 29 cột  
+− Kiểu dữ liệu: Chủ yếu là số nguyên (int64), một số cột dạng chuỗi (object) 
+và một cột dạng số thực (float64).  
+− Vấn đề chính:  
+• Giá trị thiếu: 24 giá trị, tất cả nằm ở cột Income. 
+• Trùng lặp: Không có dòng trùng lặp hoàn toàn, nhưng có 182 dòng 
+trùng lặp về đặc trưng. 
+• Ngoại lai: 390 giá trị, gồm 1 giá trị thu nhập cực lớn (666,666), 2 
+giá trị năm sinh không thực tế (<1900), và nhiều giá trị chi tiêu cao. 
+• Không nhất quán: Một số giá trị trong Marital_Status không chuẩn 
+(Alone, YOLO, Absurd). 
+• Kiểu dữ liệu chưa phù hợp: Dt_Customer ở dạng chuỗi, Education 
+chưa thể hiện thứ bậc. 
+  
+
+=== Page 33 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 23 
+b) Tình trạng sau tiền xử lý 
+− Kích thước: 2,010 dòng × 24 cột (giảm 10.27%).  
+− Các bước thực hiện:  
+• Loại bỏ 24 dòng có giá trị thiếu và 182 dòng trùng lặp đặc trưng. 
+• Loại bỏ 3 outliers cực đoan, giữ lại 387 outliers hợp lệ để bảo toàn 
+thông tin kinh doanh. 
+• Chuẩn hóa Marital_Status và mã hóa bằng One-Hot Encoding  
+• Mã hóa Education theo thứ tự (Ordinal Encoding). 
+• Chuyển đổi Dt_Customer sang định dạng ngày (datetime64). 
+− Kết quả: Không còn giá trị thiếu, không còn trùng lặp, dữ liệu nhất quán 
+và sẵn sàng cho mô hình hóa. 
+c) Đánh giá chất lượng tiền xử lý 
+− Chất lượng dữ liệu: Được cải thiện rõ rệt, loại bỏ hoàn toàn missing values 
+và duplicates.  
+− Bảo toàn thông tin: Giữ lại các outliers hợp lệ để phục vụ phân tích phân 
+khúc khách hàng.  
+Bảng 2.10 Ưu điểm và hạn chế của xử lý Outlier 
+Ưu điểm Hạn chế 
+Giữ lại thông tin quan trọng về 
+khách hàng chi tiêu cao 
+Phân phối dữ liệu vẫn lệch phải, cần 
+chuẩn hóa thêm 
+Loại bỏ triệt để dữ liệu thiếu và 
+trùng lặp 
+Mất một phần nhỏ dữ liệu do loại bỏ 
+missing values 
+Quy trình rõ ràng, dễ tái lập 
+Ngưỡng loại bỏ outliers có thể cần 
+điều chỉnh cho bộ dữ liệu khác 
+ 
+  
+
+=== Page 34 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 24 
+d) Hướng xử lý khác 
+Ngoài phương pháp hiện tại (loại bỏ giá trị thiếu và outliers cực đoan), 
+có thể xem xét hai hướng tiếp cận bổ sung: 
+• Bảo toàn dữ liệu tối đa : Thay vì loại bỏ 24 dòng có Income bị 
+thiếu, có thể điền giá trị thay thế. 
+− Phương pháp:  
+• Điền giá trị trung bình hoặc trung vị. 
+• Dự đoán bằng mô hình hồi quy dựa trên các biến liên quan (Education, 
+Year_Birth). 
+− Ưu điểm: Giữ nguyên số lượng khách hàng, không mất dữ liệu. 
+− Nhược điểm: Có thể làm sai lệch phân phối gốc do giá trị giả định.  Xử lý outliers 
+mạnh hơn  
+ Thay vì chỉ loại bỏ 3 outliers cực đoan, có thể biến đổi các biến có phân phối 
+lệch để giảm tác động của 387 outliers còn lại. 
+− Phương pháp:  
+▪ Log Transformation: Áp dụng biến đổi logarit cho các biến chi tiêu và 
+thu nhập để giảm độ lệch. 
+▪ Robust Scaling: Chuẩn hóa dựa trên trung vị và IQR, ít bị ảnh hưởng 
+bởi outliers. 
+− Ưu điểm: Giúp thuật toán dựa trên khoảng cách (như K-Means) hoạt động hiệu quả 
+hơn, cụm rõ ràng hơn. 
+− Nhược điểm: Làm mất ý nghĩa trực tiếp của giá trị gốc, khó diễn giải về mặt kinh 
+doanh. 
+▪ Kết luận 
+Quy trình xử lý hiện tại đạt sự cân bằng giữa làm sạch dữ liệu và giữ lại giá trị 
+kinh doanh. Dữ liệu sau xử lý có chất lượng cao, nhất quán và phù hợp cho bài 
+toán phân cụm khách hàng. Các phương pháp bổ sung như imputation hoặc biến 
+đổi dữ liệu (log transform, robust scaling) có thể được xem xét ở giai đoạn tiếp 
+theo để tối ưu hơn cho mô hình. 
+ 
+
+=== Page 35 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 25 
+2.3. Xây dựng đặc trưng 
+ 
+Sau khi có được bộ dữ liệu đã làm sạch, chúng ta bước vào giai đoạn Xây dựng 
+Đặc trưng. Mục tiêu chính của giai đoạn này không phải là tạo ra một bộ dữ liệu duy nhất, 
+mà là tách và phát triển ba bộ đặc trưng riêng biệt, mỗi bộ được thiết kế để trả lời một câu 
+hỏi kinh doanh cụ thể thông qua phân cụm: 
+ 
+− Phân Cụm Nhân Khẩu Học (Demographic): "Khách hàng là ai?" 
+• Tập trung: Các đặc điểm về vòng đời, tuổi tác, và cấu trúc gia đình. 
+• Hành động: Tạo ra các biến như Age, Life_Stage (Giai đoạn sống), và 
+Dependency_Ratio (Tỷ lệ phụ thuộc tài chính). 
+ 
+− Phân Cụm Hành Vi Mua Sắm (Product & Channel): "Khách hàng mua sắm như thế 
+nào?" 
+• Tập trung: Thói quen mua sắm, sự đa dạng sản phẩm và kênh tương tác ưa thích. 
+• Hành động: Tạo các biến như Total_Spent, Product_HHI (mức độ đa dạng sản 
+phẩm), và Store_Preference (mức độ ưa thích mua tại cửa hàng). 
+ 
+− Phân Cụm Giá Trị (RFM): "Khách hàng mang lại giá trị bao nhiêu?" 
+• Tập trung: Giá trị kinh tế mà khách hàng mang lại. 
+• Hành động: Xây dựng các biến dựa trên mô hình RFM (Recency, 
+Frequency,Monetary) mở rộng  và kết hợp với các chỉ số tài chính như Income 
+và AvgPerPurchase.  
+  
+
+=== Page 36 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 26 
+2.3.1. Feature Engineering 
+a) Demographic Feature Engineering 
+- Tổng quan 
+Bước Feature Engineering cho chiến lược Demographic Clustering tập trung vào 
+việc xây dựng 5 biến đặc trưng từ dữ liệu gốc, trong đó 3 biến dùng trực tiếp cho 
+phân cụm K-Means và 2 biến dành cho phân tích hậu kiểm (post-hoc analysis). Cách 
+tiếp cận này đảm bảo rằng các yếu tố nhân khẩu học được phản ánh một cách toàn 
+diện mà không gây ra hiện tượng dominance. 
+- Các đặc trưng được tạo: 
+● Age (Tuổi khách hàng) 
+○ Được tính toán từ Year_Birth với công thức: 2014 - 
+Year_Birth 
+○ Phạm vi: 18-100 tuổi 
+○ Skewness ban đầu: 0.137  
+○ Đặc điểm: Phân phối gần như chuẩn, giữ nguyên không biến 
+đổi. 
+ 
+ 
+Hình 2.1 Phân phối Age 
+  
+
+
+=== Page 37 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 27 
+ 
+● Income (Thu nhập hàng năm) 
+○ Đặc trưng gốc từ dataset 
+○ Skewness: 0.367  
+○ Đặc điểm: Thu nhập dao động từ 1,730 đến 162,397 đơn vị, 
+phân phối tương đối cân bằng 
+ 
+ 
+Hình 2.2 Phân phối Income 
+  
+
+
+=== Page 38 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 28 
+ 
+● Dependency_Ratio (Tỷ lệ phụ thuộc gia đình) 
+o Công thức: (TotalChildren × 10,000) / 
+Income_per_Family_Member 
+o Skewness ban đầu: 1.735 (vượt ngưỡng 0.5, cần biến đổi) 
+o Transform áp dụng: Yeo -Johnson (do có 568 giá trị = 0, 
+chiếm 28.3%) 
+o Kết quả: Skewness giảm từ 1.735 xuống 0.089  
+o Ý nghĩa: Đo mức độ phụ thuộc tài chính của các thành viên 
+gia đình vào thu nhập 
+ 
+ 
+Hình 2.3 Phân phối của Dependency_Ratio 
+ 
+● Education_ord (Trình độ giáo dục - Ordinal) 
+○ Mã hóa: 0 (Basic) → 4 (PhD), có 5 mức độ 
+○ Không dùng cho K-Means để tránh hiệu ứng dominance của 
+biến ordinal 
+ 
+● Life_Stage (Giai đoạn cuộc sống - Categorical) 
+○ 5 nhóm: Young Single (451), Young Family (525), Mature 
+Family (321), Empty Nest (223), Single Parent (490) 
+○ Được xây dựng từ: Age × TotalChildren × Marital_Status 
+  
+
+
+=== Page 39 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 29 
+- Phương pháp biến đổi: 
+Hệ thống tự động phát hiện phương pháp biến đổi tối ưu đặc tính trên dữ liệu: 
+● Box-Cox: Được áp dụng cho dữ liệu thuần dương (min > 0) 
+● Yeo-Johnson: Được áp dụng cho dữ liệu có giá trị 0 hoặc âm 
+Trong trường hợp này, chỉ Dependency_Ratio cần biến đổi vì có skewness = 
+1.735. Yeo-Johnson được chọn vì biến này chứa nhiều giá trị 0 (28.3%), biểu 
+thị các gia đình không có con cái. 
+ 
+Hình 2.4 Phân phối của Dependency_Ratio trước và sau transform 
+  
+
+
+=== Page 40 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 30 
+- Phân tích tương quan 
+• Giữa 3 biến clustering: 
+o Age ↔ Income: r = 0.201 
+o Age ↔ Dependency_Ratio: r = -0.043  
+o Income ↔ Dependency_Ratio: r = -0.601  
+ 
+Hình 2.5 Tương quan giữa các đặc trưng Demographic 
+ 
+- Kết luận: Dataset Demographic sẵn sàn với 3 biến được tinh chỉnh: 
+● 3 biến clustering có độc lập cao, phân phối chuẩn hóa tốt 
+● Không có vấn đề dữ liệu hoặc Multicollinearity (Đa cộng tuyến – 
+xảy ra khi từ 3 biến độc lập trở lên có mối quan hệ tuyến tính mạnh mẽ với 
+nhau)  
+Dataset:  Customer_Behavior_Demographic.xlsx 
+  
+
+
+=== Page 41 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 31 
+b) Product + Channel Feature Engineering 
+− Tổng quan 
+Bước Feature Engineering cho chiến lược Product + Channel Clustering tập trung 
+vào hành vi mua sắm của khách hàng thông qua lăng kính "mua bao nhiêu" thay vì 
+"mua cái gì". Kết quả là 4 biến clustering độc lập cao và 8 biến tham chiếu để phân 
+tích hậu kiểm. 
+− Các biến được tạo 
+● Product_HHI (Mức độ tập trung sản phẩm) 
+○ Công thức: Σ(Preference₍ᵢ₎)² cho 6 loại sản phẩm 
+○ Phạm vi: 0.167 - 1 
+ Ý nghĩa: Giá trị cao = khách hàng chuyên mua 1 loại, giá 
+trị thấp = đa dạng sản phẩm 
+ 
+Hình 2.6 Product_HHI 
+  
+
+
+=== Page 42 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 32 
+ 
+● Store_Preference (Ưu tiên kênh cửa hàng) 
+○ Công thức: NumStorePurchases / TotalPurchases  
+○ Phạm vi: 0-1 (không biến đổi, skewness = 0.059) 
+○ Ý nghĩa: Tỷ lệ mua tại cửa hàng vật lý so với online. 
+ 
+ 
+Hình 2.7 Store_Preference 
+  
+
+
+=== Page 43 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 33 
+ 
+● Web_Engagement (Hành vi truy cập) 
+○ Dữ liệu: NumWebVisitsMonth (số lần truy cập web hàng 
+tháng) 
+○ Phạm vi: 0-20 (không biến đổi, skewness = 0.279) 
+○ Ý nghĩa: Mức độ tương tác với nền tảng số 
+ 
+ 
+Hình 2.8 Web_Engagement 
+  
+
+
+=== Page 44 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 34 
+● PC1_Total_TotalPurchases (Tổng hợp PCA) 
+○ Biến gốc 1: Total_Spent_Transformed (Box-Cox: skew 0.857 
+→ -0.126) 
+○ Biến gốc 2: TotalPurchases (skewness = 0.249, không cần 
+biến đổi) 
+○ Tương quan gốc: r = 0.874 (cần PCA) 
+○ Kết quả PCA: Giữ lại 93.69% phương sai từ 2 biến 
+○ Công thức: 0.7071 × Total_Spent_Transformed + 0.7071 × 
+TotalPurchases 
+○ Ý nghĩa: Biến tổng hợp đo khối lượng chi tiêu và tần suất mua 
+hàng 
+ 
+Hình 2.9 PC1_TotalPurchases 
+  
+
+
+=== Page 45 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 35 
+● Wine_Preference: Tỷ lệ chi tiêu vào rượu vang.  
+● Meat_Preference: Tỷ lệ chi tiêu vào thịt.  
+● Fish_Preference: Tỷ lệ chi tiêu vào cá.  
+● Fruit_Preference: Tỷ lệ chi tiêu vào trái cây.  
+● Sweet_Preference: Tỷ lệ chi tiêu vào bánh ngọt.  
+● Gold_Preference: Tỷ lệ chi tiêu vào sản phẩm vàng.  
+● Dominant_Product: Loại sản phẩm được mua nhiều nhất.  
+● Top_Product_Share: Tỷ lệ chi tiêu cho sản phẩm chủ yếu. 
+ 
+ 
+Hình 2.10 Các đặc trưng tham chiếu 
+- Phương pháp biến đổi  
+• Total_Spent Transform 
+o Phương pháp: Box-Cox (vì dữ liệu thuần dương, không có giá trị 0) 
+o Lambda: 0.185 
+o Kết quả: Skewness giảm từ 0.857 xuống -0.126 (cải thiện 0.731) 
+• PCA Reduction 
+o Total_Spent_Transformed ↔ TotalPurchases có r = 0.874 ≥ 0.7 
+o Áp dụng: PCA giữ 1 thành phần chính 
+o Lợi ích: Loại bỏ multicollinearity, giảm từ 5 biến xuống 4 biến 
+clustering 
+o Kết quả: PC1 giải thích 93.69% phương sai từ 2 biến tương quan cao 
+  
+
+
+=== Page 46 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 36 
+− Phân tích tương quan 
+● Product_HHI ↔ Store_Preference: r = -0.08 
+● Product_HHI ↔ Web_Engagement: r = 0.06 
+● Product_HHI ↔ PC1: r = 0.20 
+● Store_Preference ↔ Web_Engagement: r = -0.20 
+● Store_Preference ↔ PC1: r = -0.29 
+● Web_Engagement ↔ PC1: r = -0.40 
+ 
+Hình 2.11 Tương quan giữa các đặc trưng Product Channel 
+− Kết Luận 
+Dataset Product+Channel đã được tinh chỉnh thành công với 4 biến clustering độc 
+lập cao, kết hợp khối lượng mua sắm, tần suất, đa dạng sản phẩm, và kênh phân 
+phối. 8 biến tham chiếu cung cấp bối cảnh chi tiết để diễn giải các cluster được hình 
+thành, sẵn sàng cho bước K-Means Clustering. 
+Dataset: Customer_Behavior_ProductChannel.xlsx 
+ 
+
+
+=== Page 47 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 37 
+c) RFM Feature Engineering 
+− Tổng quan : 
+Bước Feature Engineering cho chiến lược RFM Clustering tập trung vào phân khúc 
+khách hàng dựa trên giá trị kinh tế thông qua ba chỉ số chính: Recency (tần suất gần 
+đây), Frequency (tần suất giao dịch), và Monetary (giá trị chi tiêu). Kết quả là 4 biến 
+clustering độc lập cao (sau khi áp dụng PCA giảm chiều từ 6 biến ban đầu). 
+− Các biến được tạo: 
+● Recency (Tần suất gần đây) 
+○ Dữ liệu gốc: Days_Since_Last_Purchase 
+○ Phạm vi: 0-100 ngày (không biến đổi, skewness = giá trị nhỏ) 
+○ Ý nghĩa: Số ngày kể từ lần mua hàng gần nhất. Giá trị cao = 
+khách hàng không hoạt động 
+○ Độc lập cao: Recency không tương quan với các biến khác (r 
+< 0.01) 
+ 
+Hình 2.12 Recency 
+  
+
+
+=== Page 48 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 38 
+● Income_per_Family_Member_Transformed (Khả năng tài chính) 
+○ Công thức: Income / (2 + TotalChildren) 
+○ Biến đổi: Box-Cox (vì dữ liệu thuần dương) 
+○ Skewness: 1.003 → -0.006 (cải thiện 0.997) 
+○ Ý nghĩa: Thu nhập bình quân trên đầu người trong gia đình 
+ 
+ 
+Hình 2.13 Income_per_Family_Member_Transformed 
+  
+
+
+=== Page 49 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 39 
+● PC1_TotalPurchases_Total (Tổng hợp PCA) 
+○ Biến gốc 1: TotalPurchases (tần suất = 14.89, skewness = 0.249) 
+○ Biến gốc 2: Total_Spent (giá trị = 608, skewness = 0.857 → -0.126 
+sau transform) 
+○ Tương quan gốc: r = 0.756 (cần PCA) 
+○ Kết quả PCA: Giữ lại 87.81% phương sai từ 2 biến 
+○ Công thức: 0.7071 × TotalPurchases + 0.7071 × Total_Spent  
+○ Ý nghĩa: Biến tổng hợp đo khối lượng mua hàng 
+ 
+ 
+Hình 2.14 PC1_TotalPurchases_Total 
+  
+
+
+=== Page 50 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 40 
+● PC1_AvgPerPurchase_Income (Tổng hợp PCA) 
+o Biến gốc 1: AvgPerPurchase_Transformed  
+o Biến gốc 2: Income (Thu nhập cơ bản) 
+o Tương quan gốc: r = 0.795 (cần PCA) 
+o Kết quả PCA: Giữ lại 89.73% phương sai từ 2 biến 
+o Công thức: 0.7071 × AvgPerPurchase_Transformed + 0.7071 × 
+Income 
+o Ý nghĩa: Biến tổng hợp đo sức mua (kết hợp AOV + khả năng tài 
+chính) 
+ 
+ 
+Hình 2.15 PC1_AvgPerPurchase_Income 
+  
+
+
+=== Page 51 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 41 
+− Phương pháp biến đổi: 
+• AvgPerPurchase Transform 
+o Phương pháp: Yeo-Johnson (vì có giá trị = 0, chiếm 0.2%) 
+o Lambda: 0.079 
+o Kết quả: Skewness giảm từ 1.315 xuống -0.020 (cải thiện 1.295) 
+ 
+• Income_per_Family_Member Transform 
+o Phương pháp: Box-Cox (dữ liệu thuần dương) 
+o Lambda: 0.206 
+o Kết quả: Skewness giảm từ 1.003 xuống -0.006 (cải thiện 0.997) 
+ 
+ 
+Hình 2.16 Income_per_Family_Member trước và sau transform 
+  
+
+
+=== Page 52 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 42 
+− Phân tích tương quan: 
+Giữa 4 biến clustering sau PCA: 
+● Recency ↔ Income_per_Family_Member_Tr: r = -0.01  
+● Recency ↔ PC1_TotalPurchases_Total: r = 0.01  
+● Recency ↔ PC1_AvgPerPurchase_Income: r = 0.01  
+● Income_per_Family_Member_Tr ↔ PC1_TotalPurchases_Total:  
+r = 0.76  
+● Income_per_Family_Member_Tr 
+↔ PC1_AvgPerPurchase_Income: r = 0.93  
+● PC1_TotalPurchases_Total ↔ PC1_AvgPerPurchase_Income: 
+ r = 0.87  
+ 
+Hình 2.17 Tương quan giữa các đặc trưng RFM 
+  
+
+
+=== Page 53 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 43 
+− Kết Luận 
+Dataset RFM đã được xây dựng thành công với 4 biến clustering tối ưu hóa, trong 
+đó: 
+● Recency độc lập hoàn toàn từ các biến khác 
+● Income_per_Family_Member_Transformed đo khả năng tài chính 
+● PC1_TotalPurchases_Total đo khối lượng giao dịch 
+● PC1_AvgPerPurchase_Income đo sức mua 
+ Mặc dù các PC có tương quan cao với nhau, nhưng điều này là tự nhiên do 
+bản chất RFM.  
+Dataset: Customer_Behavior_RFM.xlsx 
+2.3.2. Feature Scaling 
+− Tổng quan 
+Tiếp nối quá trình tiền xử lý và xây dựng đặc trưng, bước này tập trung vào Feature 
+Scaling – một yêu cầu quan trọng trước khi áp dụng K -Means. Do thuật toán dựa 
+trên khoảng cách Euclidean, các đặc trưng có thang đo lớn (như thu nhập) dễ chi 
+phối kết quả, vì vậy cần chuẩn hóa để đảm bảo tính cân bằng và hội tụ nhanh hơn. 
+− Phương án xử lý 
+● StandardScaler (Z-score) – phù hợp dữ liệu chuẩn nhưng nhạy cảm 
+với outliers. 
+● RobustScaler (Median/IQR) – ít bị ảnh hưởng bởi outliers, thích hợp 
+cho dữ liệu kinh tế lệch phải. 
+o Ba chiến lược scaling: 
+● Demographic: Chuẩn hóa Age, Income, Dependency_Ratio; giữ 
+nguyên Education_ord và Life_Stage để phân tích hậu kiểm (vì không tham 
+gia vào phân cụm). 
+● Product-Channel: Chuẩn hóa các chỉ số hành vi mua sắm 
+(Web_Engagement, Product_HHI, Store_Preference, PCA features); giữ 
+nguyên đặc trưng mô tả sản phẩm. 
+● RFM: Chuẩn hóa Recency, Frequency, Monetary và các biến PCA 
+liên quan. 
+
+=== Page 54 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 44 
+− Ưu điểm cách tiếp cận: 
+● So sánh hiệu quả clustering giữa hai phương pháp. 
+● Linh hoạt xử lý outliers và tránh thiên lệch do chọn một phương pháp 
+duy nhất. 
+● Tăng độ tin cậy và khả năng diễn giải kết quả. 
+ Hai phiên bản dữ liệu được tạo để so sánh hiệu quả trong bước phân 
+cụm tiếp theo. Kỳ vọng RobustScaler sẽ cho kết quả tốt hơn, nhưng cả hai 
+sẽ được đánh giá thực nghiệm để chọn phương pháp tối ưu. 
+a) Demographic Feature Scaling 
+Dữ liệu Demographic có 3 đặc trưng chính: Age, Income, Dependency_Ratio. 
+Những đặc trưng này có thang đo khác nhau, do đó cần scaling để K-Means hoạt 
+động hiệu quả. 
+Bảng 2.11 Demographic trước Scaling 
+Feature Mean Std Min Max Skewness Status 
+Age 45.15 11.73 18 100 0.137 Gần chuẩn 
+Income 52,048 21,619 1,730 162,397 0.367 Lệch phải 
+Dependency_Ratio 0.400 0.306 0.0 1.063 0.089 Gần chuẩn 
+ 
+Nhận xét: Income có phạm vi lớn (Q3=68,592 vs Min=1,730), có thể gây ảnh hưởng nếu 
+dùng StandardScaler. 
+− Kết quả scaling 
+• StandardScaler 
+o Age: Mean ≈ 0, Std = 1 
+
+=== Page 55 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 45 
+o Income: Mean ≈ 0, Std = 1 
+o Dependency_Ratio: Mean ≈ 0, Std = 1 
+Outliers (|z| > 3): Income có 49 outliers (2.44%) → vấn đề đáng chú ý. 
+ 
+ 
+Hình 2.18 Kết quả scaling Age bằng StandardScaler 
+ 
+ 
+Hình 2.19  Kết quả scaling Dependency_Ratio bằng StandardScaler 
+ 
+Hình 2.20  Kết quả scaling Income bằng StandardScaler 
+
+
+=== Page 56 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 46 
+• RobustScaler 
+o Age: Median ≈ 0, IQR = 1 
+o Income: Median ≈ 0, IQR = 1 
+o Dependency_Ratio: Median ≈ 0, IQR = 1 
+ Outliers (|z| > 3): Income chỉ còn 3 outliers (0.15%) → tốt hơn rõ rệt. 
+ 
+Hình 2.21 Kết quả scaling Age bằng RobustScaler 
+ 
+Hình 2.22 Kết quả scaling Dependency_Ratio bằng RobustScaler 
+ 
+Hình 2.23 Kết quả scaling Income bằng RobustScaler 
+
+
+=== Page 57 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 47 
+Bảng 2.12: So sánh 2 phương pháp scale với Demogaphic 
+Tiêu chí StandardScaler RobustScaler 
+Income Outliers 49 (2.44%) – khá nhiều 3 (0.15%) – rất ít 
+Extreme Values max = 5.11σ (rất xa trung bình) max = 3.35σ (ít cực đoan 
+hơn) 
+Distribution Shape Dữ liệu bị ép về Gaussian-like Giữ nguyên phân phối gốc 
+tốt hơn 
+Sensitivity to 
+Outliers 
+Cao – dễ bị ảnh hưởng bởi giá trị 
+cực đoan 
+Thấp – ổn định hơn với 
+outliers 
+− Ý nghĩa  
+● Income Outliers: Cho thấy StandardScaler tạo ra nhiều điểm dữ liệu có giá trị 
+chuẩn hóa vượt quá ±3 (outliers), trong khi RobustScaler giảm đáng kể số lượng 
+này. 
+● Extreme Values: StandardScaler làm cho một số giá trị trở nên cực đoan hơn 
+(5.11σ), còn RobustScaler giữ chúng gần hơn với trung tâm (3.35σ). 
+● Distribution Shape: StandardScaler ép dữ liệu về dạng gần Gaussian, trong khi 
+RobustScaler bảo toàn hình dạng gốc, điều này quan trọng nếu dữ liệu lệch tự nhiên. 
+● Sensitivity to Outliers: StandardScaler nhạy cảm với outliers, dễ bị ảnh hưởng; 
+RobustScaler ít bị ảnh hưởng, phù hợp cho dữ liệu kinh tế vốn có outliers hợp lệ. 
+− Kết luận: RobustScaler là lựa chọn tốt hơn cho dữ liệu Demographic vì nó xử lý 
+outliers hiệu quả hơn và bảo toàn đặc tính tự nhiên của dữ liệu. 
+− Dataset: Robust Scaling: Customer_Behavior_Demographic_Robust_scaled.xlsx 
+  
+
+=== Page 58 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 48 
+b) Product + Channel Feature Scaling 
+Dữ liệu ProductChannel có 4 đặc trưng chính: Product_HHI, Store_Preference, 
+Web_Engagement, PC1_Total_TotalPurchases. Những đặc trưng này đo lường hành 
+vi mua sắm và sở thích kênh bán hàng với các thang đo rất khác nhau (Product_HHI: 
+0.17-0.99, Web_Engagement: 0-20). Cần scaling để K-Means hoạt động hiệu quả. 
+− Trước khi scaling  
+Bảng 2.13 Product + Channel trước Scaling 
+Feature Mean Std Min Max Skewness Issue 
+Product_HHI 0.391 0.156 0.167 0.994 1.053 Lệch phải rõ 
+Store_Preference 0.408 0.121 0.0 1.0 0.059 Gần chuẩn 
+Web_Engagement 5.314 2.437 0 20 0.279 Phạm vi rộng 
+PC1_Total_TotalPurchases 0.000 1.369 -2.856 3.659 -0.081 Đã chuẩn hóa 
+− Nhận xét 
+● Product_HHI có skewness cao (1.053) → phân phối lệch phải rõ rệt. 
+● Web_Engagement có phạm vi r ất rộng (0–20), gấp ~20 l ần so v ới 
+mean → StandardScaler dễ bị ảnh hưởng. 
+− Kết quả scaling 
+• StandardScaler 
+▪ Validation:  
+○ Product_HHI: Mean ≈ 0, Std = 1 
+○ Store_Preference: Mean ≈ 0, Std = 1 
+○ Web_Engagement: Mean ≈ 0, Std = 1 
+○ PC1_Total_TotalPurchases: Mean ≈ 0, Std = 1 
+▪ Extreme Values (|z| > 3):  
+
+=== Page 59 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 49 
+○ Product_HHI: max = 3.87σ → chứa giá trị cực đoan 
+○ Store_Preference: 7 outliers 
+○ Web_Engagement: 15 outliers (≈0.75%) 
+○ PC1_Total_TotalPurchases: Không có outliers 
+ 
+ 
+Hình 2.24 Kết quả scaling PC1_Total_TotalPurchases bằng StandardScaler 
+ 
+ 
+Hình 2.25 Kết quả scaling Product_HHI bằng StandardScaler 
+
+
+=== Page 60 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 50 
+ 
+Hình 2.26 Kết quả scaling Store_Preference bằng StandardScaler 
+ 
+Hình 2.27 Kết quả scaling Web_Engagement bằng StandardScaler 
+• RobustScaler 
+▪ Validation:  
+○ Product_HHI: Median ≈ 0, IQR = 1 
+○ Store_Preference: Median ≈ 0, IQR = 1 
+○ Web_Engagement: Median ≈ 0, IQR = 1 
+○ PC1_Total_TotalPurchases: Median ≈ 0, IQR = 1 
+▪ Extreme Values (|z| > 3):  
+○ Product_HHI: 1 outlier (0.05%) 
+○ Store_Preference: Không đáng kể 
+○ Web_Engagement: 3 outliers (0.15%) 
+○ PC1_Total_TotalPurchases: Không có outliers 
+Cải thiện: RobustScaler giảm outliers đáng kể và bảo toàn phân phối gốc. 
+ 
+
+
+=== Page 61 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 51 
+ 
+Hình 2.28 Kết quả scaling  PC1_Total_TotalPurchases bằng RobustScaler 
+ 
+ 
+Hình 2.29 Kết quả scaling Product_HHI bằng RobustScaler 
+ 
+ 
+Hình 2.30 Kết quả scaling  Store_Preference bằng RobustScaler 
+ 
+
+
+=== Page 62 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 52 
+ 
+Hình 2.31 Kết quả scaling Web_Engagement bằng RobustScaler 
+ 
+Bảng 2.14 So sánh 2 phương pháp scaling với ProductChannel 
+Tiêu chí StandardScaler RobustScaler 
+Product_HHI Max 3.87σ 3.20σ 
+Web_Engagement Outliers 15 (0.75%) 3 (0.15%) 
+Skewness Preservation Removed Preserved 
+Reference Features Preserved Preserved 
+Extreme Value Handling Kém Tốt 
+ 
+  
+
+
+=== Page 63 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 53 
+− Ý nghĩa  
+● Product_HHI Max: Giá trị chuẩn hóa lớn nhất của biến 
+Product_HHI. StandardScaler tạo ra giá trị cực đoan hơn (3.87σ), trong khi 
+RobustScaler giữ gần trung tâm hơn (3.20σ) → RobustScaler tốt hơn. 
+● Web_Engagement Outliers: Số lượng điểm vượt ngưỡng |z| > 3. 
+StandardScaler có 15 outliers (0.75%), RobustScaler chỉ còn 3 (0.15%) → 
+RobustScaler giảm đáng kể outliers. 
+● Skewness Preservation: StandardScaler ép dữ liệu về dạng gần 
+Gaussian (mất tính lệch), còn RobustScaler giữ nguyên phân phối lệch phải 
+(quan trọng cho dữ liệu hành vi thực tế). 
+● Reference Features: Cả hai phương pháp đều giữ nguyên các biến 
+tham chiếu (không scale) → hòa. 
+● Extreme Value Handling: StandardScaler xử lý kém, RobustScaler 
+xử lý tốt hơn  
+− Kết luận 
+Qua phân tích, RobustScaler cho thấy hiệu quả vượt trội so với StandardScaler trong 
+việc xử lý dữ liệu Product-Channel. Nó giảm số lượng outliers đáng kể, bảo tồn phân 
+phối lệch tự nhiên của Product_HHI và xử lý tốt các giá trị cực đoan. Do đó, 
+RobustScaler được khuyến nghị sử dụng cho bước K -Means tiếp theo, trong khi 
+StandardScaler vẫn được lưu giữ để đối chiếu khi cần. 
+− Dataset: Robust scaling: Customer_Behavior_ProductChannel_Robust_scaled.xlsx 
+  
+
+=== Page 64 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 54 
+c) RFM Feature Scaling 
+− Dữ liệu RFM có 4 đặc trưng chính: 
+Recency,Income_per_Family_Member_Transformed,PC1_TotalPurchases_Total,P
+C1_AvgPerPurchase_Income. Những đặc trưng này đo lường hành vi mua sắm 
+khách hàng với các thang đo khác nhau. Cần scaling để K -Means hoạt động hiệu 
+quả cho phân cụm giá trị khách hàng. 
+− Trước khi scaling: 
+Bảng 2.15 Trước scaling RFM 
+Feature Mean Std Min Max Skewness Status 
+Recency 49.06 28.95 0 99 -0.004 Đối xứng 
+Income_per_Family 31.29 4.57 14.47 44.91 -0.006 Đối xứng 
+PC1_TotalPurchases 0.00 1.33 -2.08 3.99 0.308 Lệch phải nhẹ 
+PC1_AvgPerPurchase 0.00 1.34 -3.78 4.86 0.079 Gần đối xứng 
+− Nhận xét: 
+● Recency & Income_per_Family: Dữ liệu gốc (raw features). 
+● PC1 components: Đã transform từ giai đoạn Feature Engineering, 
+sẵn chuẩn hóa. 
+● PC1_TotalPurchases có skewness 0.308 → lệch phải nhẹ. 
+  
+
+=== Page 65 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 55 
+− Kết quả Scaling 
+▪ StandardScaler  
+● Validation:  
+o Recency: Mean ≈ 0, Std = 1 
+o Income_per_Family: Mean ≈ 0, Std = 1 
+o PC1_TotalPurchases: Mean ≈ 0, Std = 1 
+o PC1_AvgPerPurchase: Mean ≈ 0, Std = 1 
+● Extreme Values (|z| > 3):  
+o Recency: Không có outliers 
+o Income_per_Family: 1 outlier (min) 
+o PC1_TotalPurchases: 1 outlier (max) 
+o PC1_AvgPerPurchase: 2 outliers 
+Tổng cộng: 4 outliers đơn lẻ, mức ảnh hưởng thấp nhưng vẫn tồn tại. 
+ 
+ 
+Hình 2.32 Kết quả scaling Income_per_Family_Member_Transformed bằng 
+StandardScaler 
+
+
+=== Page 66 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 56 
+ 
+ 
+Hình 2.33 Kết quả scaling PC1_AvgPerPurchases_Income bằng StandardScaler 
+ 
+ 
+Hình 2.34 Kết quả scaling PC1_TotalPurchases_Total bằng StandardScaler 
+ 
+ 
+Hình 2.35 Kết quả scaling Recency bằng StandardScaler 
+ 
+
+
+=== Page 67 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 57 
+▪ RobustScaler 
+● Validation:  
+○ Recency: Median ≈ 0, IQR = 1 
+○ Income_per_Family: Median ≈ 0, IQR ≈ 1 
+○ PC1_TotalPurchases: Median ≈ 0, IQR ≈ 1 
+○ PC1_AvgPerPurchase: Median ≈ 0, IQR = 1 
+● Extreme Values (|z| > 3):  
+○ Không có outliers ở tất cả các biến 
+○ Tổng cộng: 0 outliers → RobustScaler xử lý sạch hơn. 
+ 
+ 
+Hình 2.36 Kết quả scaling Income_per_Family_Member_Transformed bằng 
+RobustScaler 
+ 
+ 
+Hình 2.37 Kết quả scaling PC1_AvgPerPurchases_Income bằng RobustScaler 
+
+
+=== Page 68 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 58 
+ 
+Hình 2.38 Kết quả scaling PC1_TotalPurchases_Total bằng RobustScaler 
+ 
+Hình 2.39 Kết quả scaling Recency bằng RobustScaler 
+  
+
+
+=== Page 69 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 59 
+− So sánh giữa 2 phương pháp 
+Bảng 2.16 So sánh 2 phương pháp scaling cho RFM 
+Tiêu chí StandardScaler RobustScaler 
+Total Outliers  z > 3 
+Recency Range [-1.70, 1.73] [-0.98, 1.00] 
+Income_Family Range [-3.68, 2.98] [-2.63, 2.22] 
+PC1_TotalPurchases Range [-1.57, 3.01] [-0.80, 1.68] 
+PC1_AvgPerPurchase Range [-2.82, 3.63] [-1.61, 2.11] 
+Mean Validation All ≈ 0 All ≈ 0 
+Std/IQR Validation All = 1 All = 1 
+    
+  
+
+=== Page 70 ===
+CHƯƠNG 2. CHUẨN BỊ DỮ LIỆU 
+ 60 
+− Ý nghĩa  
+● Total Outliers: RobustScaler loại bỏ hoàn toàn outliers (0), trong khi 
+StandardScaler vẫn còn 4 giá trị vượt ngưỡng.  
+● Range của các biến: RobustScaler thu hẹp phạm vi dữ liệu về gần 
+trung tâm hơn (ví dụ Recency từ [ -1.70, 1.73] xuống [ -0.98, 1.00]), giúp 
+giảm ảnh hưởng của giá trị cực đoan.  
+● Mean & Std/IQR Validation: Cả hai phương pháp đều đạt chuẩn hóa 
+(Mean ≈ 0, Std hoặc IQR = 1), nhưng RobustScaler xử lý outliers tốt hơn. 
+ 
+− Kết luận 
+Sau khi so sánh hai phương pháp chuẩn hóa, RobustScaler cho thấy hiệu quả vượt 
+trội trong việc xử lý dữ liệu RFM. Không xuất hiện outliers sau chuẩn hóa, trong khi 
+StandardScaler vẫn còn 4 giá trị cực đoan. RobustScaler cũng thu hẹp phạm vi dữ 
+liệu về gần trung tâm hơn, giúp giảm ảnh hưởng của giá trị lệch. Do đó, RobustScaler 
+được khuyến nghị sử dụng cho bước K -Means tiếp theo, trong khi StandardScaler 
+vẫn được lưu giữ để đối chiếu khi cần. 
+− Dataset:  
+Robust scaling:  Customer_Behavior_RFM_Robust_scaled.xlsx 
+ 
+ 
+ 
+ 
+
+=== Page 71 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 61 
+CHƯƠNG 3. XÂY DỰNG MÔ HÌNH 
+3.1. Giới thiệu mô hình 
+3.1.1. Khái niệm 
+K-Means là một thuật toán phân cụm không giám sát (unsupervised learning) được 
+sử dụng để chia dữ liệu thành K nhóm (clusters) dựa trên sự tương đồng giữa các 
+điểm dữ liệu.  
+Mục tiêu: Tối thiểu hóa tổng bình phương khoảng cách giữa các điểm dữ liệu và 
+tâm cụm (centroid). 
+3.1.2. Nguyên lý hoạt động 
+Thuật toán dựa trên khoảng cách Euclidean để đo độ tương đồng.  
+Quy trình cơ bản:  
+• Khởi tạo: Chọn ngẫu nhiên K tâm cụm ban đầu. 
+• Gán cụm: Mỗi điểm dữ liệu được gán vào cụm có tâm gần nhất. 
+• Cập nhật tâm cụm: Tính trung bình các điểm cụm để cập nhật tâm cụm.  
+• Lặp lại: Tiếp tục gán và cập nhật cho đến khi hội tụ (tâm cụm không thay 
+đổi hoặc đạt số vòng lặp tối đa).  
+3.1.3. Ưu điểm 
+• Đơn giản, dễ triển khai.  
+• Hiệu quả với dữ liệu lớn.  
+• Tốc độ hội tụ nhanh. 
+3.1.4. Hạn chế 
+• Phải xác định trước số cụm K.  
+• Nhạy cảm với giá trị khởi tạo.  
+• Không phù hợp cho cụm có hình dạng phức tạp hoặc phân phối phi tuyến.  
+• Dễ bị ảnh hưởng bởi outliers. 
+ 
+
+=== Page 72 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 62 
+3.2. Ví dụ minh họa 
+Ta sẽ lấy ví dụ minh họa cụ thể với 1 trong 3 dataset đã qua Tiền xử lý và Xây 
+dựng đặc trưng là Demographic - Phân cụm dựa trên thông tin cá nhân cơ bản của 
+khách hàng. 
+3.2.1. Ý tưởng triển khai 
+K ngẫu nhiên từ 1 đến 10: Giả sử chưa biết số cụm tối ưu.  
+Vòng lặp K-Means:  
+● Khởi tạo tâm cụm. 
+● Gán mỗi điểm vào cụm gần nhất (dựa trên khoảng cách Euclidean). 
+● Cập nhật tâm cụm bằng trung bình các điểm trong cụm. 
+● Lặp lại cho đến khi hội tụ  
+3.2.2. Công thức cốt lõi 
+Công thức khoảng cách Euclidean cơ bản  
+𝒅(𝑷, 𝑸)  =  √{(𝒙𝟏 − 𝒚𝟏)𝟐 + (𝒙𝟐 − 𝒚𝟐)𝟐 + ⋯ + (𝒙𝒏 − 𝒚𝒏)𝟐 
+Trong đó: 
+● 𝑃 = (𝑥1, 𝑥2, ⋯ , 𝑥𝑛 ): tọa độ của điểm thứ nhất trong không gian n 
+chiều. 
+● 𝑄 = (𝑦1, 𝑦2, ⋯ , 𝑦𝑛): tọa độ của điểm thứ hai trong cùng không gian. 
+Hàm mục tiêu ( SSE )  
+𝑱 = ∑ ∑ |𝒙 − 𝝁𝒊|𝟐
+𝑲
+𝒙∈𝑪𝒊
+𝑲
+𝒊=𝟏
+ 
+Trong đó: 
+● 𝐾: số cụm. 
+● 𝐶𝑖: tập các điểm thuộc cụm i. 
+● 𝜇𝑖: tâm cụm i. 
+● |𝑥 − 𝜇𝑖|2  : bình phương khoảng cách Euclidean từ điểm x đến 
+centroid μᵢ. 
+=> Công thức này là trái tim của K‑Means, nó định nghĩa cái mà thuật toán đang cố 
+gắng tối ưu: giảm tổng khoảng cách bình phương từ điểm đến tâm cụm. 
+
+=== Page 73 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 63 
+3.2.3. Quy trình xây dựng mô hình 
+a) Khởi tạo tâm cụm 
+− Khởi tạo ngẫu nhiên  
+● Cách làm: chọn ngẫu nhiên K điểm dữ liệu trong tập để làm centroid 
+ban đầu. 
+● Ưu điểm: đơn giản, nhanh. 
+● Nhược điểm: dễ dẫn đến kết quả không ổn định (cụm chồng lấn, hội 
+tụ chậm), vì chọn điểm khởi tạo không có chiến lược. 
+− Khởi tạo bằng KMeans++ 
+● Cách làm: chọn centroid đầu tiên ngẫu nhiên, sau đó các centroid 
+tiếp theo được chọn dựa trên xác suất tỷ lệ với khoảng cách bình phương 
+đến centroid gần nhất. 
+● Ý nghĩa: đảm bảo các centroid ban đầu cách xa nhau, giảm  
+● Ưu điểm: thường cho kết quả tốt hơn, hội tụ nhanh hơn, ổn định hơn. 
+● Nhược điểm: phức tạp hơn một chút so với random, nhưng vẫn rất 
+hiệu quả. 
+b) Gán cụm 
+• Tính khoảng cách Euclidean từ mỗi điểm đến các tâm cụm. 
+• Gán điểm vào cụm có tâm gần nhất. 
+• Chức năng: phân loại tạm thời dữ liệu theo tâm cụm hiện tại. 
+c) Cập nhật tâm cụm 
+• Tính trung bình các điểm trong từng cụm để tạo tâm cụm mới. 
+• Nếu cụm rỗng, chọn ngẫu nhiên một điểm để thay thế. 
+• Chức năng: dịch chuyển tâm cụm để phản ánh vị trí trung tâm mới của dữ 
+liệu. 
+  
+
+=== Page 74 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 64 
+d) Lặp lại 
+− Thực hiện bước 2 và 3 liên tục cho đến khi tâm cụm không thay đổi (hội tụ) 
+hoặc đạt số vòng lặp tối đa. 
+− Chức năng: đảm bảo thuật toán tìm được cấu trúc cụm ổn định. 
+− Để cụ thể, ta s ẽ thử làm vài phép tính minh h ọa v ới 6 đi ểm d ữ liệu t ừ 
+Demographic dataset cùng  2 đặc trưng đầu tiên ( Age, Income ),với 𝐾 = 3: 
+             𝑥1  = (0.72,   0.19)                                 𝑥4 = (−0.77, −0.75) 
+  𝑥2  = (0.88, −0.15)                               𝑥5 = (−0.61,   0.20) 
+  𝑥3  = (0.27,   0.60)                                 𝑥6 = (0.16,   0.33) 
+ 
+• Khởi tạo tâm cụm ban đầu 
+𝑐1
+(0)  = 𝑥1  = (0.72,   0.19) , 𝑐2
+(0)  = 𝑥5  = (−0.61,   0.20), 𝑐3
+(0)  =  𝑥6  = (0.16,   0.33)  
+Công thức khoảng cách Euclid 
+                𝑑(𝑥, 𝑐) = √(𝑥1 − 𝑐1)2 + (𝑥2 − 𝑐2)2 
+• Vòng lặp 1: 
+Điểm 𝑥1: 
+o 𝑑(𝑥1, 𝑐1
+(0))  = √(0.72 − 0.72)2 + (0.19 − 0.19 )2 = 0  
+o 𝑑(𝑥1, 𝑐2
+(0))  = √(0.72 + 0.61)2 + (0.19 − 0.2)2  ≈  1.33  
+o 𝑑(𝑥1, 𝑐3
+(0))  = √(0.72 − 0.16)2 + (0.19 − 0.33)2  ≈  0.577 
+           → Gán vào cụm 1. 
+ Điểm 𝑥2: 
+o 𝑑(𝑥2, 𝑐1
+(0))  = √(0.88 − 0.72)2 + (−0.15 − 0.19)2  ≈  0.376  
+o 𝑑(𝑥2, 𝑐2
+(0))  ≈  1.503 
+o 𝑑(𝑥2, 𝑐3
+(0)) ≈  0.861 
+         → Gán vào cụm 1. 
+Kết quả gán: 
+𝐶ụ𝑚 1 ∶ {𝑥1, 𝑥2}, 𝐶ụ𝑚 2 ∶ {𝑥4, 𝑥5}, 𝐶ụ𝑚 3 ∶ {𝑥3, 𝑥6}  
+• Cập nhật tâm cụm 
+o 𝑐1
+(1)  =
+1
+2
+∑ 𝑥𝑖 = (
+0.72 + 0.88
+2 ,  
+0.19 − 0.15
+2 ) = (0.80, 0.02) 𝑖∈𝐶1  
+o 𝑐2
+(1)  = (−0.69, −0.275) 
+o 𝑐3
+(1)  = (0.215, 0.465) 
+• Vòng lặp 2: 
+o 𝑥1→ 𝑐1
+(0) ≈ 0.188; 𝑐2
+(1) ≈ 1.485; 𝑐3
+(3) ≈ 0.575 → giữ cụm 1 
+
+=== Page 75 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 65 
+o 𝑥2→ 𝑐1
+(0) ≈ 0.188; 𝑐2
+(1) ≈ 1.576; 𝑐3
+(3) ≈ 0.905 → giữ cụm 1 
+o 𝑥3→ 𝑐1
+(0) ≈ 0.786; 𝑐2
+(1) ≈ 1.298; 𝑐3
+(3) ≈ 0.146 → giữ cụm 3 
+o 𝑥4→ 𝑐1
+(0) ≈ 1.748; 𝑐2
+(1) ≈ 0.482; 𝑐3
+(3) ≈ 1.564 → giữ cụm 2 
+o 𝑥5→ 𝑐1
+(0) ≈ 1.422; 𝑐2
+(1) ≈ 0.482; 𝑐3
+(3) ≈ 0.867 → giữ cụm 2 
+o 𝑥6→ 𝑐1
+(0) ≈ 0.711; 𝑐2
+(1) ≈ 1.043; 𝑐3
+(3) ≈ 0.146 → giữ cụm 3 
+ Cụm không thay đổi, chứng tỏ mô hình đã đến ngưỡng hội tụ  
+− Tính SSE ( WCSS ) sau khi mô hình hội tụ: 
+● Cụm 1 (𝑐1
+(0) = (0.80, 0.02)): 
+○ 𝑥1  = (0.72,   0.19) :𝑥1→ 𝑐1
+(0)  = 0.0353 
+○ 𝑥2  = (0.88, −0.15): 𝑥2→ 𝑐1
+(0) = 0.0353 
+○ Tổng C1 = 0.0706 
+● Cụm 2 (𝑐2
+(2) = (−0.69, −0.275)): 
+○  𝑥4 = (−0.77, −0.75): 𝑥4→ 𝑐2
+(2) = 0.2320 
+○  𝑥5 = (−0.61,   0.20): 𝑥5→ 𝑐2
+(2) = 0.2320 
+○ Tổng C2 = 0.46405 
+● Cụm 3 (𝑐3
+(3) = (0.215, 0.465)): 
+○  𝑥3  = (0.27,   0.60): 𝑥3→ 𝑐3
+(3) = 0.0212 
+○  𝑥6  = (0.16,   0.33): 𝑥6→ 𝑐3
+(3) = 0.0212 
+○ Tổng C3 = 0.0425 
+ Tổng SSE ≈ 0.0706 + 0.46405 + 0.0425 = 0.57715 
+ Phản ánh chất lượng chặt trong một cụm. 
+  
+
+=== Page 76 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 66 
+3.3. Cài đặt thuật toán 
+3.3.1. Khởi tạo tâm cụm 
+− Khởi tạo ngẫu nhiên 
+def _init_centroids_random(self, X): 
+    """Initialize centroids randomly.""" 
+    np.random.seed(self.random_state) 
+    random_indices = np.random.choice(X.shape[0], self.n_clusters, replace=False) 
+    return X[random_indices].copy() 
+  
+− Khởi tạo bằng KMeans++ 
+def _init_centroids_kmeans_plus_plus(self, X): 
+    """Initialize centroids using K-Means++ algorithm.""" 
+    np.random.seed(self.random_state) 
+    n_samples = X.shape[0] 
+     
+    # Bước 1: Chọn centroid đầu tiên ngẫu nhiên 
+    centroids = [X[np.random.randint(n_samples)]] 
+     
+    # Bước 2-K: Chọn các centroid tiếp theo dựa trên khoảng cách xác suất 
+    for _ in range(1, self.n_clusters): 
+        # Tính khoảng cách từ mỗi điểm tới centroid gần nhất hiện tại 
+        distances = np.array([ 
+            min([np.linalg.norm(x - c)**2 for c in centroids]) 
+            for x in X 
+        ]) 
+         
+        # Chuyển đổi khoảng cách thành xác suất (d²-weighting) 
+        probabilities = distances / distances.sum() 
+        cumulative_probs = probabilities.cumsum() 
+
+=== Page 77 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 67 
+        r = np.random.rand() 
+         
+        # Chọn điểm tiếp theo dựa trên xác suất tích lũy 
+        for idx, cum_prob in enumerate(cumulative_probs): 
+            if r < cum_prob: 
+                centroids.append(X[idx]) 
+                break 
+    return np.array(centroids) 
+ 
+3.3.2. Gán cụm 
+def _assign_clusters(self, X, centroids): 
+    """Assign each sample to nearest centroid.""" 
+    distances = np.zeros((X.shape[0], self.n_clusters)) 
+     
+    # Tính khoảng cách Euclidean từ mỗi điểm tới mỗi centroid 
+    for k in range(self.n_clusters): 
+        distances[:, k] = np.linalg.norm(X - centroids[k], axis=1) 
+     
+    # Gán mỗi điểm vào cụm có centroid gần nhất 
+    return np.argmin(distances, axis=1) 
+ 
+3.3.3. Cập nhật tâm cụm 
+def _update_centroids(self, X, labels): 
+    """Update centroids as mean of assigned samples.""" 
+    centroids = np.zeros((self.n_clusters, X.shape[1])) 
+     
+    # Với mỗi cụm, tính trung bình các điểm thuộc cụm đó 
+    for k in range(self.n_clusters): 
+        cluster_points = X[labels == k] 
+
+=== Page 78 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 68 
+         
+        if len(cluster_points) > 0: 
+            # Centroid mới = trung bình các điểm trong cụm 
+            centroids[k] = cluster_points.mean(axis=0) 
+        else: 
+            # Nếu cụm rỗng, chọn điểm ngẫu nhiên (tránh centroid mồ côi) 
+            centroids[k] = X[np.random.randint(X.shape[0])] 
+     
+    return centroids 
+ 
+3.3.4. Lặp lại 
+def fit(self, X): 
+    """Fit K-Means clustering.""" 
+    X = np.array(X) 
+    best_inertia = np.inf 
+    best_centroids = None 
+    best_labels = None 
+    best_n_iter = 0 
+     
+    # Chạy K-Means n_init lần với khởi tạo khác nhau 
+    for init_run in range(self.n_init): 
+        # Bước 1: Khởi tạo centroids 
+        if self.init_method == 'kmeans++': 
+            centroids = self._init_centroids_kmeans_plus_plus(X) 
+        else: 
+            centroids = self._init_centroids_random(X) 
+         
+        # Bước 2: Lặp lại (Assignment + Update) cho đến khi hội tụ 
+        for iteration in range(self.max_iter): 
+
+=== Page 79 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 69 
+            # 2a. Gán cụm 
+            labels = self._assign_clusters(X, centroids) 
+             
+            # 2b. Cập nhật centroids 
+            new_centroids = self._update_centroids(X, labels) 
+             
+            # 2c. Kiểm tra sự hội tụ 
+            centroid_shift = np.linalg.norm(new_centroids - centroids) 
+            centroids = new_centroids 
+             
+            # Nếu centroids di chuyển rất ít → Hội tụ 
+            if centroid_shift < self.tol: 
+                break 
+         
+        # Bước 3: Tính inertia và chọn kết quả tốt nhất 
+        inertia = self._calculate_inertia(X, labels, centroids) 
+         
+        if inertia < best_inertia: 
+            best_inertia = inertia 
+            best_centroids = centroids 
+            best_labels = labels 
+            best_n_iter = iteration + 1 
+    # Lưu kết quả tốt nhất 
+    self.cluster_centers_ = best_centroids 
+    self.labels_ = best_labels 
+    self.inertia_ = best_inertia 
+    self.n_iter_ = best_n_iter 
+    return self 
+ 
+
+=== Page 80 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 70 
+3.4. Thước đo đánh giá mô hình 
+3.4.1. Tiêu chí đánh giá nội 
+Khái niệm: Dựa trên đặc tính nội tại của dữ liệu và kết quả phân cụm, không cần 
+thông tin nhãn gốc. 
+a) Elbow Method 
+− Tiêu chí: Tìm điểm "gấp khúc" trên đồ thị WCSS và K 
+− WCSS: Tổng bình phương khoảng cách từ mỗi điểm tới centroid của cụm nó thuộc 
+về 
+− Nguyên tắc: K tối ưu là điểm mà WCSS giảm chậm lại.  
+− Cách tìm: Tính khoảng cách vuông góc từ mỗi điểm K tới đường nối K_min và 
+K_max, chọn K có khoảng cách lớn nhất. 
+− Giới hạn: Không luôn tìm được "khuỷu tay" rõ ràng, đặc biệt khi WCSS giảm 
+tuyến tính. 
+b) Silhouette Score 
+− Tiêu chí: Đo độ tách biệt giữa các cụm và độ chặt của dữ liệu nội cụm 
+● Giá trị: [-1, 1] 
+● > 0.5: Cụm tách biệt tốt (Tốt) 
+● 0.3-0.5: Cụm ổn định (Chấp nhận được) 
+● < 0.3: Cụm bị chồng lấp (Yếu) 
+● Nguyên tắc: K tối ưu là K cho Silhouette Score cao nhất 
+● Ưu điểm: Phản ánh compactness (độ gắn kết), separation (tách biệt) 
+− Giới hạn: Có thể không nhạy với dữ liệu phức tạp 
+− Quyết định cuối: Kết hợp 2 phương pháp 
+● Nếu Elbow K = Silhouette K → Chọn K đó  
+● Nếu khác nhau → Chọn K được gợi ý bởi cả 2, ta có thể tùy chỉnh 
+lại 
+
+=== Page 81 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 71 
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+4.1. Mô hình tự cài đặt 
+4.1.1. Demographic 
+Gợi ý số K tối ưu từ Elbow Method và Silhouette Score  
+ 
+   Hình 4.1: Elbow method vs Silhouette score Demographic 
+Nhận xét: có thể thấy rằng Elbow Method đã gợi ý rằng số cụm K tối ưu là 4, tuy 
+nhiên thì Silhouette Score lại chỉ ra số cụm K nên là 3  
+a) K = 3 (theo Silhouette Score gợi ý ) 
+ 
+Hình 4.2: Kết quả phân cụm Demographic với K = 3  
+
+
+=== Page 82 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 72 
+ 
+Hình 4.3: Phân phối trình độ học vấn Demographic theo K = 3  
+ 
+ 
+Hình 4.4: Phân phối Giai đoạn cuộc sống Demographic theo K = 3  
+ 
+ 
+
+
+=== Page 83 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 73 
+ 
+        Hình 4.5: Biểu đồ đường Demographic theo K = 3  
+− Cụm 0: "High-Income Singles/Couples" (517 khách hàng - 25.57%) 
+● Tuổi: 38.40 năm (trẻ) 
+● Thu nhập: 73,029 (cao nhất) 
+● Tỉ lệ phụ thuộc: 0.1559 (thấp nhất) 
+ Đặc điểm: Thanh niên độc thân hoặc cặp vợ chồng không con, thu nhập cao, 
+tự do tài chính  
+− Cụm 1: "Mature Empty Nesters" (670 khách hàng - 33.53%) 
+● Tuổi: 58.13 năm (cao nhất) 
+● Thu nhập: 58,855 (trung bình) 
+● Tỉ lệ phụ thuộc: 0.3322 (trung bình) 
+ Đặc điểm: Người trưởng thành, giai đoạn "Empty Nest", con cái đã lớn, thu 
+nhập vừa phải 
+− Cụm 2: "Young Families with Dependents" (823 khách hàng - 40.90%) 
+● Tuổi: 38.74 năm (trẻ) 
+● Thu nhập: 33,347 (thấp) 
+● Tỉ lệ phụ thuộc: 0.6091 (cao nhất) 
+
+
+=== Page 84 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 74 
+ Đặc điểm: Gia đình trẻ có nhiều con nhỏ, thu nhập thấp, chi phí phụ thuộc 
+cao 
+b) K = 4 (theo Elbow Method  gợi ý) 
+ 
+Hình 4.6: Kết quả phân cụm Demographic với K = 4 
+ 
+ 
+Hình 4.7: Phân phối trình độ học vấn Demographic theo K =4   
+
+
+=== Page 85 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 75 
+ 
+ 
+Hình 4.8: Phân phối Giai đoạn cuộc sống Demographic theo K =4  
+ 
+ 
+     Hình 4.9: Biểu đồ đường Demographic theo K = 4   
+ 
+ 
+
+
+=== Page 86 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 76 
+ Phân tích sơ bộ ý nghĩa của kết quả phân cụm với K = 4 trên Demographic  
+− Cụm 0: Premium Empty  
+● Tuổi: 60+ (cao) 
+● Thu nhập: rất cao 
+● Tỉ lệ phụ thuộc: thấp 
+Đặc điểm: Nhóm khách hàng lớn tuổi, con cái đã trưởng thành, thu nhập cao, 
+thường tiêu dùng sản phẩm/dịch vụ cao cấp. 
+− Cụm 1: Budget Senior 
+● Tuổi: 55+ (cao) 
+● Thu nhập:thấp 
+● Tỉ lệ phụ thuộc: cao 
+Đặc điểm: Nhóm khách hàng cao tuổi, thu nhập hạn chế, vẫn còn gánh nặng gia 
+đình, nhạy cảm với giá cả. 
+− Cụm 2: Struggling Young Families 
+● Tuổi: 35-45 (trẻ) 
+● Thu nhập: thấp 
+● Tỉ lệ phụ thuộc: rất cao 
+Đặc điểm: Nhóm gia đình trẻ có nhiều con nhỏ, thu nhập thấp, chi phí sinh hoạt và 
+phụ thuộc cao. 
+− Cụm 3: Affluent Young Professionals 
+● Tuổi: 25-40 (trẻ) 
+● Thu nhập: rất cao 
+● Tỉ lệ phụ thuộc: thấp 
+Đặc điểm: Nhóm chuyên gia trẻ, học vấn cao, thu nhập vượt trội, ít gánh nặng gia 
+đình, sẵn sàng chi tiêu cho sản phẩm/dịch vụ cao cấp. 
+  
+
+=== Page 87 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 77 
+− Tổng kết 
+Qua quá trình thực nghiệm với phương pháp Elbow Method và Silhouette Score, mô 
+hình K-Means với K=3 được xác định là giải pháp tối ưu cho phân cụm khách hàng 
+theo nhân khẩu học. 
+Kết quả Silhouette Score cho K=3 (0.3506) cao hơn K=4 (0.3193) khoảng 3.1%, cho 
+thấy sự phân tách rõ ràng và bao gồm tốt hơn. Elbow Method cũng xác nhận K=3 là 
+điểm khuỷu tay với WCSS giảm 28.32%, trong khi K=4 chỉ cải thiện thêm 18.79% 
+với lợi ích giảm dần. Ba cụm K=3 phân chia khách hàng thành ba nhóm có ý nghĩa 
+kinh doanh rõ ràng:  
+● Affluent Young Professionals (chuyên gia trẻ thu nhập cao, tự do tài 
+chính) 
+● Struggling Young Families (gia đình trẻ áp lực cao) 
+● Premium/Budget Seniors (người trưởng thành/hưu trí). 
+Phân chia này không chỉ dễ hiểu mà còn dễ chuyển thành chiến lược marketing cụ 
+thể. 
+Mặc dù K=4 cung cấp chi tiết hơn bằng cách tách Premium Empty Nesters khỏi 
+Budget Seniors, nó đi kèm với chi phí quản lý: (1) tỷ lệ phân loại sai có nguy cơ tăng 
+cao hơn, (2) cần 4 chiến lược marketing thay vì 3, vô tình làm phức tạp phân bổ ngân 
+sách, và (3) các cụm nhỏ hơn có thể không đạt để triển khai campaign hiệu quả. 
+Vì vậy, K=3 là lựa chọn tối ưu, cân bằng hoàn hảo giữa độ chính xác phân cụm, ý 
+nghĩa kinh doanh, và khả năng triển khai chiến lược thực tế. 
+  
+
+=== Page 88 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 78 
+4.1.2. Product Channel 
+Gợi ý số K tối ưu từ Elbow Method và Silhouette Score  
+ 
+Hình 4.10: Elbow method vs Silhouette score Product Channel 
+Nhận xét: có thể thấy rằng cả 2 phương pháp Elbow Method lẫn Silhouette Score 
+đều đồng thuận rằng K = 4 là lựa chọn tốt nhất 
+a) Với K = 4 ( được cả Elbow Method và Silhouette Score công nhận )  
+ 
+Hình 4.11: Kết quả phân cụm Product Channel với K = 4 
+
+
+=== Page 89 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 79 
+ 
+Hình 4.12: Độ quan tâm của khách hàng với từng sản phẩm cụ thể  
+ 
+ 
+Hình 4.13: Độ đa dạng khi mua hàng giữa các cụm  
+ 
+
+
+=== Page 90 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 80 
+ 
+Hình 4.14: Biểu đồ đường ProductChannel cho K = 4 
+  
+− Cụm 0: "Premium Product Seekers" (23.93% = 479 khách) 
+• Đặc điểm: 
+o Product_HHI: -0.208 (thấp) → Mua rất đa dạng 
+o Store_Preference: +0.62 (cao nhất) → Thích mua tại cửa hàng 
+o Web_Engagement: +0.064 (v ừa ph ải) → Tương tác web bình 
+thường 
+o PC1_Total_TotalPurchases: -0.71 (thấp) → Chi tiêu thấp 
+• Hành vi mua hàng: 
+o Wine: 31.5% (thấp nhất) 
+o Meat: 26.0% (cao) 
+o Gold: 17.8% (cao nhất) → Quan tâm sản phẩm bổ sung 
+o Fish: 10.5%, Fruit: 7.3%, Sweet: 6.9% 
+o Dominant Product: Wine 46.8%, Meat 25.8%, Gold 15.8% Top 
+Product Share: 0.425 (thấp) → Chọn sản phẩm đa dạng 
+• Ý nghĩa: Khách hàng cao cấp, thích mua ở cửa hàng, tìm Gold + sản phẩm 
+bổ sung 
+
+
+=== Page 91 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 81 
+− Cụm 1: "Balanced Buyers" (30.05% = 604 khách) 
+• Đặc điểm: 
+o Product_HHI: -0.047 (thấp) → Mua đa dạng các sản phẩm 
+o Store_Preference: +0.11 (vừa phải) → Mua tại cửa hàng và web 
+o Web_Engagement: -0.81 (thấp nhất) → Ít tương tác web 
+o PC1_Total_TotalPurchases: +0.37 (cao) → Chi tiêu cao 
+• Hành vi mua hàng: 
+o Wine: 42.8% (trung bình) 
+o Meat: 31.0% (cao) 
+o Gold: 7.1% 
+o Fish: 7.9%, Fruit: 5.6%, Sweet: 5.6% 
+o Dominant Product: Wine 69.4%, Meat 29.6% Top Product Share: 
+0.475 (thấp) → Lựa chọn sản phẩm cân bằng 
+• Ý nghĩa: Khách hàng cân bằng, ít dùng digital, mua cả Wine và Meat đều đặn 
+ 
+− Cụm 2: "Online Engagers" (25.42% = 518 khách) 
+• Đặc điểm: 
+o Product_HHI: -0.105 (thấp) → Mua đa dạng 
+o Store_Preference: -0.70 (thấp nhất) → Ít mua tại cửa hàng 
+o Web_Engagement: +0.23 (cao nhất) → Tương tác web nhiều 
+o PC1_Total_TotalPurchases: -0.14 (thấp) → Chi tiêu thấp 
+• Hành vi mua hàng: 
+o Wine: 38.7% (trung bình) 
+o Meat: 25.5% (cao) 
+o Gold: 17.0% (cao) 
+o Fish: 7.6%, Fruit: 5.2%, Sweet: 5.9% 
+o Dominant Product: Wine 64.4%, Meat 17.6%, Gold 14.1% Top 
+Product Share: 0.459 (thấp) → Lựa chọn cân bằng 
+• Ý Nghĩa: Khách hàng kỹ thuật số, mua online, quan tâm Gold + các sản phẩm 
+khác 
+
+=== Page 92 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 82 
+− Cụm 3: "Wine Enthusiasts" (20.60% = 409 khách) 
+• Đặc điểm: 
+o Product_HHI: +1.42 (cao nhất) → Mua chủ yếu 1 sản phẩm 
+o Store_Preference: -0.13 (thấp) → Ít mua tại cửa hàng 
+o Web_Engagement: -0.01 (trung bình) → Tương tác web vừa phải 
+o PC1_Total_TotalPurchases: +0.07 (thấp) → Chi tiêu vừa phải 
+• Hành vi mua hàng: 
+o Wine: 76.0% (cao nhất) 
+o Meat: 14.3% 
+o Gold: 5.9% 
+o Cân bằng: 1.1% Fruit + 1.3% Fish + 1.3% Sweet 
+o Dominant Product: Wine 98.1% (g ần như toàn b ộ) Top Product 
+Share: 0.777 (cao nhất) → Tập trung mua 1 sản phẩm 
+• Ý nghĩa: Khách hàng chuyên mua rượu vang, không quan tâm đến sản phẩm 
+khác 
+ 
+− Tổng kết  
+Kết quả phân cụm Product+Channel với K = 4 cho thấy sự đa dạng rõ rệt trong hành 
+vi mua hàng của khách hàng. 
+● Premium Product Seekers: nhóm khách hàng cao cấp, thích mua 
+trực tiếp tại cửa hàng, quan tâm đến các sản phẩm bổ sung như Gold. 
+● Balanced Buyers: nhóm mua hàng cân bằng, chi tiêu cao, ít sử 
+dụng kênh digital, thường xuyên mua Wine và Meat. 
+● Online Engagers: nhóm khách hàng ưu tiên mua online, có mức 
+tương tác web cao, quan tâm đến nhiều loại sản phẩm, đặc biệt là Gold. 
+● Wine Enthusiasts: nhóm chuyên mua rượu vang, ít quan tâm đến 
+sản phẩm khác, hành vi tiêu dùng tập trung. 
+Phân cụm này giúp doanh nghiệp nhận diện rõ các phân khúc khách hàng khác nhau, 
+từ đó xây dựng chiến lược marketing phù hợp: tập trung sản phẩm cao cấp cho nhóm 
+Premium, chương trình khách hàng thân thiết cho Balanced Buyers, chiến dịch 
+digital cho Online Engagers, và khuyến mãi chuyên biệt cho Wine Enthusiast 
+
+=== Page 93 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 83 
+4.1.3. RSM 
+Gợi ý số K tối ưu từ Elbow Method và Silhouette Score  
+ 
+   Hình 4.15: Elbow method vs Silhouette score RFM 
+ Nhận xét: có thể thấy rằng Elbow Method đã gợi ý rằng số cụm K tối ưu là 
+5, tuy nhiên thì Silhouette Score lại chỉ ra số cụm K nên là 2  
+a) Với K = 2 ( theo Silhouette Score gợi ý ) 
+ 
+Hình 4.16: Kết quả phân cụm RFM với K = 2  
+
+
+=== Page 94 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 84 
+ 
+Hình 4.17: Biểu đồ đường RFM với K =2  
+− Cụm 0: "At-Risk High-Value Customers" (949 khách ) 
+• Đặc điểm 
+o Recency: 49.25 ngày 
+o Income_per_Family_Member_Transformed:  0.661  
+o PC1_TotalPurchases_Total: 0.542  
+o PC1_AvgPerPurchase_Income: 0.538  
+• Hành vi mua sắm 
+o Hành vi: Đây là nhóm khách hàng từng mua rất nhiều, mỗi lần chi tiêu ở 
+mức cao, có khả năng tài chính tốt. Tuy nhiên, gần 50 ngày qua họ không 
+phát sinh giao dịch, cho thấy dấu hiệu giảm tương tác và nguy cơ rời bỏ. 
+o Tâm lý: Họ từng trung thành và coi trọng thương hiệu, nhưng hiện tại có 
+thể cảm thấy bị lãng quên, mệt mỏi vì quá nhiều lựa chọn, hoặc tò mò thử 
+sản phẩm từ thương hiệu khác. 
+• Ý nghĩa kinh doanh: Đây là nhóm VIP quan trọng, nếu không được tái kích 
+hoạt sẽ dễ mất vĩnh viễn. Doanh nghiệp cần chiến lược chăm sóc đặc biệt, 
+khuyến mãi cá nhân hóa và tạo cảm giác được ưu tiên để giữ chân họ. 
+  
+
+
+=== Page 95 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 85 
+− Cụm 1: “Emerging Potential Customers" (1061 khách) 
+• Đặc điểm  
+o Recency: 48.90 ngày 
+o Income_per_Family_Member_Transformed:  -0.495  
+o PC1_TotalPurchases_Total: -0.379  
+o PC1_AvgPerPurchase_Income: -0.446  
+• Hành vi mua sắm  
+o Hành vi: Nhóm khách hàng mới hoặc chưa trung thành, thu nhập thấp, 
+mỗi lần mua nhỏ nhưng vẫn còn hoạt động gần đây (Recency ~49 ngày). 
+Họ đang trong giai đoạn khám phá sản phẩm và thương hiệu. 
+o Tâm lý: Giá trị hiện tại thấp nhưng tiềm năng phát triển dài hạn. Họ cần 
+được chăm sóc, hướng dẫn và tạo niềm tin để sẵn sàng chi tiêu nhiều hơn. 
+• Ý nghĩa kinh doanh: Đây là nhóm khách hàng tiềm năng, nếu được nuôi dưỡng đúng 
+cách có thể trở thành khách hàng trung thành. Chiến lược phù hợp là upsell/cross -
+sell, khuyến khích trải nghiệm thêm sản phẩm, và xây dựng quan hệ lâu dài. 
+− Kết luận: 
+Cụm 0 (At-Risk High-Value Customers) chiếm 47.06% với đặc điểm thu nhập cao, 
+tần suất và giá trị mua hàng lớn nhưng hiện đang ngủ quên (Recency ~49 ngày), có 
+nguy cơ mất khách VIP. 
+Ngược lại, cụm 1 (Emerging Potential Customers) chiếm 52.94%, thu nhập thấp, 
+lịch sử mua ít và giá trị mỗi lần mua nhỏ, song vẫn active gần đây, thể hiện cơ hội 
+phát triển nếu được chăm sóc và xây dựng quan hệ. 
+ 
+ 
+ 
+  
+
+=== Page 96 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 86 
+b) Với K = 5 ( theo Elbow Method  gợi ý ) 
+ 
+Hình 4.18: Kết quả phân cụm RFM với K = 5  
+ 
+ 
+Hình 4.19: Biểu đồ đường RFM với K = 5  
+  
+
+
+=== Page 97 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 87 
+− Cụm 0: "VIPS - RECENT & HIGH-VALUE” 
+• Đặc điểm  
+● Recency: 20-30 ngày 
+● Income_per_Family_Member: +1.2 đến +1.5 
+● PC1_TotalPurchases_Total: +0.8 đến +1.2 
+● PC1_AvgPerPurchase_Income: +0.9 đến +1.3  
+• Hành vi mua sắm  
+o Hành vi: Mua gần đây, thường xuyên, giá trị mỗi lần cao, thu nhập 
+cao nhất. 
+o Tâm lý: Trung thành, hài lòng, coi thương hiệu là lựa chọn số 1. 
+• Ý nghĩa kinh doanh: Nhóm VIP cần giữ chân, upsell sản phẩm/dịch vụ cao 
+cấp, ROI cao nhất. 
+ 
+− Cụm 1: "PLATEAUING CUSTOMERS" 
+• Đặc điểm  
+o Recency: 35-45 ngày (BÌNH THƯỜNG) 
+o Income_per_Family_Member:+0.5 đến +0.8 (CAO) 
+o PC1_TotalPurchases_Income: +0.3 đến +0.6 (TRUNG BÌNH THỨ 
+2) 
+o PC1_AvgPerPurchase: +0.4 đến +0.7 (CAO) 
+• Hành vi mua sắm 
+o Hành vi: Mua đều nhưng chu kỳ dài hơn, giá trị mỗi lần khá cao, 
+thu nhập tốt. 
+o Tâm lý: Khách hàng tốt nhưng có dấu hiệu giảm nhiệt, dễ thử 
+thương hiệu khác. 
+• Ý nghĩa kinh doanh: Cần kích thích tăng tần suất, duy trì engagement để 
+tránh mất khách. 
+  
+
+=== Page 98 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 88 
+− Cụm 2: "MAINSTREAM CUSTOMERS" 
+• Đặc điểm  
+o Recency:  40-50 ngày 
+o Income_per_Family_Member:   -0.1 đến +0.3  
+o PC1_TotalPurchases_Total:  -0.2 đến +0.2 
+o PC1_AvgPerPurchase_Income:-0.1 đến +0.2 
+• Hành vi mua sắm 
+o Hành vi: Mua ở mức trung bình, không thường xuyên, giá trị mỗi 
+lần vừa phải, thu nhập trung bình. 
+o Tâm lý: Khách hàng phổ thông, không đặc biệt gắn bó, dễ bị lôi 
+kéo bởi giá cả và khuyến mãi. 
+• Ý nghĩa kinh doanh: Có thể nâng cấp thành nhóm trung thành nếu tăng trải 
+nghiệm và giá trị cảm nhận. 
+ 
+− Cụm 3: "NEW OR OCCASIONAL BUYERS"  
+• Đặc điểm  
+o Recency: 45-50 ngày 
+o Income_per_Family_Member:  -0.5 đến -0.1  
+o PC1_TotalPurchases_Total: -0.7 đến -0.3  
+o PC1_AvgPerPurchase_Income: -0.7 đến -0.3 
+• Hành vi mua sắm 
+o Hành vi: Vừa mua gần đây nhưng rất ít, giá trị mỗi lần thấp, thu 
+nhập hạn chế. 
+o Tâm lý: Khách mới hoặc mua thỉnh thoảng, nhạy cảm với giá, chưa 
+tin tưởng thương hiệu. 
+• Ý nghĩa kinh doanh: Nhóm tiềm năng cần nuôi dưỡng, khuyến khích thử 
+thêm sản phẩm, xây dựng niềm tin. 
+  
+
+=== Page 99 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 89 
+− Cụm 4: "AT-RISK DORMANT CUSTOMERS"  
+• Đặc điểm  
+o Recency: 50+ ngày  
+o Income_per_Family_Member:  -0.8 đến -0.3  
+o PC1_TotalPurchases_Total: -1.0 đến -0.5 
+o PC1_AvgPerPurchase_Income: -0.9 đến -0.4  
+• Hành vi mua sắm 
+o Hành vi: Đã lâu không mua (50+ ngày), lịch sử mua rất ít, giá trị 
+thấp, thu nhập thấp. 
+o Tâm lý: Khách hàng “ngủ quên”, không còn quan tâm, có thể đã 
+chuyển sang thương hiệu khác. 
+• Ý nghĩa kinh doanh: Nguy cơ mất vĩnh viễn, chỉ nên đầu tư win-back có chọn lọc. 
+− Tổng kết  
+Khi áp dụng mô hình K-Means với K = 2, dữ liệu khách hàng được chia thành hai 
+nhóm rõ rệt: 
+● Cụm 0 – At-Risk High-Value Customers: nhóm khách hàng có thu 
+nhập cao, từng mua nhiều và giá trị mỗi lần mua lớn, nhưng hiện đang 
+giảm hoạt động (Recency ~49 ngày). Đây là nhóm VIP có nguy cơ rời bỏ, 
+cần chiến lược tái kích hoạt để giữ chân. 
+● Cụm 1 – Emerging Potential Customers: nhóm khách hàng thu 
+nhập thấp, lịch sử mua ít và giá trị mỗi lần mua nhỏ, song vẫn còn hoạt 
+động gần đây. Đây là nhóm tiềm năng, cần nuôi dưỡng để phát triển thành 
+khách hàng trung thành. → Phân cụm K = 2 mang lại sự đơn giản, dễ 
+quản lý, và làm nổi bật sự khác biệt giữa rủi ro mất khách VIP và cơ hội 
+phát triển khách mới. 
+  
+
+=== Page 100 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 90 
+Với K = 5, mô hình cho kết quả chi tiết hơn, phân tách thành năm nhóm hành vi: 
+● Cụm 0 – VIPs (Recent & High-Value): khách hàng trung thành, chi 
+tiêu cao, cần giữ chân và upsell. 
+● Cụm 1 – Plateauing Customers: khách hàng tốt nhưng có dấu hiệu 
+giảm nhiệt, cần kích thích tăng tần suất mua. 
+● Cụm 2 – Mainstream Customers: khách hàng phổ thông, mua ở 
+mức trung bình, dễ bị lôi kéo bởi giá cả, cần tăng engagement. 
+● Cụm 3 – New or Occasional Buyers: khách mới hoặc mua ít, nhạy 
+cảm với giá, cần nuôi dưỡng để phát triển. 
+● Cụm 4 – At-Risk Dormant Customers: khách hàng đã lâu không 
+mua, nguy cơ mất vĩnh viễn, chỉ nên đầu tư win-back có chọn lọc. → 
+Phân cụm K = 5 giúp nhận diện chi tiết hơn các hành vi và tâm lý, hỗ trợ 
+xây dựng chiến lược marketing chuyên biệt cho từng nhóm, nhưng cũng 
+làm tăng độ phức tạp trong quản lý. 
+− Kết luận 
+● K = 2: phù hợp cho phân tích tổng quan, dễ triển khai chiến lược 
+giữ chân và phát triển khách hàng. 
+● K = 5: cung cấp cái nhìn sâu hơn, giúp tối ưu hóa chiến dịch 
+marketing theo từng phân khúc cụ thể, nhưng cần nguồn lực quản lý nhiều 
+hơn. 
+  
+
+=== Page 101 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 91 
+4.2. Sử dụng thư viện 
+Kết quả thực nghiệm khi áp dụng mô hình có sẵn trong thư viện Sklearn cho ra các 
+cụm phân tích tương tự với mô hình tự xây dựng. Điều này khẳng định rằng mô 
+hình tự cài đặt đã hoạt động chính xác và có độ tin cậy cao. 
+4.2.1. Demographic 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== Page 102 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 92 
+Tiêu chí Mô hình tự cài đặt 
+Mô hình sử dụng 
+thư viện 
+Đánh giá 
+1. Inertia 
+(WCSS) 
+973.95 973.95 Giống nhau 
+2. Silhouette 
+Score 
+0.3505 0.3506 
+Sai khác: 0.0001 ≈ 
+0.03% – Không đáng 
+kể 
+3. Cluster 
+Distribution 
+C0: 517 (25.7%) 
+C1: 670 (33.3%) 
+C2: 823 (40.9%) 
+C0: 512 (25.5%) 
+C1: 822 (40.9%) 
+C2: 676 (33.6%) 
+Khác về phân bổ & chỉ 
+số cụm 
+4. Centroid 
+Locations 
+Giá trị rất gần 
+nhau, sai khác < 
+0.02 
+Giá trị rất gần 
+nhau, sai khác < 
+0.02 
+ 
+5. Iterations 23 9 WL nhanh hơn ~2.56x 
+– do tối ưu hóa sklearn 
+Kết luận: 
+
+=== Page 103 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 93 
+● Độ chính xác:  Inertia và Silhouette gần như giống nhau → Mã tự cài đặt 
+chính xác và đáng tin cậy. 
+● Phân bổ cụm: Khác về thứ tự và số lượng phần tử do hoán vị nhãn cụm - 
+là điều bình thường trong K-Means. Chất lượng phân cụm tương đương nhau. 
+● Vị trí Centroid: Sai khác rất nhỏ (< 0.03), chấp nhận được. 
+● Hiệu năng: Sklearn nhanh hơn ~2.5 lần (do tối ưu hóa C), Mã tự cài đặt 
+tuy chậm hơn nhưng dễ hiểu. 
+Kết luận cuối: Mô hình tự cài đặt  hoạt động chính xác, khác biệt chỉ ở sai số nhỏ, hoán 
+vị nhãn cụm và tốc độ chậm hơn. Vì vậy ta có thể sử dụng mô hình tự cài đặt với độ tin 
+cậy cao. 
+4.2.2. Product Channel 
+ 
+ 
+ 
+
+
+=== Page 104 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 94 
+ 
+Tiêu chí Mô hình tự cài đặt Mô hình sử dụng 
+thư viện 
+Đánh giá 
+Inertia (WCSS) 1654.91 1654.90 Sai khác: 0.01 
+Silhouette 
+Score 
+0.2849 0.2850 Sai khác: 0.0001 
+Cluster 
+Distribution 
+C0: 479 (23.8%) 
+C1: 604 (30.0%) 
+C2: 518 (25.8%) 
+C3: 409 (20.3%) 
+C0: 415 (20.6%) 
+C1: 608 (30.2%) 
+C2: 506 (25.2%) 
+C3: 481 (23.9%) 
+Khác nhãn cụm, chất 
+lượng tương đương 
+Centroid 
+Locations 
+Sai khác < 0.02, giá 
+trị rất gần nhau 
+Sai khác < 0.02, giá 
+trị rất gần nhau 
+Tương đương 
+Iterations 20 12 Mô hình sử dụng thư 
+viện nhanh hơn ~1.67x 
+ 
+Kết luận  
+● Độ chính xác: Inertia (1654.91 vs 1654.90) và Silhouette (0.2849 vs 
+0.2850) gần như giống hệt nhau (sai khác < 0.01%) → Mã tự cài đặt hoạt động 
+chính xác và đáng tin cậy. 
+
+=== Page 105 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 95 
+● Phân bổ cụm: Khác về thứ tự nhãn do hoán vị (bình thường trong K-
+Means). Chất lượng phân cụm tương đương. 
+● Centroid: Sai khác rất nhỏ (< 0.02), chấp nhận được. 
+● Hiệu năng: Sklearn nhanh hơn ~1.67 lần (12 vs 20 iterations) nhờ tối ưu 
+hóa C. Custom chậm hơn nhưng dễ hiểu cho học tập. 
+Kết luận cuối: Mô hình tự cài đặt chính xác và đáng tin cậy. Khác biệt chỉ ở sai số nhỏ, 
+hoán vị nhãn và tốc độ chậm hơn. Vì thế mô hình tự cài đặt là lý tưởng cho công việc học 
+tập/tự nghiên cứu, còn mô hình sử dụng thư viện có thể áp dụng để tạo ra sản phẩm.  
+ 
+4.2.3. RFM 
+ 
+ 
+ 
+ 
+
+
+=== Page 106 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 96 
+Tiêu chí NL (Custom) WL (Sklearn) Đánh giá 
+Inertia (WCSS) 1413.58 1413.58 0% sai khác 
+Silhouette Score 0.4393 0.4394 Sai khác: 0.0001 
+Cluster Distribution C0: 949 (47.2%) 
+C1: 1,061 (52.8%) 
+C0: 946 (47.1%) 
+C1: 1,064 (52.9%) 
+Sai khác: ±3 phần 
+tử ≈ 0.15% 
+Centroid Locations Sai khác rất nhỏ (< 
+0.003), giá trị gần 
+như giống nhau 
+Sai khác rất nhỏ (< 
+0.003) 
+Floating-point 
+precision 
+Iterations 14 7 Mô hình sử dụng 
+thư viện  nhanh hơn 
+~2.0x  
+ 
+  
+
+=== Page 107 ===
+CHƯƠNG 4. KẾT QUẢ THỰC NGHIỆM 
+ 97 
+− Kết luận: 
+● Độ chính xác: Inertia (1413.58 vs 1413.58) và Silhouette Score (0.4393 
+vs 0.4394) gần như giống hệt nhau (sai khác < 0.01%) → Mã tự cài đặt hoạt 
+động chính xác và đáng tin cậy. 
+● Phân bổ cụm: Gần như giống nhau, sai khác chỉ 3 khách hàng trên tổng 
+2.010 (≈0.15%) → hoàn toàn bình thường. 
+● Vị trí Centroid: Sai khác rất nhỏ (< 0.003), không ảnh hưởng đến chất 
+lượng phân cụm. 
+● Hiệu năng: Sklearn nhanh hơn ~2 lần (7 vs 14 iterations) nhờ tối ưu hóa 
+C; mã tự cài đặt chậm hơn nhưng dễ hiểu cho học tập. 
+● Chất lượng phân cụm: RFM có Silhouette Score cao nhất (0.4393) so 
+với các bộ dữ liệu khác → phân nhóm khách hàng rõ ràng hơn. 
+− Kết luận cuối 
+Mô hình tự cài đặt chính xác và đáng tin cậy. Khác biệt chỉ ở sai số nhỏ, phân bổ 
+cụm gần như giống nhau và tốc độ chậm hơn → Dùng mô hình tự cài đặt cho phân 
+tích/học tập, Sklearn cho sản phẩm. 
+ 
+ 
+
+=== Page 108 ===
+CHƯƠNG 5. KẾT LUẬN 
+ 98 
+CHƯƠNG 5. KẾT LUẬN 
+5.1. Kết quả đạt được 
+Quá trình phân cụm bằng K‑Means đã được triển khai thành công trên ba lĩnh vực 
+dữ liệu khách hàng: 
+● Demographic Segmentation: Xác định 3 cụm dựa trên tuổi, thu nhập và tỉ lệ 
+phụ thuộc. Các cụm phản ánh rõ sự khác biệt về cấu trúc gia đình và giai đoạn cuộc sống 
+(gia đình trẻ, độc thân thu nhập cao, và nhóm trưởng thành). 
+● RFM Segmentation: Xác định 2 cụm rõ rệt phân biệt khách hàng giá trị cao 
+và thấp. Đây là kết quả có chất lượng tốt nhất với Silhouette Score cao (0.4394), cho phép 
+đưa ra chiến lược chăm sóc và tái kích hoạt khách hàng hiệu quả. 
+● Product+Channel Segmentation: Xác định 4 cụm dựa trên hành vi mua hàng 
+và kênh mua sắm. Các cụm thể hiện các nhóm hành vi khác nhau như “Wine Enthusiasts”, 
+“Balanced Buyers”, “Premium Product Seekers” và “Online Engagers”, hỗ trợ tối ưu hóa 
+chiến lược sản phẩm và kênh bán hàng. 
+ Nhìn chung, các cụm được tạo ra đều mang ý nghĩa kinh doanh thực tế, giúp doanh 
+nghiệp định hình chiến lược marketing và chăm sóc khách hàng theo từng phân khúc. 
+5.2. Những khó khăn, hạn chế 
+● Chất lượng phân cụm trung bình: Silhouette Score dao động từ 0.28 đến 
+0.44, phản ánh ranh giới cụm chưa thật sự rõ ràng, đặc biệt trong dữ liệu 
+Product+Channel. 
+● Khách hàng nằm ở ranh giới cụm: Một số điểm dữ liệu có Silhouette Score 
+âm, cho thấy sự chồng lấp tự nhiên trong hành vi và đặc điểm khách hàng. 
+● Phương pháp chọn số cụm (K): Elbow và Silhouette đôi khi đưa ra gợi ý 
+khác nhau, cần kết hợp cả hai và cân nhắc yếu tố kinh doanh để quyết định K tối 
+ưu. 
+● Đặc thù dữ liệu khách hàng: Dữ liệu phức tạp, đa chiều, chứa ngoại lệ tự 
+nhiên khiến việc phân cụm khó đạt được sự tách biệt hoàn hảo.
+
+=== Page 109 ===
+ 
+ 99 
+TÀI LIỆU THAM KHẢO 
+ 
+[1]  C. P. Analysis, “Kaggle,” [Tr ực tuy ến]. Available: 
+https://www.kaggle.com/datasets/imakash3011/customer-personality-analysis.. 
+[2]  C. S. P. KMeans, “Kaggle,” [Tr ực tuy ến]. Available: 
+https://www.kaggle.com/code/manarsaber/customer-segmentation-pca-kmeans.. 
+ 
+ 
+
+=== Page 110 ===
+ 
+ 100 
+PHỤ LỤC 
+Bảng phân công công việc của các thành viên trong nhóm 
+STT Nội dung công việc 
+23DH114778 
+Trương Gia 
+Nghi 
+23DH111855 
+Đoàn Thanh 
+Sang 
+23DH113038 
+Trần Lâm Hồng 
+Liên 
+1 Tiền xử lý dữ liệu 20% 60% 20% 
+2 Xây dựng đặc trưng 20% 20% 60% 
+3 Xây dựng mô hình 60% 20% 20% 
+ 

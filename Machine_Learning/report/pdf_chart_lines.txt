@@ -1,0 +1,148 @@
+pages 110
+hits 146
+p5: 3.1. Giới thiệu mô hình ................................................................................................ 61
+p5: 3.2.3. Quy trình xây dựng mô hình .............................................................................. 63
+p5: 3.4. Thước đo đánh giá mô hình ................................................................................. 70
+p6: 4.1. Mô hình tự cài đặt ................................................................................................ 71
+p7: Hình 2.1 Phân phối Age ............................................................................................. 26
+p7: Hình 2.2 Phân phối Income ....................................................................................... 27
+p7: Hình 2.3 Phân phối của Dependency_Ratio .............................................................. 28
+p7: Hình 2.4 Phân phối của Dependency_Ratio trước và sau transform ......................... 29
+p7: Hình 2.5 Tương quan giữa các đặc trưng Demographic ........................................... 30
+p7: Hình 2.6 Product_HHI ............................................................................................... 31
+p7: Hình 2.7 Store_Preference ......................................................................................... 32
+p7: Hình 2.8 Web_Engagement ....................................................................................... 33
+p7: Hình 2.9 PC1_TotalPurchases ................................................................................... 34
+p7: Hình 2.10 Các đặc trưng tham chiếu ......................................................................... 35
+p7: Hình 2.11 Tương quan giữa các đặc trưng Product Channel .................................... 36
+p7: Hình 2.12 Recency ..................................................................................................... 37
+p7: Hình 2.13 Income_per_Family_Member_Transformed ............................................ 38
+p7: Hình 2.14 PC1_TotalPurchases_Total ....................................................................... 39
+p7: Hình 2.15 PC1_AvgPerPurchase_Income ................................................................. 40
+p7: Hình 2.16 Income_per_Family_Member trước và sau transform ............................. 41
+p7: Hình 2.17 Tương quan giữa các đặc trưng RFM ....................................................... 42
+p7: Hình 2.18 Kết quả scaling Age bằng StandardScaler ................................................ 45
+p7: Hình 2.19  Kết quả scaling Dependency_Ratio bằng StandardScaler ....................... 45
+p7: Hình 2.20  Kết quả scaling Income bằng StandardScaler ......................................... 45
+p7: Hình 2.21 Kết quả scaling Age bằng RobustScaler ................................................... 46
+p7: Hình 2.22 Kết quả scaling Dependency_Ratio bằng RobustScaler ........................... 46
+p7: Hình 2.23 Kết quả scaling Income bằng RobustScaler ............................................. 46
+p7: Hình 2.24 Kết quả scaling PC1_Total_TotalPurchases bằng StandardScaler........... 49
+p7: Hình 2.25 Kết quả scaling Product_HHI bằng StandardScaler ................................. 49
+p7: Hình 2.26 Kết quả scaling Store_Preference bằng StandardScaler ........................... 50
+p7: Hình 2.27 Kết quả scaling Web_Engagement bằng StandardScaler ......................... 50
+p7: Hình 2.28 Kết quả scaling  PC1_Total_TotalPurchases bằng RobustScaler ............ 51
+p8: Hình 2.29 Kết quả scaling Product_HHI bằng RobustScaler ................................... 51
+p8: Hình 2.30 Kết quả scaling  Store_Preference bằng RobustScaler ............................ 51
+p8: Hình 2.31 Kết quả scaling Web_Engagement bằng RobustScaler ........................... 52
+p8: Hình 2.32 Kết quả scaling Income_per_Family_Member_Transformed bằng StandardScaler
+p8: Hình 2.33 Kết quả scaling PC1_AvgPerPurchases_Income bằng StandardScale .... 56
+p8: Hình 2.34 Kết quả scaling PC1_TotalPurchases_Total bằng StandardScaler .......... 56
+p8: Hình 2.35 Kết quả scaling Recency bằng StandardScaler ........................................ 56
+p8: Hình 2.36 Kết quả scaling Income_per_Family_Member_Transformed bằng RobustScaler 57
+p8: Hình 2.37 Kết quả scaling PC1_AvgPerPurchases_Income bằng RobustScaler ...... 57
+p8: Hình 2.38 Kết quả scaling PC1_TotalPurchases_Total bằng RobustScaler ............. 58
+p8: Hình 2.39 Kết quả scaling Recency bằng RobustScaler ........................................... 58
+p12: tuyến hoặc cụm có hình
+p12: có hình dạng bất
+p20: ● Mục tiêu nghiên cứu: Đảm bảo chất lượng dữ liệu cho mô hình phân
+p20: lượng dữ liệu cho mô hình phân cụm, đồng thời tránh sai lệch do ước lượng giá
+p22: Để đảm bảo chất lượng dữ liệu cho mô hình K -Means, nhóm lựa chọn loại
+p22: ● Giảm nhiễu và bias: Loại bỏ các dòng trùng lặp giúp mô hình
+p23: trong tính toán tâm cụm và nâng cao độ chính xác của mô hình K -Means. Sau
+p27: giúp mô hình phân cụm nhậ n diện phân khúc giá trị cao, phục vụ chiến lược
+p29: ● Dữ liệu sẵn sàng cho bước mã hóa và mô hình hóa.
+p30: mô hình phân cụm.
+p31: trong đó một số nhóm hiếm (<1%). Cần mã hóa để mô hình hiểu
+p32: − Tối ưu cho mô hình học máy: Biến ordinal được mã hóa giữ thứ tự, biến nominal được
+p33: và sẵn sàng cho mô hình hóa.
+p34: • Dự đoán bằng mô hình hồi quy dựa trên các biến liên quan (Education,
+p34: theo để tối ưu hơn cho mô hình.
+p35: • Hành động: Xây dựng các biến dựa trên mô hình RFM (Recency,
+p36: Hình 2.1 Phân phối Age
+p37: Hình 2.2 Phân phối Income
+p38: Hình 2.3 Phân phối của Dependency_Ratio
+p39: Hình 2.4 Phân phối của Dependency_Ratio trước và sau transform
+p40: Hình 2.5 Tương quan giữa các đặc trưng Demographic
+p41: Hình 2.6 Product_HHI
+p42: Hình 2.7 Store_Preference
+p43: Hình 2.8 Web_Engagement
+p44: Hình 2.9 PC1_TotalPurchases
+p45: Hình 2.10 Các đặc trưng tham chiếu
+p46: Hình 2.11 Tương quan giữa các đặc trưng Product Channel
+p46: phối. 8 biến tham chiếu cung cấp bối cảnh chi tiết để diễn giải các cluster được hình
+p47: Hình 2.12 Recency
+p48: Hình 2.13 Income_per_Family_Member_Transformed
+p49: Hình 2.14 PC1_TotalPurchases_Total
+p50: Hình 2.15 PC1_AvgPerPurchase_Income
+p51: Hình 2.16 Income_per_Family_Member trước và sau transform
+p52: Hình 2.17 Tương quan giữa các đặc trưng RFM
+p55: Hình 2.18 Kết quả scaling Age bằng StandardScaler
+p55: Hình 2.19  Kết quả scaling Dependency_Ratio bằng StandardScaler
+p55: Hình 2.20  Kết quả scaling Income bằng StandardScaler
+p56: Hình 2.21 Kết quả scaling Age bằng RobustScaler
+p56: Hình 2.22 Kết quả scaling Dependency_Ratio bằng RobustScaler
+p56: Hình 2.23 Kết quả scaling Income bằng RobustScaler
+p57: RobustScaler bảo toàn hình dạng gốc, điều này quan trọng nếu dữ liệu lệch tự nhiên.
+p59: Hình 2.24 Kết quả scaling PC1_Total_TotalPurchases bằng StandardScaler
+p59: Hình 2.25 Kết quả scaling Product_HHI bằng StandardScaler
+p60: Hình 2.26 Kết quả scaling Store_Preference bằng StandardScaler
+p60: Hình 2.27 Kết quả scaling Web_Engagement bằng StandardScaler
+p61: Hình 2.28 Kết quả scaling  PC1_Total_TotalPurchases bằng RobustScaler
+p61: Hình 2.29 Kết quả scaling Product_HHI bằng RobustScaler
+p61: Hình 2.30 Kết quả scaling  Store_Preference bằng RobustScaler
+p62: Hình 2.31 Kết quả scaling Web_Engagement bằng RobustScaler
+p65: Hình 2.32 Kết quả scaling Income_per_Family_Member_Transformed bằng
+p66: Hình 2.33 Kết quả scaling PC1_AvgPerPurchases_Income bằng StandardScaler
+p66: Hình 2.34 Kết quả scaling PC1_TotalPurchases_Total bằng StandardScaler
+p66: Hình 2.35 Kết quả scaling Recency bằng StandardScaler
+p67: Hình 2.36 Kết quả scaling Income_per_Family_Member_Transformed bằng
+p67: Hình 2.37 Kết quả scaling PC1_AvgPerPurchases_Income bằng RobustScaler
+p68: Hình 2.38 Kết quả scaling PC1_TotalPurchases_Total bằng RobustScaler
+p68: Hình 2.39 Kết quả scaling Recency bằng RobustScaler
+p71: 3.1. Giới thiệu mô hình
+p71: • Không phù hợp cho cụm có hình dạng phức tạp hoặc phân phối phi tuyến.
+p73: 3.2.3. Quy trình xây dựng mô hình
+p75:  Cụm không thay đổi, chứng tỏ mô hình đã đến ngưỡng hội tụ
+p75: − Tính SSE ( WCSS ) sau khi mô hình hội tụ:
+p80: 3.4. Thước đo đánh giá mô hình
+p81: 4.1. Mô hình tự cài đặt
+p81: Hình 4.1: Elbow method vs Silhouette score Demographic
+p81: Hình 4.2: Kết quả phân cụm Demographic với K = 3
+p82: Hình 4.3: Phân phối trình độ học vấn Demographic theo K = 3
+p82: Hình 4.4: Phân phối Giai đoạn cuộc sống Demographic theo K = 3
+p83: Hình 4.5: Biểu đồ đường Demographic theo K = 3
+p84: Hình 4.6: Kết quả phân cụm Demographic với K = 4
+p84: Hình 4.7: Phân phối trình độ học vấn Demographic theo K =4
+p85: Hình 4.8: Phân phối Giai đoạn cuộc sống Demographic theo K =4
+p85: Hình 4.9: Biểu đồ đường Demographic theo K = 4
+p87: hình K-Means với K=3 được xác định là giải pháp tối ưu cho phân cụm khách hàng
+p88: Hình 4.10: Elbow method vs Silhouette score Product Channel
+p88: Hình 4.11: Kết quả phân cụm Product Channel với K = 4
+p89: Hình 4.12: Độ quan tâm của khách hàng với từng sản phẩm cụ thể
+p89: Hình 4.13: Độ đa dạng khi mua hàng giữa các cụm
+p90: Hình 4.14: Biểu đồ đường ProductChannel cho K = 4
+p93: Hình 4.15: Elbow method vs Silhouette score RFM
+p93: Hình 4.16: Kết quả phân cụm RFM với K = 2
+p94: Hình 4.17: Biểu đồ đường RFM với K =2
+p96: Hình 4.18: Kết quả phân cụm RFM với K = 5
+p96: Hình 4.19: Biểu đồ đường RFM với K = 5
+p99: Khi áp dụng mô hình K-Means với K = 2, dữ liệu khách hàng được chia thành hai
+p100: Với K = 5, mô hình cho kết quả chi tiết hơn, phân tách thành năm nhóm hành vi:
+p101: Kết quả thực nghiệm khi áp dụng mô hình có sẵn trong thư viện Sklearn cho ra các
+p101: cụm phân tích tương tự với mô hình tự xây dựng. Điều này khẳng định rằng mô
+p101: hình tự cài đặt đã hoạt động chính xác và có độ tin cậy cao.
+p102: Tiêu chí Mô hình tự cài đặt
+p102: Mô hình sử dụng
+p103: Kết luận cuối: Mô hình tự cài đặt  hoạt động chính xác, khác biệt chỉ ở sai số nhỏ, hoán
+p103: vị nhãn cụm và tốc độ chậm hơn. Vì vậy ta có thể sử dụng mô hình tự cài đặt với độ tin
+p104: Tiêu chí Mô hình tự cài đặt Mô hình sử dụng
+p104: Iterations 20 12 Mô hình sử dụng thư
+p105: Kết luận cuối: Mô hình tự cài đặt chính xác và đáng tin cậy. Khác biệt chỉ ở sai số nhỏ,
+p105: hoán vị nhãn và tốc độ chậm hơn. Vì thế mô hình tự cài đặt là lý tưởng cho công việc học
+p105: tập/tự nghiên cứu, còn mô hình sử dụng thư viện có thể áp dụng để tạo ra sản phẩm.
+p106: Iterations 14 7 Mô hình sử dụng
+p107: Mô hình tự cài đặt chính xác và đáng tin cậy. Khác biệt chỉ ở sai số nhỏ, phân bổ
+p107: cụm gần như giống nhau và tốc độ chậm hơn → Dùng mô hình tự cài đặt cho phân
+p108: nghiệp định hình chiến lược marketing và chăm sóc khách hàng theo từng phân khúc.
+p110: 3 Xây dựng mô hình 60% 20% 20%
