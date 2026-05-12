@@ -8,23 +8,21 @@ Dự án này tập trung vào việc phân tích và phân cụm khách hàng d
 - [1. Giới thiệu tổng quan](#1-giới-thiệu-tổng-quan)
 - [2. Cấu trúc dự án](#2-cấu trúc-dự-án)
 - [3. Cài đặt và chạy chương trình](#3-cài-đặt-và-chạy-chương-trình)
-- [4. Quy trình xử lý dữ liệu (Pipeline)](#4-quy-trình-xử-lý-dữ-liệu-pipeline)
-- [5. Kết quả phân cụm](#5-kết-quả-phân-cụm)
-- [6. Giao diện Web Dashboard](#6-giao-diện-web-dashboard)
-- [7. Đóng góp](#7-đóng-góp)
+- [4. Giải thích thuật toán K-Means và Luồng hoạt động](#4-giải-thích-thuật-toán-k-means-và-luồng-hoạt-động)
+- [5. Giao diện và Kết quả Demo](#5-giao-diện-và-kết-quả-demo)
+- [6. Tác dụng của dự án](#6-tác-dụng-của-dự-án)
+- [7. Giấy phép sử dụng (License)](#7-giấy-phép-sử-dụng-license)
 
 ---
 
 ## 1. Giới thiệu tổng quan
 
 Dự án thực hiện phân cụm khách hàng theo 3 góc nhìn chiến lược:
-- **Demographic (Nhân khẩu học):** Dựa trên tuổi tác, thu nhập, trình độ học vấn và tình trạng gia đình.
-- **Product & Channel (Sản phẩm & Kênh):** Phân tích thói quen chi tiêu cho các loại sản phẩm và ưu tiên kênh mua sắm (Web, Catalog, Store).
-- **RFM (Recency, Frequency, Monetary):** Đánh giá giá trị khách hàng dựa trên độ gần đây, tần suất và giá trị giao dịch.
+- **Demographic (Nhân khẩu học):** Tuổi tác, thu nhập, học vấn.
+- **Product & Channel (Sản phẩm & Kênh):** Thói quen mua sắm.
+- **RFM (Recency, Frequency, Monetary):** Giá trị khách hàng.
 
-Dự án triển khai cả hai phương pháp:
-1. **K-Means tự cài đặt (No Library):** Hiểu rõ bản chất thuật toán.
-2. **K-Means thư viện (With Library):** Sử dụng `scikit-learn` để tối ưu hiệu năng.
+Dự án triển khai cả hai phương pháp: K-Means tự cài đặt (No Library) và K-Means thư viện (Scikit-learn).
 
 ---
 
@@ -33,105 +31,97 @@ Dự án triển khai cả hai phương pháp:
 ```
 Phân cụm tệp khách hàng bằng thuật toán K-Means/
 ├── Machine_Learning/
-│   ├── dataset/            # 📁 Dữ liệu gốc và dữ liệu sau xử lý
-│   ├── graph/              # 📊 Biểu đồ trực quan hóa (PCA, Elbow, Silhouette)
-│   ├── report/             # 📝 Báo cáo text chi tiết từng giai đoạn
+│   ├── dataset/            # 📁 Dữ liệu gốc và sau xử lý
+│   ├── graph/              # 📊 Biểu đồ trực quan (PCA, Elbow)
 │   ├── src/                # 💻 Mã nguồn chính
-│   │   ├── Data Preparation/  # 🛠 Tiền xử lý dữ liệu
-│   │   │   ├── Data_Cleaning.py      # Làm sạch và chuẩn hóa dữ liệu
-│   │   │   ├── Feature_Engineering.py # Trích xuất đặc trưng mới
-│   │   │   └── Feature_Scaling.py     # Chuẩn hóa thang đo (Standard/Robust)
-│   │   └── Training/          # 🧠 Huấn luyện mô hình
-│   │       ├── No Library/    # K-Means tự cài đặt từ đầu
-│   │       └── With Library/  # K-Means sử dụng Scikit-learn
-│   └── web/                # 🌐 Giao diện người dùng
-│       ├── app.py             # Backend Flask API
-│       └── frontend/          # Mã nguồn React Dashboard
-├── requirements.txt        # 📦 Danh sách thư viện cần thiết
-├── README.md               # 📖 Hướng dẫn sử dụng
-└── .gitignore              # 🛠 Cấu hình Git
+│   │   ├── Data Preparation/  # Tiền xử lý dữ liệu
+│   │   └── Training/          # Huấn luyện mô hình
+│   └── web/                # 🌐 Giao diện Dashboard (Flask + React)
+├── requirements.txt        # 📦 Thư viện cần thiết
+└── LICENSE.txt             # 📜 Giấy phép sử dụng
 ```
-
-### 2.1. Các file quan trọng:
-- **`Data_Cleaning.py`**: Xử lý nhiễu, giá trị thiếu và chuẩn hóa định dạng dữ liệu.
-- **`Feature_Engineering.py`**: Tạo ra các biến có ý nghĩa kinh doanh từ dữ liệu thô (ví dụ: RFM segments).
-- **`KMeans_RFM_WL.py`**: Script huấn luyện mô hình phân cụm RFM sử dụng thư viện chuyên dụng.
-- **`app.py`**: Khởi chạy server cung cấp API dữ liệu và biểu đồ cho Dashboard.
 
 ---
 
 ## 3. Cài đặt và chạy chương trình
 
-### 3.1. Yêu cầu hệ thống
-- Python 3.9 trở lên
-- Trình quản lý gói `pip`
+### 3.1. Cài đặt thư viện
+Yêu cầu Python 3.9+. Nên sử dụng môi trường ảo (virtualenv):
 
-### 3.2. Cài đặt thư viện
 ```bash
-# Cài đặt tất cả các thư viện cần thiết
+# Tạo môi trường ảo
+python -m venv .venv
+
+# Kích hoạt môi trường ảo (Windows)
+.venv\Scripts\activate
+
+# Cài đặt thư viện
 pip install -r requirements.txt
 ```
 
-### 3.3. Chạy toàn bộ Pipeline
-Bạn có thể chạy tuần tự các script trong `Machine_Learning/src/` để thực hiện quy trình từ dữ liệu thô đến kết quả phân cụm.
+### 3.2. Cách mở Web Dashboard
+Để xem kết quả trực quan trên giao diện Web:
+
+1. **Khởi chạy Backend (Flask):**
+   ```bash
+   cd Machine_Learning/web
+   python app.py
+   ```
+   Server sẽ chạy tại: `http://localhost:5000`
+
+2. **Truy cập Giao diện:**
+   Mở trình duyệt và nhập địa chỉ `http://localhost:5000`. Dashboard sẽ hiển thị tổng quan dữ liệu, biểu đồ phân cụm và các chỉ số đánh giá.
 
 ---
 
-## 4. Quy trình xử lý dữ liệu (Pipeline)
+## 4. Giải thích thuật toán K-Means và Luồng hoạt động
 
-### Bước 1: Phân tích và Làm sạch dữ liệu
-- Loại bỏ giá trị thiếu (Missing values), giá trị trùng lặp (Duplicates).
-- Xử lý các giá trị ngoại lai (Outliers).
-- Chỉnh sửa và chuẩn hóa các cột phân loại (Education, Marital_Status).
+### 4.1. Thuật toán K-Means là gì?
+K-Means là thuật toán học máy không giám sát (Unsupervised Learning) dùng để phân chia dữ liệu thành **K** nhóm (cụm) dựa trên đặc tính tương đồng.
+- **Bước 1:** Chọn ngẫu nhiên K điểm làm tâm cụm (Centroids).
+- **Bước 2:** Gán mỗi điểm dữ liệu vào cụm có tâm gần nhất (khoảng cách Euclidean).
+- **Bước 3:** Cập nhật tâm cụm bằng cách tính trung bình cộng các điểm trong cụm đó.
+- **Lặp lại** bước 2 và 3 cho đến khi tâm cụm không đổi.
 
-### Bước 2: Kỹ thuật đặc trưng (Feature Engineering)
-- Tạo các thuộc tính mới như: `Age`, `Total_Spent`, `Dependency_Ratio`.
-- Trích xuất 3 tập đặc trưng chính: Demographic, ProductChannel, và RFM.
-
-### Bước 3: Chuẩn hóa dữ liệu (Feature Scaling)
-- Sử dụng `StandardScaler` và `RobustScaler` để đưa dữ liệu về cùng một thang đo.
-
-### Bước 4: Huấn luyện mô hình
-- Xác định số cụm tối ưu (K) bằng phương pháp Elbow và Silhouette.
-- Thực hiện phân cụm và trực quan hóa kết quả bằng PCA (2D/3D).
-
----
-
-## 5. Kết quả phân cụm
-
-Dưới đây là tóm tắt chỉ số Silhouette và Davies-Bouldin cho các chiến lược (sử dụng RobustScaler):
-
-| Chiến lược | Số cụm (K) | Silhouette Score | Davies-Bouldin Index |
-|---|---|---|---|
-| Demographic | 3 | 0.3506 | 0.9987 |
-| Product+Channel | 4 | 0.2848 | 1.0968 |
-| RFM | 2 | 0.4394 | 0.8860 |
+### 4.2. Luồng hoạt động của Project
+1. **Dữ liệu thô:** Đọc từ file TSV `Customer_Behavior.csv`.
+2. **Làm sạch:** Xử lý giá trị trống, trùng lặp và loại bỏ Outlier.
+3. **Kỹ thuật đặc trưng:** Tính toán các chỉ số RFM và mã hóa biến phân loại.
+4. **Chuẩn hóa:** Đưa dữ liệu về cùng thang đo (RobustScaler) để thuật toán K-Means hoạt động chính xác.
+5. **Huấn luyện:** Tìm số cụm tối ưu (K) bằng phương pháp **Elbow** (điểm khuỷu tay) và **Silhouette**.
+6. **Dashboard:** Hiển thị kết quả thông qua API Flask.
 
 ---
 
-## 6. Giao diện Web Dashboard
+## 5. Giao diện và Kết quả Demo
 
-Dự án cung cấp một Dashboard trực quan để theo dõi kết quả.
+### 🖼️ Ảnh chụp màn hình Web Dashboard
+*(Chèn ảnh demo giao diện tại đây)*
+![Web Dashboard Demo](Machine_Learning/graph/Training/WIth Library/RFM_WL/05_Clusters_3D.png)
 
-### Chạy Backend (Flask API)
-```bash
-cd Machine_Learning/web
-python app.py
-```
-API sẽ khởi chạy tại: `http://localhost:5000`
-
-### Chạy Frontend (React)
-Nếu đã có bản build trong `dist`, Flask sẽ tự động phục vụ giao diện tại trang chủ. Nếu muốn phát triển thêm:
-```bash
-cd Machine_Learning/web/frontend
-npm install
-npm run dev
-```
+### 📈 Kết quả phân cụm tiêu biểu
+- **Nhóm 1:** Khách hàng trung thành, chi tiêu cao (Monetary cao, Frequency cao).
+- **Nhóm 2:** Khách hàng mới, cần chăm sóc thêm.
+- **Nhóm 3:** Khách hàng có nguy cơ rời bỏ (Recency cao).
 
 ---
 
-## 7. Đóng góp
-Dự án được phát triển nhằm mục đích học tập và nghiên cứu về phân tích dữ liệu khách hàng. Mọi đóng góp xin gửi về qua các Issue hoặc Pull Request trên GitHub.
+## 6. Tác dụng của dự án
+
+Khi tải dự án này về, bạn sẽ nhận được:
+- **Tài liệu học tập:** Cách xử lý dữ liệu thực tế từ A-Z.
+- **Mã nguồn mẫu:** Cách tự triển khai thuật toán K-Means mà không dùng thư viện.
+- **Kỹ năng Full-stack Data:** Cách kết hợp Machine Learning với Web Dashboard (Flask + React).
+- **Ứng dụng thực tế:** Hiểu được cách doanh nghiệp phân nhóm khách hàng để tối ưu hóa chiến dịch Marketing.
+
+---
+
+## 7. Giấy phép sử dụng (License)
+
+**QUY ĐỊNH QUAN TRỌNG:**
+- Dự án này chỉ được sử dụng cho mục đích **HỌC TẬP VÀ NGHIÊN CỨU**.
+- **NGHIÊM CẤM** sử dụng để buôn bán, kinh doanh hoặc kiếm tiền dưới bất kỳ hình thức nào.
+- Vui lòng dẫn nguồn nếu bạn sử dụng mã nguồn này cho mục đích tham khảo bài tập.
 
 ---
 **Author:** [GonhNiel05](https://github.com/GonhNiel05)

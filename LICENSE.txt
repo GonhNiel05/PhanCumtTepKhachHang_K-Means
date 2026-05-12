@@ -1,0 +1,10 @@
+# LICENSE (GIẤY PHÉP SỬ DỤNG)
+
+Dự án này được cung cấp cho mục đích **HỌC TẬP VÀ NGHIÊN CỨU CÁ NHÂN**.
+
+### 🚫 Điều khoản quan trọng:
+1. **KHÔNG THƯƠNG MẠI:** Bạn không được phép sử dụng bất kỳ phần nào của mã nguồn, dữ liệu hoặc tài liệu trong dự án này để mục đích buôn bán, kinh doanh hoặc kiếm tiền dưới bất kỳ hình thức nào.
+2. **HỌC TẬP:** Dự án được khuyến khích sử dụng làm tài liệu tham khảo để tìm hiểu về thuật toán học máy (Machine Learning) và phát triển ứng dụng web.
+3. **TRÁCH NHIỆM:** Tác giả không chịu trách nhiệm về bất kỳ thiệt hại hoặc vấn đề nào phát sinh từ việc sử dụng mã nguồn này.
+
+Bằng việc tải xuống hoặc sử dụng mã nguồn này, bạn mặc định đồng ý với các điều khoản trên.
