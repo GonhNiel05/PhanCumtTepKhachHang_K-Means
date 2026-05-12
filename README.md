@@ -33,17 +33,30 @@ Dự án triển khai cả hai phương pháp:
 ```
 Phân cụm tệp khách hàng bằng thuật toán K-Means/
 ├── Machine_Learning/
-│   ├── dataset/            # 📁 Dữ liệu gốc (TSV) và dữ liệu đã qua xử lý (CSV)
-│   ├── graph/              # 📊 Biểu đồ trực quan hóa kết quả phân cụm
-│   ├── report/             # 📝 Các báo cáo chi tiết về quá trình xử lý
+│   ├── dataset/            # 📁 Dữ liệu gốc và dữ liệu sau xử lý
+│   ├── graph/              # 📊 Biểu đồ trực quan hóa (PCA, Elbow, Silhouette)
+│   ├── report/             # 📝 Báo cáo text chi tiết từng giai đoạn
 │   ├── src/                # 💻 Mã nguồn chính
-│   │   ├── Data Preparation/  # Xử lý, làm sạch và chuẩn hóa dữ liệu
-│   │   └── Training/          # Huấn luyện mô hình (No Library & With Library)
-│   └── web/                # 🌐 Dashboard hiển thị kết quả (Flask + React)
+│   │   ├── Data Preparation/  # 🛠 Tiền xử lý dữ liệu
+│   │   │   ├── Data_Cleaning.py      # Làm sạch và chuẩn hóa dữ liệu
+│   │   │   ├── Feature_Engineering.py # Trích xuất đặc trưng mới
+│   │   │   └── Feature_Scaling.py     # Chuẩn hóa thang đo (Standard/Robust)
+│   │   └── Training/          # 🧠 Huấn luyện mô hình
+│   │       ├── No Library/    # K-Means tự cài đặt từ đầu
+│   │       └── With Library/  # K-Means sử dụng Scikit-learn
+│   └── web/                # 🌐 Giao diện người dùng
+│       ├── app.py             # Backend Flask API
+│       └── frontend/          # Mã nguồn React Dashboard
 ├── requirements.txt        # 📦 Danh sách thư viện cần thiết
 ├── README.md               # 📖 Hướng dẫn sử dụng
-└── .gitignore              # 🛠 Cấu hình bỏ qua các file không cần thiết trên Git
+└── .gitignore              # 🛠 Cấu hình Git
 ```
+
+### 2.1. Các file quan trọng:
+- **`Data_Cleaning.py`**: Xử lý nhiễu, giá trị thiếu và chuẩn hóa định dạng dữ liệu.
+- **`Feature_Engineering.py`**: Tạo ra các biến có ý nghĩa kinh doanh từ dữ liệu thô (ví dụ: RFM segments).
+- **`KMeans_RFM_WL.py`**: Script huấn luyện mô hình phân cụm RFM sử dụng thư viện chuyên dụng.
+- **`app.py`**: Khởi chạy server cung cấp API dữ liệu và biểu đồ cho Dashboard.
 
 ---
 
