@@ -18,9 +18,9 @@ Dự án này tập trung vào việc phân tích và phân cụm khách hàng d
 ## 1. Giới thiệu tổng quan
 
 Dự án thực hiện phân cụm khách hàng theo 3 góc nhìn chiến lược:
-- **Demographic (Nhân khẩu học):** Tuổi tác, thu nhập, học vấn.
-- **Product & Channel (Sản phẩm & Kênh):** Thói quen mua sắm.
-- **RFM (Recency, Frequency, Monetary):** Giá trị khách hàng.
+- **Demographic (Nhân khẩu học):** Tuổi tác, thu nhập, học vấn, tình trạng và cấu trúc gia đình
+- **Product & Channel (Sản phẩm & Kênh):** Thói quen mua sắm dựa trên sản phẩm và kênh mua hàng
+- **RFM (Recency, Frequency, Monetary):** Giá trị khách hàng dựa trên tần suất và chi tiêu mua hàng
 
 Dự án triển khai cả hai phương pháp: K-Means tự cài đặt (No Library) và K-Means thư viện (Scikit-learn).
 
@@ -31,14 +31,14 @@ Dự án triển khai cả hai phương pháp: K-Means tự cài đặt (No Libr
 ```
 Phân cụm tệp khách hàng bằng thuật toán K-Means/
 ├── Machine_Learning/
-│   ├── dataset/            # 📁 Dữ liệu gốc và sau xử lý
-│   ├── graph/              # 📊 Biểu đồ trực quan (PCA, Elbow)
-│   ├── src/                # 💻 Mã nguồn chính
+│   ├── dataset/            # Dữ liệu gốc và sau xử lý
+│   ├── graph/              # Biểu đồ trực quan (PCA, Elbow)
+│   ├── src/                # Mã nguồn chính
 │   │   ├── Data Preparation/  # Tiền xử lý dữ liệu
 │   │   └── Training/          # Huấn luyện mô hình
-│   └── web/                # 🌐 Giao diện Dashboard (Flask + React)
-├── requirements.txt        # 📦 Thư viện cần thiết
-└── LICENSE.txt             # 📜 Giấy phép sử dụng
+│   └── web/                # Giao diện Dashboard (Flask + React)
+├── requirements.txt        # Thư viện cần thiết
+└── LICENSE.txt             # Giấy phép sử dụng
 ```
 
 ---
@@ -93,13 +93,7 @@ K-Means là thuật toán học máy không giám sát (Unsupervised Learning) d
 
 ---
 
-## 5. Giao diện và Kết quả Demo
-
-### 🖼️ Ảnh chụp màn hình Web Dashboard
-*(Chèn ảnh demo giao diện tại đây)*
-![Web Dashboard Demo](Machine_Learning/graph/Training/WIth Library/RFM_WL/05_Clusters_3D.png)
-
-### 📈 Kết quả phân cụm tiêu biểu
+## 5. Kết quả phân cụm tiêu biểu
 - **Nhóm 1:** Khách hàng trung thành, chi tiêu cao (Monetary cao, Frequency cao).
 - **Nhóm 2:** Khách hàng mới, cần chăm sóc thêm.
 - **Nhóm 3:** Khách hàng có nguy cơ rời bỏ (Recency cao).
