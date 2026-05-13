@@ -47,6 +47,16 @@ type DatasetSampleData = {
   total_shown: number
 }
 
+type DatasetColumn = {
+  name: string
+  type: string
+  desc: string
+}
+
+type InsightTone = 'good' | 'warn' | 'info'
+type InsightBadge = { label: string; tone: InsightTone }
+type GalleryFilter = 'all' | 'cluster' | 'pca' | 'posthoc' | 'quality'
+
 type SummaryData = Record<string, MetricsData & { error?: string }>
 
 type LoadState<T> = {
@@ -65,15 +75,16 @@ const copy = {
     footerTag: 'Phân cụm khách hàng bằng thuật toán K-Means',
     nav: {
       overview: 'Tổng quan',
-      segments: 'Phân cụm khách hàng',
+      segments: 'Huấn luyện',
       rfm: 'RFM',
       demographic: 'Nhân khẩu học',
       productchannel: 'Sản phẩm & Kênh',
-      processingGroup: 'Tiền xử lý',
-      processing: 'Dữ liệu',
-      dataset: 'Bộ dữ liệu',
+      processingGroup: 'Tiền xử lý dữ liệu',
+      processing: 'Tiền xử lý',
+      resultsGroup: 'Kết quả',
+      dataset: 'Kết quả dữ liệu',
       analysisGroup: 'Phân tích',
-      metrics: 'So sánh Metrics',
+      metrics: 'Phân tích chỉ số',
       conclusion: 'Kết luận',
     },
     status: {
@@ -123,8 +134,36 @@ const copy = {
         desc: 'Phân cụm theo độ tuổi, học vấn, thu nhập, tình trạng gia đình',
       },
       productchannel: {
+        title: 'Sản phẩm & Kênh',
+        desc: 'Phân cụm theo loại sản phẩm ưa thích và kênh mua hàng của khách hàng',
+      },
+    },
+    strategyLabels: {
+      criteria: 'Tiêu chí phân cụm',
+      meaning: 'Ý nghĩa',
+      metrics: 'Thông số',
+    },
+    strategyCards: {
+      rfm: {
+        title: 'Recency · Frequency · Monetary',
+        criteria: 'Phân cụm dựa trên hành vi mua hàng gần đây, tần suất và giá trị chi tiêu.',
+        meaningQuestion: '“Khách hàng mang lại giá trị bao nhiêu?”',
+        meaning:
+          'Tập trung giá trị kinh tế; mở rộng RFM với Income và AvgPerPurchase để đo sức mua và tần suất.',
+      },
+      demographic: {
+        title: 'Nhân khẩu học',
+        criteria: 'Phân cụm theo độ tuổi, học vấn, thu nhập, tình trạng gia đình.',
+        meaningQuestion: '“Khách hàng là ai?”',
+        meaning:
+          'Tập trung vòng đời, tuổi tác và cấu trúc gia đình; tạo các biến Age, Life_Stage và Dependency_Ratio.',
+      },
+      productchannel: {
         title: 'Sản phẩm & Kênh mua hàng',
-        desc: 'Phân cụm theo loại sản phẩm ưa thích và kênh mua hàng',
+        criteria: 'Phân cụm theo loại sản phẩm ưa thích và kênh mua hàng.',
+        meaningQuestion: '“Khách hàng mua sắm như thế nào?”',
+        meaning:
+          'Tập trung thói quen mua sắm, đa dạng sản phẩm và kênh ưa thích; dùng Product_HHI, Store_Preference và Total_Spent.',
       },
     },
     meaning: {
@@ -169,12 +208,165 @@ const copy = {
       feature: 'Feature Engineering',
     },
     dataset: {
-      title: 'Khám phá bộ dữ liệu',
+      title: 'Kết quả dữ liệu',
       subtitle: '100 dòng đầu của Customer_Behavior_cleaned.csv',
       loading: 'Đang tải dữ liệu...',
+      schemaTitle: 'Mô tả đặc trưng gốc',
+      schemaHeaders: {
+        name: 'Trường',
+        type: 'Kiểu',
+        desc: 'Mô tả',
+      },
     },
+    datasetSchema: [
+      {
+        name: 'ID',
+        type: 'int64',
+        desc: 'Mã định danh duy nhất cho mỗi khách hàng.',
+      },
+      {
+        name: 'Year_Birth',
+        type: 'int64',
+        desc: 'Năm sinh khách hàng.',
+      },
+      {
+        name: 'Education',
+        type: 'object',
+        desc: 'Trình độ học vấn (Graduation, Master, PhD).',
+      },
+      {
+        name: 'Marital_Status',
+        type: 'object',
+        desc: 'Tình trạng hôn nhân (Single, Married, Together, Divorced, v.v.).',
+      },
+      {
+        name: 'Income',
+        type: 'float64',
+        desc: 'Thu nhập hộ gia đình (số tiền).',
+      },
+      {
+        name: 'Kidhome',
+        type: 'int64',
+        desc: 'Số trẻ con sống cùng (kid at home).',
+      },
+      {
+        name: 'Teenhome',
+        type: 'int64',
+        desc: 'Số thiếu niên sống cùng.',
+      },
+      {
+        name: 'Dt_Customer',
+        type: 'object',
+        desc: 'Ngày khách hàng trở thành khách hàng (ngày đăng ký).',
+      },
+      {
+        name: 'Recency',
+        type: 'int64',
+        desc: 'Số ngày kể từ lần mua hàng gần nhất.',
+      },
+      {
+        name: 'MntWines',
+        type: 'int64',
+        desc: 'Tổng chi tiêu cho rượu vang trong giai đoạn khảo sát.',
+      },
+      {
+        name: 'MntFruits',
+        type: 'int64',
+        desc: 'Tổng chi tiêu cho trái cây.',
+      },
+      {
+        name: 'MntMeatProducts',
+        type: 'int64',
+        desc: 'Tổng chi tiêu cho thịt.',
+      },
+      {
+        name: 'MntFishProducts',
+        type: 'int64',
+        desc: 'Tổng chi tiêu cho sản phẩm cá.',
+      },
+      {
+        name: 'MntSweetProducts',
+        type: 'int64',
+        desc: 'Tổng chi tiêu cho đồ ngọt.',
+      },
+      {
+        name: 'MntGoldProds',
+        type: 'int64',
+        desc: 'Tổng chi tiêu cho sản phẩm cao cấp/kim loại (gold products).',
+      },
+      {
+        name: 'NumDealsPurchases',
+        type: 'int64',
+        desc: 'Số lần mua hàng có dùng khuyến mãi/giảm giá.',
+      },
+      {
+        name: 'NumWebPurchases',
+        type: 'int64',
+        desc: 'Số lần mua qua website.',
+      },
+      {
+        name: 'NumCatalogPurchases',
+        type: 'int64',
+        desc: 'Số lần mua qua catalogue.',
+      },
+      {
+        name: 'NumStorePurchases',
+        type: 'int64',
+        desc: 'Số lần mua trực tiếp tại cửa hàng.',
+      },
+      {
+        name: 'NumWebVisitsMonth',
+        type: 'int64',
+        desc: 'Số lần truy cập website trong tháng gần nhất.',
+      },
+      {
+        name: 'AcceptedCmp3',
+        type: 'int64',
+        desc: 'Khách có chấp nhận chiến dịch marketing số 3 không (0/1).',
+      },
+      {
+        name: 'AcceptedCmp4',
+        type: 'int64',
+        desc: 'Nhận chiến dịch số 4 (0/1).',
+      },
+      {
+        name: 'AcceptedCmp5',
+        type: 'int64',
+        desc: 'Nhận chiến dịch số 5 (0/1).',
+      },
+      {
+        name: 'AcceptedCmp1',
+        type: 'int64',
+        desc: 'Nhận chiến dịch số 1 (0/1).',
+      },
+      {
+        name: 'AcceptedCmp2',
+        type: 'int64',
+        desc: 'Nhận chiến dịch số 2 (0/1).',
+      },
+      {
+        name: 'Complain',
+        type: 'int64',
+        desc: 'Khách hàng có từng khiếu nại không (0/1).',
+      },
+      {
+        name: 'Z_CostContact',
+        type: 'int64',
+        desc: 'Biến nội bộ liên quan chi phí contact campaign.',
+      },
+      {
+        name: 'Z_Revenue',
+        type: 'int64',
+        desc: 'Biến nội bộ liên quan revenue từ contact.',
+      },
+      {
+        name: 'Response',
+        type: 'int64',
+        desc: 'Khách có phản hồi chiến dịch gần nhất không (0/1).',
+      },
+    ] satisfies DatasetColumn[],
     metrics: {
-      title: 'So sánh Metrics',
+      title: 'Phân tích chỉ số',
       subtitle: 'Silhouette Score · Davies-Bouldin Index · Cluster Distribution',
       loading: 'Đang tính toán...',
       labels: {
@@ -182,6 +374,25 @@ const copy = {
         db: 'Davies-Bouldin ↓',
         clusters: 'Số cụm',
         customers: 'Số khách hàng',
+      },
+      analysis: {
+        silhouette:
+          'Silhouette cao = cụm tách rõ; 0.25–0.5 là mức chấp nhận được cho dữ liệu thực tế.',
+        db: 'Davies-Bouldin thấp = cụm gọn và tách biệt; càng gần 0 càng tốt.',
+        clusters:
+          'Số cụm cân bằng giữa khả năng triển khai và độ chi tiết của phân khúc.',
+        customers:
+          'Quy mô mẫu giúp đánh giá độ ổn định của cụm và mức độ đại diện dữ liệu.',
+      },
+      insights: {
+        silhouetteStrong: 'Tách cụm tốt',
+        silhouetteModerate: 'Tách cụm khá',
+        silhouetteWeak: 'Tách cụm yếu',
+        dbGood: 'Cụm gọn',
+        dbModerate: 'Độ gọn trung bình',
+        dbWeak: 'Cụm chưa gọn',
+        kBalanced: 'K cân bằng',
+        kReview: 'Xem lại K',
       },
     },
     buttons: {
@@ -198,24 +409,32 @@ const copy = {
       metricsUnavailable: 'Metrics: chưa có nhãn cụm trong CSV',
       errorGraphs: '⚠️ Lỗi tải biểu đồ',
     },
+    filters: {
+      label: 'Bộ lọc',
+      all: 'Tất cả',
+      cluster: 'Cụm',
+      pca: 'PCA',
+      posthoc: 'Post-hoc',
+      quality: 'Đánh giá chất lượng',
+    },
     conclusion: {
       title: 'Kết luận',
       subtitle: 'Tổng hợp kết quả phân cụm và những điểm cần lưu ý',
       resultsTitle: 'Kết quả đạt được',
       results: [
-        'Demographic: 3 cụm theo tuổi, thu nhập và tỉ lệ phụ thuộc; phản ánh giai đoạn cuộc sống.',
-        'RFM: 2 cụm giá trị cao/thấp với Silhouette cao nhất (~0.4394), hỗ trợ chiến lược giữ chân.',
-        'Product+Channel: 4 cụm hành vi (Wine Enthusiasts, Balanced Buyers, Premium Product Seekers, Online Engagers).',
+        'Demographic Segmentation: Xác định 3 cụm dựa trên tuổi, thu nhập và tỉ lệ phụ thuộc; phản ánh khác biệt cấu trúc gia đình và giai đoạn cuộc sống (gia đình trẻ, độc thân thu nhập cao, nhóm trưởng thành).',
+        'RFM Segmentation: Xác định 2 cụm rõ rệt phân biệt khách hàng giá trị cao và thấp; Silhouette Score 0.4394, hỗ trợ chiến lược chăm sóc và tái kích hoạt hiệu quả.',
+        'Product+Channel Segmentation: Xác định 4 cụm theo hành vi mua hàng và kênh mua sắm; gồm Wine Enthusiasts, Balanced Buyers, Premium Product Seekers và Online Engagers.',
       ],
       limitationsTitle: 'Hạn chế & lưu ý',
       limitations: [
-        'Silhouette 0.28–0.44 cho thấy ranh giới cụm chưa thật sự rõ.',
-        'Một số khách hàng nằm ở ranh giới cụm (Silhouette âm).',
-        'Elbow và Silhouette đôi khi mâu thuẫn, cần cân nhắc yếu tố kinh doanh.',
-        'Dữ liệu khách hàng đa chiều, có ngoại lệ tự nhiên.',
+        'Chất lượng phân cụm trung bình: Silhouette Score 0.28–0.44, ranh giới cụm chưa thật sự rõ, đặc biệt trong dữ liệu Product+Channel.',
+        'Khách hàng nằm ở ranh giới cụm: một số điểm có Silhouette âm, cho thấy sự chồng lấp tự nhiên trong hành vi và đặc điểm.',
+        'Phương pháp chọn số cụm (K): Elbow và Silhouette đôi khi khác nhau, cần kết hợp cả hai và cân nhắc yếu tố kinh doanh.',
+        'Đặc thù dữ liệu khách hàng: dữ liệu phức tạp, đa chiều, chứa ngoại lệ tự nhiên khiến phân cụm khó đạt được sự tách biệt hoàn hảo.',
       ],
       summary:
-        'Nhìn chung, các cụm mang ý nghĩa kinh doanh thực tế, giúp định hình chiến lược marketing và chăm sóc khách hàng theo phân khúc.',
+        'Nhìn chung, các cụm tạo ra đều mang ý nghĩa kinh doanh thực tế, giúp doanh nghiệp định hình chiến lược marketing và chăm sóc khách hàng theo từng phân khúc.',
     },
     toggles: {
       themeLabel: 'Giao diện',
@@ -231,15 +450,16 @@ const copy = {
     footerTag: 'K-Means for Customer Clustering',
     nav: {
       overview: 'Overview',
-      segments: 'Customer Segmentation',
+      segments: 'Training',
       rfm: 'RFM',
       demographic: 'Demographic',
       productchannel: 'Product & Channel',
       processingGroup: 'Preprocessing',
-      processing: 'Data',
-      dataset: 'Dataset',
+      processing: 'Preprocess',
+      resultsGroup: 'Results',
+      dataset: 'Dataset output',
       analysisGroup: 'Analysis',
-      metrics: 'Metrics Comparison',
+      metrics: 'Metrics analysis',
       conclusion: 'Conclusion',
     },
     status: {
@@ -293,6 +513,34 @@ const copy = {
         desc: 'Clusters by preferred product types and purchase channels',
       },
     },
+    strategyLabels: {
+      criteria: 'Clustering criteria',
+      meaning: 'Meaning',
+      metrics: 'Metrics',
+    },
+    strategyCards: {
+      rfm: {
+        title: 'Recency · Frequency · Monetary',
+        criteria: 'Clusters based on recent purchasing behavior, frequency, and monetary value.',
+        meaningQuestion: '“How much value do they bring?”',
+        meaning:
+          'Focuses on economic value; extends RFM with Income and AvgPerPurchase to measure purchasing power.',
+      },
+      demographic: {
+        title: 'Demographic',
+        criteria: 'Clusters by age, education, income, and family status.',
+        meaningQuestion: '“Who are the customers?”',
+        meaning:
+          'Focuses on life stage, age, and family structure; uses Age, Life_Stage, and Dependency_Ratio.',
+      },
+      productchannel: {
+        title: 'Product & Channel',
+        criteria: 'Clusters by preferred product types and purchase channels.',
+        meaningQuestion: '“How do they shop?”',
+        meaning:
+          'Focuses on shopping habits, product diversity, and preferred channels; uses Product_HHI, Store_Preference, and Total_Spent.',
+      },
+    },
     meaning: {
       title: 'Why these three segmentations',
       items: [
@@ -335,12 +583,165 @@ const copy = {
       feature: 'Feature Engineering',
     },
     dataset: {
-      title: 'Dataset explorer',
+      title: 'Dataset output',
       subtitle: 'First 100 rows of Customer_Behavior_cleaned.csv',
       loading: 'Loading data...',
+      schemaTitle: 'Raw feature definitions',
+      schemaHeaders: {
+        name: 'Field',
+        type: 'Type',
+        desc: 'Description',
+      },
     },
+    datasetSchema: [
+      {
+        name: 'ID',
+        type: 'int64',
+        desc: 'Unique identifier for each customer.',
+      },
+      {
+        name: 'Year_Birth',
+        type: 'int64',
+        desc: 'Customer birth year.',
+      },
+      {
+        name: 'Education',
+        type: 'object',
+        desc: 'Education level (Graduation, Master, PhD).',
+      },
+      {
+        name: 'Marital_Status',
+        type: 'object',
+        desc: 'Marital status (Single, Married, Together, Divorced, etc.).',
+      },
+      {
+        name: 'Income',
+        type: 'float64',
+        desc: 'Household income (amount).',
+      },
+      {
+        name: 'Kidhome',
+        type: 'int64',
+        desc: 'Number of children at home.',
+      },
+      {
+        name: 'Teenhome',
+        type: 'int64',
+        desc: 'Number of teenagers at home.',
+      },
+      {
+        name: 'Dt_Customer',
+        type: 'object',
+        desc: 'Date the customer joined (registration date).',
+      },
+      {
+        name: 'Recency',
+        type: 'int64',
+        desc: 'Days since the last purchase.',
+      },
+      {
+        name: 'MntWines',
+        type: 'int64',
+        desc: 'Total spending on wine during the period.',
+      },
+      {
+        name: 'MntFruits',
+        type: 'int64',
+        desc: 'Total spending on fruits.',
+      },
+      {
+        name: 'MntMeatProducts',
+        type: 'int64',
+        desc: 'Total spending on meat products.',
+      },
+      {
+        name: 'MntFishProducts',
+        type: 'int64',
+        desc: 'Total spending on fish products.',
+      },
+      {
+        name: 'MntSweetProducts',
+        type: 'int64',
+        desc: 'Total spending on sweets.',
+      },
+      {
+        name: 'MntGoldProds',
+        type: 'int64',
+        desc: 'Total spending on premium/gold products.',
+      },
+      {
+        name: 'NumDealsPurchases',
+        type: 'int64',
+        desc: 'Purchases using promotions/discounts.',
+      },
+      {
+        name: 'NumWebPurchases',
+        type: 'int64',
+        desc: 'Purchases made on the website.',
+      },
+      {
+        name: 'NumCatalogPurchases',
+        type: 'int64',
+        desc: 'Purchases made via catalogue.',
+      },
+      {
+        name: 'NumStorePurchases',
+        type: 'int64',
+        desc: 'Purchases made in-store.',
+      },
+      {
+        name: 'NumWebVisitsMonth',
+        type: 'int64',
+        desc: 'Website visits in the last month.',
+      },
+      {
+        name: 'AcceptedCmp3',
+        type: 'int64',
+        desc: 'Accepted marketing campaign 3 (0/1).',
+      },
+      {
+        name: 'AcceptedCmp4',
+        type: 'int64',
+        desc: 'Accepted marketing campaign 4 (0/1).',
+      },
+      {
+        name: 'AcceptedCmp5',
+        type: 'int64',
+        desc: 'Accepted marketing campaign 5 (0/1).',
+      },
+      {
+        name: 'AcceptedCmp1',
+        type: 'int64',
+        desc: 'Accepted marketing campaign 1 (0/1).',
+      },
+      {
+        name: 'AcceptedCmp2',
+        type: 'int64',
+        desc: 'Accepted marketing campaign 2 (0/1).',
+      },
+      {
+        name: 'Complain',
+        type: 'int64',
+        desc: 'Customer has complained before (0/1).',
+      },
+      {
+        name: 'Z_CostContact',
+        type: 'int64',
+        desc: 'Internal variable for contact campaign cost.',
+      },
+      {
+        name: 'Z_Revenue',
+        type: 'int64',
+        desc: 'Internal variable for contact campaign revenue.',
+      },
+      {
+        name: 'Response',
+        type: 'int64',
+        desc: 'Responded to the last campaign (0/1).',
+      },
+    ] satisfies DatasetColumn[],
     metrics: {
-      title: 'Metrics Comparison',
+      title: 'Metrics analysis',
       subtitle: 'Silhouette Score · Davies-Bouldin Index · Cluster Distribution',
       loading: 'Computing...',
       labels: {
@@ -348,6 +749,25 @@ const copy = {
         db: 'Davies-Bouldin ↓',
         clusters: 'Clusters',
         customers: 'Customers',
+      },
+      analysis: {
+        silhouette:
+          'Higher Silhouette means clearer separation; 0.25–0.5 is common in real-world data.',
+        db: 'Lower Davies-Bouldin indicates tighter, better-separated clusters.',
+        clusters:
+          'Cluster count balances interpretability and segmentation detail.',
+        customers:
+          'Sample size signals how stable and representative the clustering is.',
+      },
+      insights: {
+        silhouetteStrong: 'Strong separation',
+        silhouetteModerate: 'Moderate separation',
+        silhouetteWeak: 'Weak separation',
+        dbGood: 'Compact clusters',
+        dbModerate: 'Moderate compactness',
+        dbWeak: 'Loose clusters',
+        kBalanced: 'Balanced K',
+        kReview: 'Review K',
       },
     },
     buttons: {
@@ -363,6 +783,14 @@ const copy = {
       graphNotFound: '📂 No charts found',
       metricsUnavailable: 'Metrics: no cluster labels in the CSV yet',
       errorGraphs: '⚠️ Failed to load charts',
+    },
+    filters: {
+      label: 'Filters',
+      all: 'All',
+      cluster: 'Clusters',
+      pca: 'PCA',
+      posthoc: 'Post-hoc',
+      quality: 'Quality',
     },
     conclusion: {
       title: 'Conclusion',
@@ -402,130 +830,254 @@ type GraphGroup =
 
 const noteText = {
   vi: {
-    preprocessMissing:
+    preprocessMissing: [
       'Income chỉ thiếu 24 giá trị (~0.04%) nên loại bỏ các dòng thiếu để tránh sai lệch do ước lượng.',
-    preprocessDuplicates:
-      'Không có trùng lặp toàn dòng/ID nhưng có 182 dòng trùng đặc trưng; loại bỏ để giảm bias và tăng tính đại diện.',
-    preprocessOutlierSelective:
-      'Outliers xử lý có chọn lọc: loại bỏ giá trị cực đoan (Income ≥ 500K, Year_Birth < 1900) và giữ outliers hợp lệ phản ánh VIP/frequent buyers.',
-    preprocessOutlierCount:
-      'Outliers ở biến đếm phản ánh hành vi mua sắm đặc biệt; phần lớn được giữ để bảo toàn insight.',
-    preprocessOutlierSpending:
-      'Outliers chi tiêu phản ánh khách hàng giá trị cao; giữ lại để phân biệt phân khúc high-spender.',
-    preprocessOutlierIncome:
-      'Giá trị Income cực đoan (≥ 500K) được loại bỏ vì nghi ngờ lỗi nhập liệu.',
-    preprocessOutlierYearBirth:
-      'Năm sinh < 1900 bị loại bỏ vì không thực tế.',
-    preprocessConstant:
-      'Biến hằng không mang thông tin phân biệt; chỉ ghi nhận và cân nhắc loại bỏ khỏi mô hình.',
-    preprocessDistribution:
-      'Phân phối tổng quan giúp phát hiện lệch và xác định biến cần xử lý trước khi phân cụm.',
-    preprocessCorrelation:
-      'Ma trận tương quan dùng để đánh giá mối liên hệ giữa biến và hạn chế multicollinearity.',
-    rfmRecency:
-      'Recency 0–100 ngày, gần như độc lập; giá trị cao = khách hàng ít hoạt động gần đây.',
-    rfmIncomePerFamily:
-      'Thu nhập bình quân đầu người (Box-Cox) giảm skew 1.003 → -0.006, phản ánh khả năng tài chính.',
-    rfmIncomeTransform:
-      'Biến đổi giúp giảm lệch mạnh và tăng ổn định trước khi áp dụng K-Means.',
-    rfmPc1Total:
-      'PC1_TotalPurchases_Total tổng hợp TotalPurchases và Total_Spent, giữ 87.81% phương sai.',
-    rfmPc1Avg:
-      'PC1_AvgPerPurchase_Income tổng hợp AOV và Income, giữ 89.73% phương sai, đo sức mua.',
-    rfmCorrelation:
-      'Recency gần độc lập; các PC có tương quan tự nhiên do bản chất RFM.',
-    noteOptimalKDemographic:
-      'Elbow gợi ý K=4, Silhouette gợi ý K=3; K=3 cân bằng tốt giữa phân tách và triển khai.',
-    noteOptimalKProduct:
+      'Tỷ lệ thiếu rất nhỏ nên ảnh hưởng nhẹ, giữ tính nhất quán cho K-Means.',
+    ],
+    preprocessDuplicates: [
+      'Không có trùng lặp toàn dòng/ID nhưng có 182 dòng trùng đặc trưng.',
+      'Loại bỏ để giảm bias và tăng tính đại diện cho cụm.',
+    ],
+    preprocessOutlierSelective: [
+      'Outliers xử lý có chọn lọc: loại bỏ giá trị cực đoan (Income ≥ 500K, Year_Birth < 1900).',
+      'Giữ outliers hợp lệ để bảo toàn nhóm VIP/frequent buyers.',
+    ],
+    preprocessOutlierCount: [
+      'Outliers ở biến đếm phản ánh hành vi mua sắm đặc biệt.',
+      'Phần lớn được giữ lại để không làm mất insight.',
+    ],
+    preprocessOutlierSpending: [
+      'Outliers chi tiêu thường là khách hàng giá trị cao.',
+      'Giữ lại để tách rõ nhóm high-spender.',
+    ],
+    preprocessOutlierIncome: [
+      'Income cực đoan (≥ 500K) nghi ngờ lỗi nhập liệu.',
+      'Loại bỏ để giảm lệch phân phối và ổn định cụm.',
+    ],
+    preprocessOutlierYearBirth: [
+      'Năm sinh < 1900 không thực tế trong dữ liệu khách hàng.',
+      'Loại bỏ để làm sạch và giảm nhiễu.',
+    ],
+    preprocessConstant: [
+      'Biến hằng không mang thông tin phân biệt giữa các cụm.',
+      'Chỉ ghi nhận và cân nhắc loại khỏi mô hình.',
+    ],
+    preprocessDistribution: [
+      'Phân phối tổng quan giúp phát hiện độ lệch và ngoại lệ.',
+      'Hỗ trợ quyết định biến cần xử lý trước khi phân cụm.',
+    ],
+    preprocessCorrelation: [
+      'Ma trận tương quan dùng để đánh giá mối liên hệ giữa biến.',
+      'Hạn chế multicollinearity trước khi áp dụng K-Means.',
+    ],
+    rfmRecency: [
+      'Recency 0–100 ngày, gần như độc lập với các biến khác.',
+      'Giá trị cao = khách hàng ít hoạt động trong thời gian gần đây.',
+    ],
+    rfmIncomePerFamily: [
+      'Thu nhập bình quân đầu người (Box-Cox) giảm skew 1.003 → -0.006.',
+      'Phản ánh sức mua ổn định hơn cho phân cụm.',
+    ],
+    rfmIncomeTransform: [
+      'Biến đổi trước/sau cho thấy phân phối cân bằng hơn.',
+      'Giúp giảm lệch và tăng độ ổn định cho K-Means.',
+    ],
+    rfmPc1Total: [
+      'PC1_TotalPurchases_Total tổng hợp TotalPurchases và Total_Spent.',
+      'Giữ 87.81% phương sai, đại diện mức chi tiêu tổng.',
+    ],
+    rfmPc1Avg: [
+      'PC1_AvgPerPurchase_Income kết hợp AOV và Income.',
+      'Giữ 89.73% phương sai, đo sức mua trung bình.',
+    ],
+    rfmCorrelation: [
+      'Recency gần độc lập; các PC có tương quan tự nhiên.',
+      'Cấu trúc RFM tạo cụm theo giá trị và hành vi.',
+    ],
+    noteOptimalKDemographic: [
+      'Elbow gợi ý K=4, Silhouette gợi ý K=3.',
+      'K=3 cân bằng giữa phân tách và khả năng triển khai.',
+      'Các cụm phản ánh rõ giai đoạn cuộc sống.',
+    ],
+    noteOptimalKProduct: [
       'Elbow và Silhouette cùng chọn K=4 cho Product+Channel.',
-    noteOptimalKRfm:
-      'Elbow gợi ý K=5, Silhouette gợi ý K=2; K=2 dễ triển khai, K=5 chi tiết hơn.',
-    notePcaProjection:
-      'Chiếu PCA 2D/3D giúp quan sát mức độ tách cụm theo không gian giảm chiều.',
-    noteCluster2D:
+      'K=4 thể hiện rõ các nhóm hành vi mua sắm khác nhau.',
+    ],
+    noteOptimalKRfm: [
+      'Elbow gợi ý K=5, Silhouette gợi ý K=2.',
+      'K=2 đơn giản cho chiến lược chăm sóc, K=5 chi tiết hơn.',
+    ],
+    notePcaProjection: [
+      'PCA 2D/3D giúp quan sát mức độ tách cụm trong không gian giảm chiều.',
+      'Cụm càng tách rõ cho thấy chất lượng phân cụm tốt hơn.',
+    ],
+    noteCluster2D: [
       'Biểu đồ phân cụm 2D minh họa sự tách biệt giữa các nhóm khách hàng.',
-    noteCluster3D:
-      'Phân cụm 3D giúp nhìn rõ khoảng cách giữa các nhóm.',
-    noteDemographicEducation:
-      'Phân phối Education hỗ trợ diễn giải khác biệt trình độ giữa các cụm.',
-    noteDemographicLifeStage:
+      'Khoảng cách càng rõ ràng thì cụm càng ổn định.',
+    ],
+    noteCluster3D: [
+      'Phân cụm 3D giúp nhìn rõ khoảng cách không gian giữa các nhóm.',
+      'Hữu ích khi 2D có thể chồng lấp.',
+    ],
+    noteDemographicEducation: [
+      'Phân phối Education làm rõ sự khác biệt trình độ giữa các cụm.',
+      'Hỗ trợ diễn giải hành vi và giá trị khách hàng.',
+    ],
+    noteDemographicLifeStage: [
       'Life_Stage cho thấy cấu trúc vòng đời trong từng cụm nhân khẩu học.',
-    noteDemographicLine:
-      'K=3 tạo 3 nhóm: High-Income Singles/Couples, Mature Empty Nesters, Young Families with Dependents.',
-    noteProductPreferences:
-      'Biểu đồ sở thích sản phẩm thể hiện mức quan tâm Wine/Meat/Gold... theo từng cụm.',
-    noteProductDominant:
+      'Giúp nhận diện gia đình trẻ, độc thân thu nhập cao, và nhóm trưởng thành.',
+    ],
+    noteDemographicLine: [
+      'K=3 tạo 3 nhóm theo tuổi, thu nhập và tỉ lệ phụ thuộc.',
+      'Hỗ trợ phân loại theo giai đoạn cuộc sống để tối ưu marketing.',
+    ],
+    noteProductPreferences: [
+      'Sở thích sản phẩm thể hiện mức quan tâm Wine/Meat/Gold theo từng cụm.',
+      'Giúp định hướng danh mục sản phẩm ưu tiên.',
+    ],
+    noteProductDominant: [
       'Dominant Product giúp nhận diện cụm tập trung vào một loại sản phẩm.',
-    noteProductTopShare:
-      'Top product share thấp = mua đa dạng; cao = tập trung vào một sản phẩm.',
-    noteProductLine:
-      'K=4 tạo 4 nhóm: Premium Product Seekers, Balanced Buyers, Online Engagers, Wine Enthusiasts.',
-    noteRfmLine:
-      'K=2 phân tách At-Risk High-Value và Emerging Potential; K=5 có thể dùng để phân khúc sâu.',
+      'Hữu ích cho chiến lược định vị và bán chéo.',
+    ],
+    noteProductTopShare: [
+      'Top product share thấp = mua đa dạng; cao = mua tập trung.',
+      'Phân biệt rõ balanced buyers và nhóm mua chuyên biệt.',
+    ],
+    noteProductLine: [
+      'K=4 tạo 4 nhóm hành vi: Premium, Balanced, Online, Wine.',
+      'Phản ánh khác biệt kênh mua sắm và sở thích sản phẩm.',
+    ],
+    noteRfmLine: [
+      'K=2 tách At-Risk High-Value và Emerging Potential rõ rệt.',
+      'K=5 chi tiết hơn nếu cần phân khúc sâu.',
+    ],
   },
   en: {
-    preprocessMissing:
+    preprocessMissing: [
       'Only Income had 24 missing values (~0.04%), so rows were removed to avoid imputation bias.',
-    preprocessDuplicates:
-      'No full-row/ID duplicates, but 182 feature-level duplicates were removed to reduce bias.',
-    preprocessOutlierSelective:
-      'Outliers were handled selectively: extreme values (Income ≥ 500K, Year_Birth < 1900) removed, valid VIP/frequent outliers kept.',
-    preprocessOutlierCount:
-      'Count outliers reflect special shopping behavior and were mostly kept to preserve insights.',
-    preprocessOutlierSpending:
-      'Spending outliers represent high-value customers and were kept for segmentation clarity.',
-    preprocessOutlierIncome:
-      'Extreme Income values (≥ 500K) were removed due to likely data entry issues.',
-    preprocessOutlierYearBirth:
-      'Year_Birth values < 1900 were removed as unrealistic.',
-    preprocessConstant:
-      'Constant variables carry no discriminatory signal and are flagged for removal.',
-    preprocessDistribution:
-      'Distribution checks help detect skew and guide preprocessing decisions.',
-    preprocessCorrelation:
-      'Correlation analysis helps evaluate variable relationships and avoid multicollinearity.',
-    rfmRecency:
-      'Recency spans 0–100 days and is nearly independent; higher values indicate inactivity.',
-    rfmIncomePerFamily:
-      'Income per family member (Box-Cox) reduces skew from 1.003 → -0.006, reflecting financial capacity.',
-    rfmIncomeTransform:
-      'Transformations reduce skew and stabilize features before K-Means.',
-    rfmPc1Total:
-      'PC1_TotalPurchases_Total combines TotalPurchases and Total_Spent, preserving 87.81% variance.',
-    rfmPc1Avg:
-      'PC1_AvgPerPurchase_Income combines AOV and Income, preserving 89.73% variance to measure buying power.',
-    rfmCorrelation:
-      'Recency stays independent; PCs correlate naturally due to RFM structure.',
-    noteOptimalKDemographic:
-      'Elbow suggests K=4 while Silhouette suggests K=3; K=3 balances separation and execution.',
-    noteOptimalKProduct:
+      'The missing rate is tiny, keeping clustering stable and consistent.',
+    ],
+    preprocessDuplicates: [
+      'No full-row/ID duplicates, but 182 feature-level duplicates were removed.',
+      'This reduces bias and improves representativeness of clusters.',
+    ],
+    preprocessOutlierSelective: [
+      'Outliers were handled selectively: extreme values (Income ≥ 500K, Year_Birth < 1900) removed.',
+      'Valid VIP/frequent outliers were kept to preserve insights.',
+    ],
+    preprocessOutlierCount: [
+      'Count outliers reflect special shopping behavior.',
+      'Most were kept to avoid losing behavioral signals.',
+    ],
+    preprocessOutlierSpending: [
+      'Spending outliers often represent high-value customers.',
+      'Keeping them helps separate premium segments.',
+    ],
+    preprocessOutlierIncome: [
+      'Extreme Income values (≥ 500K) were likely data entry errors.',
+      'Removing them stabilizes the distribution.',
+    ],
+    preprocessOutlierYearBirth: [
+      'Year_Birth values < 1900 are unrealistic.',
+      'Removing them cleans the dataset.',
+    ],
+    preprocessConstant: [
+      'Constant variables carry no discriminatory signal for clustering.',
+      'They are flagged for potential removal.',
+    ],
+    preprocessDistribution: [
+      'Distribution checks highlight skew and outliers.',
+      'They guide which features need transformation.',
+    ],
+    preprocessCorrelation: [
+      'Correlation analysis reveals strongly related variables.',
+      'Helps avoid multicollinearity before K-Means.',
+    ],
+    rfmRecency: [
+      'Recency spans 0–100 days and is nearly independent.',
+      'Higher values indicate recent inactivity.',
+    ],
+    rfmIncomePerFamily: [
+      'Income per family member (Box-Cox) reduces skew from 1.003 → -0.006.',
+      'It better reflects financial capacity for clustering.',
+    ],
+    rfmIncomeTransform: [
+      'Before/after transforms show a more balanced distribution.',
+      'This stabilizes distance-based clustering.',
+    ],
+    rfmPc1Total: [
+      'PC1_TotalPurchases_Total combines TotalPurchases and Total_Spent.',
+      'It preserves 87.81% variance, capturing total spend.',
+    ],
+    rfmPc1Avg: [
+      'PC1_AvgPerPurchase_Income combines AOV and Income.',
+      'It preserves 89.73% variance, measuring buying power.',
+    ],
+    rfmCorrelation: [
+      'Recency stays independent; PCs correlate naturally.',
+      'RFM structure groups customers by value and behavior.',
+    ],
+    noteOptimalKDemographic: [
+      'Elbow suggests K=4 while Silhouette suggests K=3.',
+      'K=3 balances separation quality and interpretability.',
+      'Clusters reflect distinct life stages.',
+    ],
+    noteOptimalKProduct: [
       'Elbow and Silhouette agree on K=4 for Product+Channel.',
-    noteOptimalKRfm:
-      'Elbow suggests K=5 while Silhouette suggests K=2; K=2 is simpler, K=5 is more detailed.',
-    notePcaProjection:
-      'PCA 2D/3D projections help visualize cluster separation in reduced space.',
-    noteCluster2D:
-      '2D cluster plots illustrate the separation between customer groups.',
-    noteCluster3D:
-      '3D clustering highlights distances between groups more clearly.',
-    noteDemographicEducation:
-      'Education distribution helps interpret differences in cluster profiles.',
-    noteDemographicLifeStage:
-      'Life-stage distribution reveals the household structure of each cluster.',
-    noteDemographicLine:
-      'K=3 yields: High-Income Singles/Couples, Mature Empty Nesters, and Young Families with Dependents.',
-    noteProductPreferences:
-      'Product preferences show interest in Wine/Meat/Gold by cluster.',
-    noteProductDominant:
-      'Dominant product highlights clusters that focus on a single product type.',
-    noteProductTopShare:
+      'K=4 captures clear shopping behavior groups.',
+    ],
+    noteOptimalKRfm: [
+      'Elbow suggests K=5 while Silhouette suggests K=2.',
+      'K=2 is simpler for retention; K=5 is more granular.',
+    ],
+    notePcaProjection: [
+      'PCA 2D/3D projections visualize separation in reduced space.',
+      'Clearer gaps indicate better cluster quality.',
+    ],
+    noteCluster2D: [
+      '2D cluster plots illustrate separation between groups.',
+      'Wider gaps imply more stable clusters.',
+    ],
+    noteCluster3D: [
+      '3D clustering highlights spatial distances more clearly.',
+      'Useful when 2D views overlap.',
+    ],
+    noteDemographicEducation: [
+      'Education distribution differentiates cluster profiles.',
+      'Supports interpretation of customer value and needs.',
+    ],
+    noteDemographicLifeStage: [
+      'Life-stage distribution reveals household structure by cluster.',
+      'Helps spot young families, high-income singles, and mature groups.',
+    ],
+    noteDemographicLine: [
+      'K=3 yields three groups by age, income, and dependency ratio.',
+      'Enables life-stage-based targeting.',
+    ],
+    noteProductPreferences: [
+      'Product preferences highlight interest in Wine/Meat/Gold by cluster.',
+      'Guides product portfolio focus.',
+    ],
+    noteProductDominant: [
+      'Dominant Product shows clusters focused on a single product type.',
+      'Useful for positioning and cross-sell tactics.',
+    ],
+    noteProductTopShare: [
       'Lower top-share means diverse buying; higher share means concentrated demand.',
-    noteProductLine:
-      'K=4 yields: Premium Product Seekers, Balanced Buyers, Online Engagers, and Wine Enthusiasts.',
-    noteRfmLine:
-      'K=2 separates At-Risk High-Value vs Emerging Potential; K=5 provides deeper segmentation.',
+      'Separates balanced buyers from niche buyers.',
+    ],
+    noteProductLine: [
+      'K=4 yields Premium, Balanced, Online, and Wine clusters.',
+      'Reflects channel and product preference differences.',
+    ],
+    noteRfmLine: [
+      'K=2 separates At-Risk High-Value vs Emerging Potential.',
+      'K=5 provides deeper segmentation when needed.',
+    ],
   },
 } as const
+
+const galleryFilters: GalleryFilter[] = ['all', 'cluster', 'pca', 'posthoc', 'quality']
 
 type NoteKey = keyof typeof noteText.vi
 
@@ -633,6 +1185,41 @@ function apiUrl(path: string) {
   return `${API_BASE}${path}`
 }
 
+function graphMatchesFilter(filename: string, filter: GalleryFilter) {
+  if (filter === 'all') return true
+  const name = filename.toLowerCase()
+
+  if (filter === 'cluster') {
+    return (
+      (name.includes('cluster') || name.includes('clusters_')) &&
+      !name.includes('cluster_quality')
+    )
+  }
+
+  if (filter === 'pca') {
+    return name.includes('pca')
+  }
+
+  if (filter === 'posthoc') {
+    return name.includes('posthoc')
+  }
+
+  return (
+    name.includes('optimal_k') ||
+    name.includes('elbow') ||
+    name.includes('silhouette') ||
+    name.includes('gap_statistic') ||
+    name.includes('cluster_quality') ||
+    name.includes('other_metrics') ||
+    name.includes('centroid')
+  )
+}
+
+function filterGraphs(files: string[], filter: GalleryFilter) {
+  if (filter === 'all') return files
+  return files.filter((file) => graphMatchesFilter(file, filter))
+}
+
 async function apiFetch<T>(path: string): Promise<T> {
   const response = await fetch(apiUrl(path))
   if (!response.ok) {
@@ -643,6 +1230,48 @@ async function apiFetch<T>(path: string): Promise<T> {
 
 function formatGraphName(filename: string) {
   return filename.replace(/\.png$/i, '').replace(/_/g, ' ').replace(/^\d+_/, '')
+}
+
+function buildInsightBadges(
+  summary: MetricsData | undefined,
+  c: (typeof copy)[Language],
+): InsightBadge[] {
+  if (!summary) return []
+
+  const badges: InsightBadge[] = []
+  const silhouette = summary.silhouette_score
+  const db = summary.davies_bouldin_index
+  const k = summary.n_clusters
+
+  if (silhouette !== undefined) {
+    if (silhouette >= 0.5) {
+      badges.push({ label: c.metrics.insights.silhouetteStrong, tone: 'good' })
+    } else if (silhouette >= 0.25) {
+      badges.push({ label: c.metrics.insights.silhouetteModerate, tone: 'info' })
+    } else {
+      badges.push({ label: c.metrics.insights.silhouetteWeak, tone: 'warn' })
+    }
+  }
+
+  if (db !== undefined) {
+    if (db <= 1) {
+      badges.push({ label: c.metrics.insights.dbGood, tone: 'good' })
+    } else if (db <= 2) {
+      badges.push({ label: c.metrics.insights.dbModerate, tone: 'info' })
+    } else {
+      badges.push({ label: c.metrics.insights.dbWeak, tone: 'warn' })
+    }
+  }
+
+  if (k !== undefined) {
+    if (k >= 2 && k <= 5) {
+      badges.push({ label: c.metrics.insights.kBalanced, tone: 'info' })
+    } else {
+      badges.push({ label: c.metrics.insights.kReview, tone: 'warn' })
+    }
+  }
+
+  return badges
 }
 
 function useCountUp(target: number | null | undefined) {
@@ -706,6 +1335,11 @@ function App() {
     productchannel: 'library',
   })
   const [activeProcessing, setActiveProcessing] = useState<ProcessingKey>('analysis')
+  const [segmentFilters, setSegmentFilters] = useState<Record<SegmentKey, GalleryFilter>>({
+    rfm: 'all',
+    demographic: 'all',
+    productchannel: 'all',
+  })
 
   const [overview, setOverview] = useState<LoadState<OverviewData>>({
     status: 'idle',
@@ -863,6 +1497,9 @@ function App() {
     overview.status === 'ready' ? numberFormat.format(customersCount) : '—'
   const overviewFeatures =
     overview.status === 'ready' ? numberFormat.format(featuresCount) : '—'
+  const formatScore = (value?: number) => (value === undefined ? '—' : value.toFixed(4))
+  const formatCount = (value?: number) =>
+    value === undefined ? '—' : numberFormat.format(value)
 
   const handleTabChange = (tab: TabKey) => {
     setActiveTab(tab)
@@ -972,15 +1609,6 @@ function App() {
     }
   }
 
-  const segmentQuickMetric = (segment: SegmentKey) => {
-    const metric = quickMetrics[segment]
-    if (!metric) return c.labels.loading
-    if (metric.silhouette_score === undefined || metric.davies_bouldin_index === undefined) {
-      return c.labels.metricsUnavailable
-    }
-    return `${c.labels.silhouette}: ${metric.silhouette_score.toFixed(4)}  |  ${c.labels.dbIndex}: ${metric.davies_bouldin_index.toFixed(4)}  |  ${c.labels.clusters}: ${metric.n_clusters ?? '—'}`
-  }
-
   const buildGalleryItems = (graphKey: string, files: string[]) =>
     files.map((file) => ({
       url: apiUrl(`/api/graph/${graphKey}/${file}`),
@@ -1000,7 +1628,7 @@ function App() {
     return (
       <>
         {items.map((item, index) => {
-          const note = getChartNote(lang, graphKey, item.name)
+          const noteLines = getChartNote(lang, graphKey, item.name)
           return (
             <div
               className="gallery-card"
@@ -1023,7 +1651,11 @@ function App() {
                 <span className="graph-name">{formatGraphName(item.name)}</span>
                 <span className="gallery-zoom">⤢</span>
               </div>
-              <div className="chart-note">{note}</div>
+              <ul className="chart-note">
+                {noteLines.map((line, lineIdx) => (
+                  <li key={`${item.name}-note-${lineIdx}`}>{line}</li>
+                ))}
+              </ul>
             </div>
           )
         })}
@@ -1050,6 +1682,13 @@ function App() {
           >
             <span className="nav-icon">◈</span> {c.nav.overview}
           </button>
+          <button
+            type="button"
+            className={`nav-item ${activeTab === 'processing' ? 'active' : ''}`}
+            onClick={() => handleTabChange('processing')}
+          >
+            <span className="nav-icon">◎</span> {c.nav.processing}
+          </button>
           <div className="nav-group-label">{c.nav.segments}</div>
           <button
             type="button"
@@ -1072,14 +1711,7 @@ function App() {
           >
             <span className="nav-icon">◉</span> {c.nav.productchannel}
           </button>
-          <div className="nav-group-label">{c.nav.processingGroup}</div>
-          <button
-            type="button"
-            className={`nav-item ${activeTab === 'processing' ? 'active' : ''}`}
-            onClick={() => handleTabChange('processing')}
-          >
-            <span className="nav-icon">◎</span> {c.nav.processing}
-          </button>
+          <div className="nav-group-label">{c.nav.resultsGroup}</div>
           <button
             type="button"
             className={`nav-item ${activeTab === 'dataset' ? 'active' : ''}`}
@@ -1222,46 +1854,89 @@ function App() {
             })}
           </div>
 
-          <div className="section-title">{c.overview.segmentsTitle}</div>
-          <div className="segments-overview">
-            <div className="seg-card" onClick={() => handleTabChange('rfm')}>
-              <div className="seg-header">
-                <span className="seg-badge rfm">{c.nav.rfm}</span>
-                <span className="seg-arrow">→</span>
-              </div>
-              <div className="seg-title">{c.segmentCards.rfm.title}</div>
-              <div className="seg-desc">{c.segmentCards.rfm.desc}</div>
-              <div className="seg-metric">{segmentQuickMetric('rfm')}</div>
-            </div>
-            <div className="seg-card" onClick={() => handleTabChange('demographic')}>
-              <div className="seg-header">
-                <span className="seg-badge demo">{c.nav.demographic}</span>
-                <span className="seg-arrow">→</span>
-              </div>
-              <div className="seg-title">{c.segmentCards.demographic.title}</div>
-              <div className="seg-desc">{c.segmentCards.demographic.desc}</div>
-              <div className="seg-metric">{segmentQuickMetric('demographic')}</div>
-            </div>
-            <div className="seg-card" onClick={() => handleTabChange('productchannel')}>
-              <div className="seg-header">
-                <span className="seg-badge pc">{c.nav.productchannel}</span>
-                <span className="seg-arrow">→</span>
-              </div>
-              <div className="seg-title">{c.segmentCards.productchannel.title}</div>
-              <div className="seg-desc">{c.segmentCards.productchannel.desc}</div>
-              <div className="seg-metric">{segmentQuickMetric('productchannel')}</div>
-            </div>
+          <div className="section-title">{c.dataset.schemaTitle}</div>
+          <div className="table-wrapper">
+            <table className="data-table schema-table">
+              <thead>
+                <tr>
+                  <th>{c.dataset.schemaHeaders.name}</th>
+                  <th>{c.dataset.schemaHeaders.type}</th>
+                  <th>{c.dataset.schemaHeaders.desc}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {c.datasetSchema.map((col) => (
+                  <tr key={`overview-schema-${col.name}`}>
+                    <td>{col.name}</td>
+                    <td>{col.type}</td>
+                    <td>{col.desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          <div className="section-title">{c.meaning.title}</div>
-          <div className="meaning-grid">
-            {c.meaning.items.map((item) => (
-              <div className="meaning-card" key={item.title}>
-                <div className="meaning-title">{item.title}</div>
-                <div className="meaning-question">{item.question}</div>
-                <div className="meaning-desc">{item.desc}</div>
-              </div>
-            ))}
+          <div className="section-title">{c.overview.segmentsTitle}</div>
+          <div className="strategy-grid">
+            {(['rfm', 'demographic', 'productchannel'] as SegmentKey[]).map((segment) => {
+              const meta = segmentMeta[segment]
+              const metric = quickMetrics[segment]
+              const card = c.strategyCards[segment]
+
+              return (
+                <div
+                  className="strategy-card"
+                  key={`strategy-${segment}`}
+                  onClick={() => handleTabChange(segment)}
+                >
+                  <div className="strategy-header">
+                    <span className={`seg-badge ${meta.badge}`}>{c.nav[segment]}</span>
+                    <div className="strategy-title">{card.title}</div>
+                  </div>
+                  <div className="strategy-section">
+                    <div className="strategy-label">{c.strategyLabels.criteria}</div>
+                    <p className="strategy-text">{card.criteria}</p>
+                  </div>
+                  <div className="strategy-section">
+                    <div className="strategy-label">{c.strategyLabels.meaning}</div>
+                    <p className="strategy-text">
+                      <span className="strategy-question">{card.meaningQuestion}</span>
+                      {card.meaning}
+                    </p>
+                  </div>
+                  <div className="strategy-section">
+                    <div className="strategy-label">{c.strategyLabels.metrics}</div>
+                    <div className="strategy-metrics">
+                      <div className="strategy-metric">
+                        <span className="metric-name">{c.labels.silhouette}</span>
+                        <span className="metric-value">
+                          {formatScore(metric?.silhouette_score)}
+                        </span>
+                      </div>
+                      <div className="strategy-metric">
+                        <span className="metric-name">{c.labels.dbIndex}</span>
+                        <span className="metric-value">
+                          {formatScore(metric?.davies_bouldin_index)}
+                        </span>
+                      </div>
+                      <div className="strategy-metric">
+                        <span className="metric-name">{c.labels.clusters}</span>
+                        <span className="metric-value">
+                          {metric?.n_clusters ?? '—'}
+                        </span>
+                      </div>
+                      <div className="strategy-metric">
+                        <span className="metric-name">{c.labels.rows}</span>
+                        <span className="metric-value">
+                          {formatCount(metric?.n_rows)}
+                        </span>
+                      </div>
+                    </div>
+                    {!metric && <div className="metric-note">{c.labels.loading}</div>}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </section>
 
@@ -1270,6 +1945,8 @@ function App() {
           const clusterKey = `${segment}-${version}`
           const state = clusterState[clusterKey]
           const metrics = state?.data?.metrics
+          const activeFilter = segmentFilters[segment]
+          const filteredGraphs = filterGraphs(state?.data?.graphs ?? [], activeFilter)
 
           return (
             <section
@@ -1325,6 +2002,23 @@ function App() {
                     </>
                   )}
               </div>
+              <div className="filter-bar">
+                <span className="filter-label">{c.filters.label}</span>
+                <div className="filter-chips">
+                  {galleryFilters.map((filter) => (
+                    <button
+                      key={`${segment}-${filter}`}
+                      type="button"
+                      className={`filter-chip ${activeFilter === filter ? 'active' : ''}`}
+                      onClick={() =>
+                        setSegmentFilters((prev) => ({ ...prev, [segment]: filter }))
+                      }
+                    >
+                      {c.filters[filter]}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <div className="gallery-grid">
                 {state?.status === 'loading' && <LoadingState text={c.labels.loading} />}
                 {state?.status === 'error' && (
@@ -1332,7 +2026,7 @@ function App() {
                 )}
                 {state?.status === 'ready' &&
                   state.data &&
-                  renderGallery(state.data.graphKey, state.data.graphs, c.labels.graphNotFound)}
+                  renderGallery(state.data.graphKey, filteredGraphs, c.labels.graphNotFound)}
                 {!state && <LoadingState text={c.labels.loading} />}
               </div>
             </section>
@@ -1449,6 +2143,8 @@ function App() {
                   )
                 }
 
+                const insightBadges = buildInsightBadges(summary, c)
+
                 const silColor =
                   summary.silhouette_score && summary.silhouette_score > 0.5
                     ? 'val-good'
@@ -1470,30 +2166,46 @@ function App() {
                         {c.nav[seg].toUpperCase()}
                       </span>
                     </div>
+                    {insightBadges.length > 0 && (
+                      <div className="insight-badges">
+                        {insightBadges.map((badge, idx) => (
+                          <span
+                            key={`${seg}-badge-${idx}`}
+                            className={`insight-badge ${badge.tone}`}
+                          >
+                            {badge.label}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     <div className="mcc-metric-row">
                       <span className="mcc-metric-name">{c.metrics.labels.silhouette}</span>
                       <span className={`mcc-metric-val ${silColor}`}>
                         {(summary.silhouette_score ?? 0).toFixed(4)}
                       </span>
                     </div>
+                    <div className="mcc-metric-note">{c.metrics.analysis.silhouette}</div>
                     <div className="mcc-metric-row">
                       <span className="mcc-metric-name">{c.metrics.labels.db}</span>
                       <span className={`mcc-metric-val ${dbColor}`}>
                         {(summary.davies_bouldin_index ?? 0).toFixed(4)}
                       </span>
                     </div>
+                    <div className="mcc-metric-note">{c.metrics.analysis.db}</div>
                     <div className="mcc-metric-row">
                       <span className="mcc-metric-name">{c.metrics.labels.clusters}</span>
                       <span className="mcc-metric-val val-info">
                         {summary.n_clusters ?? '—'}
                       </span>
                     </div>
+                    <div className="mcc-metric-note">{c.metrics.analysis.clusters}</div>
                     <div className="mcc-metric-row">
                       <span className="mcc-metric-name">{c.metrics.labels.customers}</span>
                       <span className="mcc-metric-val">
                         {summary.n_rows ? numberFormat.format(summary.n_rows) : '—'}
                       </span>
                     </div>
+                    <div className="mcc-metric-note">{c.metrics.analysis.customers}</div>
                     {summary.cluster_distribution && (
                       <div className="cluster-dist">
                         {Object.entries(summary.cluster_distribution).map(([key, value]) => (
