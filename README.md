@@ -93,12 +93,7 @@ K-Means là thuật toán học máy không giám sát (Unsupervised Learning) d
 
 ---
 
-## 5. Giao diện và Kết quả Demo
-
-### 🖼️ Ảnh chụp màn hình Web Dashboard
-![Web Dashboard Demo]("C:\Users\Admin\OneDrive - Ho Chi Minh City University of Foreign Languages and Information Technology - HUFLIT\Pictures\Screenshots\Screenshot 2026-05-13 105707.png")
-
-### 📈 Kết quả phân cụm tiêu biểu
+## 5. Kết quả phân cụm tiêu biểu
 - **Nhóm 1:** Khách hàng trung thành, chi tiêu cao (Monetary cao, Frequency cao).
 - **Nhóm 2:** Khách hàng mới, cần chăm sóc thêm.
 - **Nhóm 3:** Khách hàng có nguy cơ rời bỏ (Recency cao).
