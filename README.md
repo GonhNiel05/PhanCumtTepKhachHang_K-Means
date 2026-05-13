@@ -96,8 +96,7 @@ K-Means là thuật toán học máy không giám sát (Unsupervised Learning) d
 ## 5. Giao diện và Kết quả Demo
 
 ### 🖼️ Ảnh chụp màn hình Web Dashboard
-*(Chèn ảnh demo giao diện tại đây)*
-![Web Dashboard Demo](Machine_Learning/graph/Training/WIth Library/RFM_WL/05_Clusters_3D.png)
+![Web Dashboard Demo]("C:\Users\Admin\OneDrive - Ho Chi Minh City University of Foreign Languages and Information Technology - HUFLIT\Pictures\Screenshots\Screenshot 2026-05-13 105707.png")
 
 ### 📈 Kết quả phân cụm tiêu biểu
 - **Nhóm 1:** Khách hàng trung thành, chi tiêu cao (Monetary cao, Frequency cao).
